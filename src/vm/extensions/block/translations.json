@@ -1,0 +1,14 @@
+{
+  "en": {
+    "sxratchtest.name": "sxratchtest",
+    "sxratchtest.doIt": "do it [SCRIPT]"
+  },
+  "ja": {
+    "sxratchtest.name": "sxratchtest",
+    "sxratchtest.doIt": "[SCRIPT] を実行する"
+  },
+  "ja-Hira": {
+    "sxratchtest.name": "sxratchtest",
+    "sxratchtest.doIt": "[SCRIPT] をじっこうする"
+  }
+}

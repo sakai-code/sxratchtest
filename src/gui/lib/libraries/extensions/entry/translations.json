@@ -1,0 +1,14 @@
+{
+  "en": {
+    "sxratchtest.entry.name": "sxratchtest",
+    "sxratchtest.entry.description": "Description of this extension"
+  },
+  "ja": {
+    "sxratchtest.entry.name": "sxratchtest",
+    "sxratchtest.entry.description": "拡張機能の説明"
+  },
+  "ja-Hira": {
+    "sxratchtest.entry.name": "sxratchtest",
+    "sxratchtest.entry.description": "かくちょうきのうのせつめい"
+  }
+}
