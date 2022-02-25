@@ -4528,8 +4528,13 @@ var WebSerial$1 = /*#__PURE__*/function () {
             if (ch in _this4.notifyListeners) {
               _this4.notifyListeners[ch](arrayBufferToBase64(data.value));
             }
-          } // log.debug({ch: ch, type: data.type, value: data.value});
+          }
 
+          console.log({
+            ch: ch,
+            type: data.type,
+            value: data.value
+          });
         }
       });
     }
