@@ -90,6 +90,7 @@ class WebSerial {
         this.notifyListeners = {};
 
         this.requestPeripheral();
+        console.log('set');
     }
 
     /**
@@ -119,6 +120,7 @@ class WebSerial {
      * callback when connection is successful.
      */
     connectPeripheral (/* id */) {
+        console.log('connect');
         if (!this.port) {
             throw new Error('device is not chosen');
         }
@@ -177,6 +179,7 @@ class WebSerial {
         this.port.open(this._serialOptions)
             .then(() => {
                 log.log(`SerialPort: open`);
+                console.log('serialopen');
                 this.state = 'open';
                 this.writer = this.port.writable.getWriter();
                 // eslint-disable-next-line no-undef
@@ -202,6 +205,7 @@ class WebSerial {
         if (this.state !== 'open') return Promise.resolve();
         this.state = 'closing';
         this.stopReceiving();
+        console.log('serialclose');
         return this.reader.cancel()
             .then(() => this.readableStreamClosed.catch(() => { /* Ignore the error */ }))
             .then(() => {
@@ -258,6 +262,7 @@ class WebSerial {
      * Start data receiving process.
      */
     startReceiving () {
+        console.log('receiveing');
         this.dataReceiving = window.setTimeout(() => {
             if (this.state !== 'open') return;
             this.receiveData()
@@ -285,6 +290,7 @@ class WebSerial {
      * @returns {Promise} - a Promise which will resolve write process was done
      */
     sendData (data) {
+        console.log('send');
         return this.writer.ready
             .then(() => this.writer.write(data))
             .then(() => new Promise(resolve => {
@@ -307,6 +313,7 @@ class WebSerial {
     }
 
     readCh (ch) {
+        console.log(ch);
         if (this.state !== 'open') {
             return Promise.reject(new Error('port is not opened'));
         }
@@ -353,6 +360,7 @@ class WebSerial {
      */
     read (serviceId, characteristicId, optStartNotifications = false, onCharacteristicChanged = null) {
         const ch = SERIAL_CH_ID[characteristicId];
+        console.log('reading');
         const constantUpdatingCh = [
             0x0101, /* State */
             0x0102 /* Motion */
@@ -409,6 +417,7 @@ class WebSerial {
      * @returns {Promise} - a Promise which will resolve true when success to write
      */
     writeCh (ch, value, withResponse) {
+        console.log('write');
         if (this.state !== 'open') {
             return Promise.reject(new Error('port is not opened'));
         }

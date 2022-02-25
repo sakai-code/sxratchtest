@@ -4298,6 +4298,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
     this.notifyListeners = {};
     this.requestPeripheral();
+    console.log('set');
   }
   /**
    * Request connection to the peripheral.
@@ -4340,6 +4341,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
       /* id */
     connectPeripheral() {
       var _this2 = this;
+
+      console.log('connect');
 
       if (!this.port) {
         throw new Error('device is not chosen');
@@ -4429,6 +4432,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
       this.port.open(this._serialOptions).then(function () {
         log$1.log("SerialPort: open");
+        console.log('serialopen');
         _this2.state = 'open';
         _this2.writer = _this2.port.writable.getWriter(); // eslint-disable-next-line no-undef
 
@@ -4461,6 +4465,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       if (this.state !== 'open') return Promise.resolve();
       this.state = 'closing';
       this.stopReceiving();
+      console.log('serialclose');
       return this.reader.cancel().then(function () {
         return _this3.readableStreamClosed.catch(function () {
           /* Ignore the error */
@@ -4537,6 +4542,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function startReceiving() {
       var _this5 = this;
 
+      console.log('receiveing');
       this.dataReceiving = window.setTimeout(function () {
         if (_this5.state !== 'open') return;
 
@@ -4569,6 +4575,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function sendData(data) {
       var _this6 = this;
 
+      console.log('send');
       return this.writer.ready.then(function () {
         return _this6.writer.write(data);
       }).then(function () {
@@ -4600,6 +4607,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
     key: "readCh",
     value: function readCh(ch) {
       var _this7 = this;
+
+      console.log(ch);
 
       if (this.state !== 'open') {
         return Promise.reject(new Error('port is not opened'));
@@ -4661,6 +4670,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       var optStartNotifications = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var onCharacteristicChanged = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var ch = SERIAL_CH_ID[characteristicId];
+      console.log('reading');
       var constantUpdatingCh = [0x0101,
       /* State */
       0x0102
@@ -4731,6 +4741,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
     key: "writeCh",
     value: function writeCh(ch, value, withResponse) {
       var _this9 = this;
+
+      console.log('write');
 
       if (this.state !== 'open') {
         return Promise.reject(new Error('port is not opened'));
