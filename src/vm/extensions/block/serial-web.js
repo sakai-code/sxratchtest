@@ -268,9 +268,11 @@ class WebSerial {
             this.receiveData()
                 .then(() => {
                     // start again
+                    console.log('not start');
                     this.startReceiving();
                 })
                 .catch(() => {
+                    console.log('handleerror');
                     this.handleDisconnectError();
                 });
         }, this.receivingInterval);

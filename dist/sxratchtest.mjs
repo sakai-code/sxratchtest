@@ -4548,8 +4548,12 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
         _this5.receiveData().then(function () {
           // start again
+          console.log('not start');
+
           _this5.startReceiving();
         }).catch(function () {
+          console.log('handleerror');
+
           _this5.handleDisconnectError();
         });
       }, this.receivingInterval);
