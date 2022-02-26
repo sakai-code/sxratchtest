@@ -4547,14 +4547,11 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function startReceiving() {
       var _this5 = this;
 
-      console.log('receiveing');
       this.dataReceiving = window.setTimeout(function () {
         if (_this5.state !== 'open') return;
 
         _this5.receiveData().then(function () {
           // start again
-          console.log('not start');
-
           _this5.startReceiving();
         }).catch(function () {
           console.log('handleerror');

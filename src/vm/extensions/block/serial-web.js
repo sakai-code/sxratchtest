@@ -262,13 +262,13 @@ class WebSerial {
      * Start data receiving process.
      */
     startReceiving () {
-        console.log('receiveing');
+        
         this.dataReceiving = window.setTimeout(() => {
             if (this.state !== 'open') return;
             this.receiveData()
                 .then(() => {
                     // start again
-                    console.log('not start');
+                   
                     this.startReceiving();
                 })
                 .catch(() => {
