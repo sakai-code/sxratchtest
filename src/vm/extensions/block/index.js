@@ -1283,6 +1283,8 @@ class MbitMore {
             this.bleAccessWaiting = false;
         }, 1000);
         return new Promise(resolve => {
+
+            console.log("command:"+""+command);
             commands.reduce((acc, cur) => acc.then(() => this.sendCommand(cur)),
                 Promise.resolve()
             )

@@ -250,7 +250,7 @@ class WebSerial {
                     this.chValues[ch][data.type] = data.value;
                     if (data.type === ChResponse.NOTIFY) {
                         if (ch in this.notifyListeners) {
-                            this.notifyListeners[ch](arrayBufferToBase64(data.value));
+                            this.notifyListeners[ch](arrayBufferTBase64(data.value));
                         }
                     }
                     console.log({ch: ch, type: data.type, value: data.value});
@@ -292,7 +292,7 @@ class WebSerial {
      * @returns {Promise} - a Promise which will resolve write process was done
      */
     sendData (data) {
-        console.log('send');
+        console.log('send:'+""+data);
         return this.writer.ready
             .then(() => this.writer.write(data))
             .then(() => new Promise(resolve => {
@@ -311,6 +311,7 @@ class WebSerial {
     startNotifications (_serviceId, characteristicId, onCharacteristicChanged = null) {
         // Connected device will start necessary notifications automatically on serial-port.
         this.notifyListeners[SERIAL_CH_ID[characteristicId]] = onCharacteristicChanged;
+        console.log("service:"+""+_serviceId)
         return Promise.resolve();
     }
 

@@ -4526,7 +4526,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
           if (data.type === ChResponse.NOTIFY) {
             if (ch in _this4.notifyListeners) {
-              _this4.notifyListeners[ch](arrayBufferToBase64(data.value));
+              _this4.notifyListeners[ch](arrayBufferTBase64(data.value));
             }
           }
 
@@ -4584,7 +4584,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function sendData(data) {
       var _this6 = this;
 
-      console.log('send');
+      console.log('send:' + "" + data);
       return this.writer.ready.then(function () {
         return _this6.writer.write(data);
       }).then(function () {
@@ -4610,6 +4610,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       var onCharacteristicChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       // Connected device will start necessary notifications automatically on serial-port.
       this.notifyListeners[SERIAL_CH_ID[characteristicId]] = onCharacteristicChanged;
+      console.log("service:" + "" + _serviceId);
       return Promise.resolve();
     }
   }, {
@@ -6221,6 +6222,7 @@ var MbitMore = /*#__PURE__*/function () {
         _this9.bleAccessWaiting = false;
       }, 1000);
       return new Promise(function (resolve) {
+        console.log("command:" + "" + command);
         commands.reduce(function (acc, cur) {
           return acc.then(function () {
             return _this9.sendCommand(cur);
