@@ -4196,11 +4196,11 @@ var _polyfillNode_buffer = /*#__PURE__*/Object.freeze({
 
 var require$$5 = /*@__PURE__*/getAugmentedNamespace(_polyfillNode_buffer);
 
+var Buffer$1 = require$$5.Buffer;
 var log$1 = log$3;
-var Buffer$1 = require$$5;
 
-var arrayBufferToBase64 = function arrayBufferToBase64(buffer) {
-  return Buffer$1.from(buffer).toString('base64');
+var arrayBufferToBase64 = function arrayBufferToBase64(arrayBuffer) {
+  return Buffer$1.from(arrayBuffer).toString('base64');
 };
 
 var base64ToUint8Array$1 = function base64ToUint8Array(base64) {

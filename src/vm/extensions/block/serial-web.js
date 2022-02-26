@@ -1,6 +1,13 @@
-const log = require('../../util/log');
+/**
+ *const log = require('../../util/log');
 const Buffer = require('buffer');
 const arrayBufferToBase64 = buffer => Buffer.from(buffer).toString('base64');
+const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
+ */
+const {Buffer} = require('buffer');
+const log = require('../../util/log');
+
+const arrayBufferToBase64 = arrayBuffer => Buffer.from(arrayBuffer).toString('base64');
 const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
 
 /**
