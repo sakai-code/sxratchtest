@@ -6190,6 +6190,7 @@ var MbitMore = /*#__PURE__*/function () {
     value: function sendCommandSet(commands, util) {
       var _this9 = this;
 
+      console.log("command:" + "" + commands);
       if (!this.isConnected()) return Promise.resolve();
 
       if (this.bleBusy) {
@@ -6213,7 +6214,6 @@ var MbitMore = /*#__PURE__*/function () {
         _this9.bleAccessWaiting = false;
       }, 1000);
       return new Promise(function (resolve) {
-        console.log("command:" + "" + command);
         commands.reduce(function (acc, cur) {
           return acc.then(function () {
             return _this9.sendCommand(cur);

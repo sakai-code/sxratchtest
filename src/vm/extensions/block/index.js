@@ -1266,7 +1266,7 @@ class MbitMore {
      * @return {?Promise} a Promise that resolves when the all commands was sent.
      */
     sendCommandSet (commands, util) {
-        console.log("command:"+""+command);
+        console.log("command:"+""+commands);
         if (!this.isConnected()) return Promise.resolve();
         if (this.bleBusy) {
             this.bleAccessWaiting = true;
