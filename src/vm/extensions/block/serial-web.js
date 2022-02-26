@@ -253,7 +253,7 @@ class WebSerial {
                             this.notifyListeners[ch](arrayBufferTBase64(data.value));
                         }
                     }
-                    console.log({ch: ch, type: data.type, value: data.value});
+                    
                 }
             });
     }

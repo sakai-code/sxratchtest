@@ -4529,12 +4529,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
               _this4.notifyListeners[ch](arrayBufferTBase64(data.value));
             }
           }
-
-          console.log({
-            ch: ch,
-            type: data.type,
-            value: data.value
-          });
         }
       });
     }
