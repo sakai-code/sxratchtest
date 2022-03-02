@@ -4509,7 +4509,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       return this.reader.read().then(function (result) {
         var value = result.value,
             done = result.done;
-        console.log(value); //add
+        console.log("ch:" + "" + value.ch + "value" + "" + _this4.value.data); //add
 
         if (done) {
           _this4.reader.releaseLock();
@@ -4526,6 +4526,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
           _this4.chValues[ch][data.type] = data.value;
 
           if (data.type === ChResponse.NOTIFY) {
+            console.log(data.type);
+
             if (ch in _this4.notifyListeners) {
               _this4.notifyListeners[ch](arrayBufferTBase64(data.value));
             }
