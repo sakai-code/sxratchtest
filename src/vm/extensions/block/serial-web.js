@@ -245,7 +245,7 @@ class WebSerial {
         return this.reader.read()
             .then(result => {
                 const {value, done} = result;
-                console.log("ch:"+""+value.ch+"value"+""+this.value.data); //add
+               
                 if (done) {
                     this.reader.releaseLock();
                 }
@@ -256,14 +256,18 @@ class WebSerial {
                         this.chValues[ch] = {};
                     }
                     this.chValues[ch][data.type] = data.value;
+                    console.log("datatype:"+data.type); //add
+                    console.log("datavalue"+data.value); //add
+
                     if (data.type === ChResponse.NOTIFY) {
-                        console.log(data.type);
+                      
                         if (ch in this.notifyListeners) {
                             this.notifyListeners[ch](arrayBufferTBase64(data.value));
                         }
                     }
                     
                 }
+                console.log("ch:"+""+value.ch+"value"+""+this.value.data); //add
             });
     }
 
@@ -287,7 +291,7 @@ class WebSerial {
                      
                     this.startReceiving(); //add
                     
-                    //this.handleDisconnectError();
+                    //this.handleDisconnectError(); //add
                 });
         }, this.receivingInterval);
     }
