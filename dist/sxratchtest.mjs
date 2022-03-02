@@ -4528,13 +4528,14 @@ var WebSerial$1 = /*#__PURE__*/function () {
           console.log("datavalue" + data.value); //add
 
           if (data.type === ChResponse.NOTIFY) {
+            console.log(data.type);
+
             if (ch in _this4.notifyListeners) {
-              _this4.notifyListeners[ch](arrayBufferTBase64(data.value));
+              _this4.notifyListeners[ch](arrayBufferToBase64(data.value)); //Fixed
+
             }
           }
         }
-
-        console.log("ch:" + "" + value.ch + "value" + "" + _this4.value.data); //add
       });
     }
     /**

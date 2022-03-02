@@ -260,14 +260,16 @@ class WebSerial {
                     console.log("datavalue"+data.value); //add
 
                     if (data.type === ChResponse.NOTIFY) {
+                        console.log(data.type);
                       
                         if (ch in this.notifyListeners) {
-                            this.notifyListeners[ch](arrayBufferTBase64(data.value));
+
+                            this.notifyListeners[ch](arrayBufferToBase64(data.value)); //Fixed
                         }
                     }
                     
                 }
-                console.log("ch:"+""+value.ch+"value"+""+this.value.data); //add
+               
             });
     }
 
