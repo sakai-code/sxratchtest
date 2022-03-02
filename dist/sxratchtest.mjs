@@ -4509,7 +4509,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       return this.reader.read().then(function (result) {
         var value = result.value,
             done = result.done;
-        console.log(result); //add
+        console.log(value); //add
 
         if (done) {
           _this4.reader.releaseLock();
@@ -4674,7 +4674,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
       var optStartNotifications = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var onCharacteristicChanged = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var ch = SERIAL_CH_ID[characteristicId];
-      console.log('reading');
       var constantUpdatingCh = [0x0101,
       /* State */
       0x0102

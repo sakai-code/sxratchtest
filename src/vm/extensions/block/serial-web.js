@@ -245,7 +245,7 @@ class WebSerial {
         return this.reader.read()
             .then(result => {
                 const {value, done} = result;
-                console.log(result); //add
+                console.log(value); //add
                 if (done) {
                     this.reader.releaseLock();
                 }
@@ -376,7 +376,7 @@ class WebSerial {
      */
     read (serviceId, characteristicId, optStartNotifications = false, onCharacteristicChanged = null) {
         const ch = SERIAL_CH_ID[characteristicId];
-        console.log('reading');
+    
         const constantUpdatingCh = [
             0x0101, /* State */
             0x0102 /* Motion */
