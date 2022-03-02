@@ -99,7 +99,7 @@ class WebSerial {
         this.notifyListeners = {};
 
         this.requestPeripheral();
-        console.log('set');
+       
     }
 
     /**
@@ -129,7 +129,7 @@ class WebSerial {
      * callback when connection is successful.
      */
     connectPeripheral (/* id */) {
-        console.log('connect');
+        
         if (!this.port) {
             throw new Error('device is not chosen');
         }
@@ -261,7 +261,7 @@ class WebSerial {
                    
 
                     if (data.type === ChResponse.NOTIFY) {
-                        console.log(data.type);
+                      
                       
                         if (ch in this.notifyListeners) {
 
@@ -313,7 +313,7 @@ class WebSerial {
      * @returns {Promise} - a Promise which will resolve write process was done
      */
     sendData (data) {
-        console.log('send:'+""+data);
+    
         return this.writer.ready
             .then(() => this.writer.write(data))
             .then(() => new Promise(resolve => {
@@ -337,7 +337,7 @@ class WebSerial {
     }
 
     readCh (ch) {
-        console.log(ch);
+      
         if (this.state !== 'open') {
             return Promise.reject(new Error('port is not opened'));
         }
@@ -441,7 +441,7 @@ class WebSerial {
      * @returns {Promise} - a Promise which will resolve true when success to write
      */
     writeCh (ch, value, withResponse) {
-        console.log('write');
+     
         if (this.state !== 'open') {
             return Promise.reject(new Error('port is not opened'));
         }
