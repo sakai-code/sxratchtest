@@ -245,6 +245,7 @@ class WebSerial {
         return this.reader.read()
             .then(result => {
                 const {value, done} = result;
+                console.log(result); //add
                 if (done) {
                     this.reader.releaseLock();
                 }
@@ -279,8 +280,13 @@ class WebSerial {
                     this.startReceiving();
                 })
                 .catch(() => {
+
+
                     console.log('handleerror');
-                    this.handleDisconnectError();
+                     
+                    this.startReceiving(); //add
+                    
+                    //this.handleDisconnectError();
                 });
         }, this.receivingInterval);
     }

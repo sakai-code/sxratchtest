@@ -4509,6 +4509,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       return this.reader.read().then(function (result) {
         var value = result.value,
             done = result.done;
+        console.log(result); //add
 
         if (done) {
           _this4.reader.releaseLock();
@@ -4550,7 +4551,9 @@ var WebSerial$1 = /*#__PURE__*/function () {
         }).catch(function () {
           console.log('handleerror');
 
-          _this5.handleDisconnectError();
+          _this5.startReceiving(); //add
+          //this.handleDisconnectError();
+
         });
       }, this.receivingInterval);
     }
