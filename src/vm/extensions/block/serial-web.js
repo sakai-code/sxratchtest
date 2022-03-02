@@ -4,6 +4,8 @@ const Buffer = require('buffer');
 const arrayBufferToBase64 = buffer => Buffer.from(buffer).toString('base64');
 const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
  */
+
+// Fixed
 const {Buffer} = require('buffer');
 const log = require('../../util/log');
 
@@ -186,7 +188,7 @@ class WebSerial {
         this.port.open(this._serialOptions)
             .then(() => {
                 log.log(`SerialPort: open`);
-                console.log('serialopen');
+            
                 this.state = 'open';
                 this.writer = this.port.writable.getWriter();
                 // eslint-disable-next-line no-undef
@@ -212,7 +214,7 @@ class WebSerial {
         if (this.state !== 'open') return Promise.resolve();
         this.state = 'closing';
         this.stopReceiving();
-        console.log('serialclose');
+    
         return this.reader.cancel()
             .then(() => this.readableStreamClosed.catch(() => { /* Ignore the error */ }))
             .then(() => {
@@ -256,8 +258,7 @@ class WebSerial {
                         this.chValues[ch] = {};
                     }
                     this.chValues[ch][data.type] = data.value;
-                    console.log("datatype:"+data.type); //add
-                    console.log("datavalue"+data.value); //add
+                   
 
                     if (data.type === ChResponse.NOTIFY) {
                         console.log(data.type);
@@ -289,9 +290,9 @@ class WebSerial {
                 .catch(() => {
 
 
-                    console.log('handleerror');
+                   
                      
-                    this.startReceiving(); //add
+                    this.startReceiving(); //add  no stopping when error packet
                     
                     //this.handleDisconnectError(); //add
                 });
@@ -331,7 +332,7 @@ class WebSerial {
     startNotifications (_serviceId, characteristicId, onCharacteristicChanged = null) {
         // Connected device will start necessary notifications automatically on serial-port.
         this.notifyListeners[SERIAL_CH_ID[characteristicId]] = onCharacteristicChanged;
-        console.log("service:"+""+_serviceId)
+       
         return Promise.resolve();
     }
 

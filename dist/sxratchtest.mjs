@@ -4432,7 +4432,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
       this.port.open(this._serialOptions).then(function () {
         log$1.log("SerialPort: open");
-        console.log('serialopen');
         _this2.state = 'open';
         _this2.writer = _this2.port.writable.getWriter(); // eslint-disable-next-line no-undef
 
@@ -4465,7 +4464,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
       if (this.state !== 'open') return Promise.resolve();
       this.state = 'closing';
       this.stopReceiving();
-      console.log('serialclose');
       return this.reader.cancel().then(function () {
         return _this3.readableStreamClosed.catch(function () {
           /* Ignore the error */
@@ -4523,9 +4521,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
           }
 
           _this4.chValues[ch][data.type] = data.value;
-          console.log("datatype:" + data.type); //add
-
-          console.log("datavalue" + data.value); //add
 
           if (data.type === ChResponse.NOTIFY) {
             console.log(data.type);
@@ -4554,9 +4549,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
           // start again
           _this5.startReceiving();
         }).catch(function () {
-          console.log('handleerror');
-
-          _this5.startReceiving(); //add
+          _this5.startReceiving(); //add  no stopping when error packet
           //this.handleDisconnectError(); //add
 
         });
@@ -4609,7 +4602,6 @@ var WebSerial$1 = /*#__PURE__*/function () {
       var onCharacteristicChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       // Connected device will start necessary notifications automatically on serial-port.
       this.notifyListeners[SERIAL_CH_ID[characteristicId]] = onCharacteristicChanged;
-      console.log("service:" + "" + _serviceId);
       return Promise.resolve();
     }
   }, {
