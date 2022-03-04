@@ -132,7 +132,9 @@ class ExtensionBlocks {
             }
         };
     }
+}
 
+<<<<<<< HEAD
     /**
      * Configurate microphone.
      * @param {boolean} use - true to use microphone.
@@ -2914,6 +2916,11 @@ const extensionTranslations = {
         'mbitMore.digitalValueMenu.Low': 'desligado',
         'mbitMore.digitalValueMenu.High': 'ligado'
     }
+=======
+export {
+    ExtensionBlocks as default,
+    ExtensionBlocks as blockClass
+>>>>>>> parent of 9daba16 (test)
 =======
 export {
     ExtensionBlocks as default,
