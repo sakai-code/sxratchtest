@@ -787,7 +787,7 @@ var setupTranslations = function setupTranslations() {
   }
 };
 
-var EXTENSION_ID = 'sxratchtest';
+var EXTENSION_ID = 'microbitMore';
 /**
  * URL to get this extension as a module.
  * When it was loaded as a module, 'extensionURL' will be replaced a URL which is retrieved from.
@@ -1751,8 +1751,8 @@ var ExtensionBlocks = /*#__PURE__*/function () {
      */
     function get() {
       return formatMessage({
-        id: 'sxratchtest.name',
-        default: 'sxratchtest',
+        id: 'microbitMore.name',
+        default: 'microbitMore',
         description: 'name of the extension'
       });
     }

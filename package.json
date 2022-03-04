@@ -1,5 +1,5 @@
 {
-  "name": "sxratchtest",
+  "name": "microbitMore",
   "version": "0.0.0",
   "scripts": {
     "register": "npx xcratch-register --id=mmyblocks --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry --core --link --use=extension-support util",

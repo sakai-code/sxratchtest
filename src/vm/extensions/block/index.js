@@ -25,7 +25,7 @@ const setupTranslations = () => {
     }
 };
 
-const EXTENSION_ID = 'sxratchtest';
+const EXTENSION_ID = 'microbitMore';
 
 /**
  * URL to get this extension as a module.
@@ -44,8 +44,8 @@ class ExtensionBlocks {
      */
     static get EXTENSION_NAME () {
         return formatMessage({
-            id: 'sxratchtest.name',
-            default: 'sxratchtest',
+            id: 'microbitMore.name',
+            default: 'microbitMore',
             description: 'name of the extension'
         });
     }
