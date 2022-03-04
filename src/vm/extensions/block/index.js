@@ -343,8 +343,9 @@ class ExtensionBlocks {
      * Start to scan Bluetooth LE devices to find micro:bit with MicroBit More service.
      */
     scanBLE () {
-        console.log("on");
-        /**const connectorClass = BLE;
+        console.log("scan");
+       
+    const connectorClass = BLE;
        this._ble = new connectorClass(
             this.runtime,
             this._extensionId,
@@ -357,7 +358,7 @@ class ExtensionBlocks {
             this._onConnect,
             this.onDisconnect
         );
-        */
+        
     }
 
     /**
@@ -2916,6 +2917,7 @@ const extensionTranslations = {
         'mbitMore.digitalValueMenu.Low': 'desligado',
         'mbitMore.digitalValueMenu.High': 'ligado'
     }
+};
 
 export {
     ExtensionBlocks as default,
