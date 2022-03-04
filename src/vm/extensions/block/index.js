@@ -1,833 +1,136 @@
-const ArgumentType = require('../../extension-support/argument-type');
-const BlockType = require('../../extension-support/block-type');
-const log = require('../../util/log');
-const cast = require('../../util/cast');
-const BLE = require('./ble');
-const {Buffer} = require('buffer');
+import BlockType from '../../extension-support/block-type';
+import ArgumentType from '../../extension-support/argument-type';
+import Cast from '../../util/cast';
+import translations from './translations.json';
+import blockIcon from './block-icon.png';
 
-const WebSerial = require('./serial-web');
-
-const uint8ArrayToBase64 = array => Buffer.from(array).toString('base64');
-const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
-
-
+/**
+ * Formatter which is used for translation.
+ * This will be replaced which is used in the runtime.
+ * @param {object} messageData - format-message object
+ * @returns {string} - message for the locale
+ */
 let formatMessage = messageData => messageData.defaultMessage;
 
-const EXTENSION_ID = 'microbitMore';
+/**
+ * Setup format-message for this extension.
+ */
+const setupTranslations = () => {
+    const localeSetup = formatMessage.setup();
+    if (localeSetup && localeSetup.translations[localeSetup.locale]) {
+        Object.assign(
+            localeSetup.translations[localeSetup.locale],
+            translations[localeSetup.locale]
+        );
+    }
+};
+
+const EXTENSION_ID = 'sxratchtest';
 
 /**
  * URL to get this extension as a module.
  * When it was loaded as a module, 'extensionURL' will be replaced a URL which is retrieved from.
  * @type {string}
  */
-let extensionURL = 'https://microbit-more.github.io/dist/microbitMore.mjs';
+let extensionURL = 'https://sakai-code.github.io/sxratchtest/dist/sxratchtest.mjs';
 
 /**
- * Icon png to be displayed at the left edge of each extension block, encoded as a data URI.
- * @type {string}
+ * Scratch 3.0 blocks for example of Xcratch.
  */
-// eslint-disable-next-line max-len
-const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAErmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjQwIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iNDAiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSI0MCIKICAgdGlmZjpJbWFnZUxlbmd0aD0iNDAiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249IjcyLjAiCiAgIHRpZmY6WVJlc29sdXRpb249IjcyLjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjEtMDMt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';
-
-/**
- * Enum for version of the hardware.
- * @readonly
- * @enum {number}
- */
-const MbitMoreHardwareVersion =
-{
-    MICROBIT_V1: 1,
-    MICROBIT_V2: 2
-};
-
-/**
- * Communication route between Scratch and micro:bit
- *
- */
-const CommunicationRoute = {
-    BLE: 0,
-    SERIAL: 1
-};
-
-/**
- * Enum for micro:bit BLE command protocol.
- * https://github.com/LLK/scratch-microbit-firmware/blob/master/protocol.md
- * @readonly
- * @enum {number}
- */
-const BLECommand = {
-    CMD_CONFIG: 0x00,
-    CMD_PIN: 0x01,
-    CMD_DISPLAY: 0x02,
-    CMD_AUDIO: 0x03,
-    CMD_DATA: 0x04
-};
-
-/**
- * Enum for command about gpio pins.
- * @readonly
- * @enum {number}
- */
-const MbitMorePinCommand =
-{
-    SET_OUTPUT: 0x01,
-    SET_PWM: 0x02,
-    SET_SERVO: 0x03,
-    SET_PULL: 0x04,
-    SET_EVENT: 0x05
-};
-
-/**
- * Enum for command about gpio pins.
- * @readonly
- * @enum {number}
- */
-const MbitMoreDisplayCommand =
-{
-    CLEAR: 0x00,
-    TEXT: 0x01,
-    PIXELS_0: 0x02,
-    PIXELS_1: 0x03
-};
-
-/**
- * Enum for name of pull mode.
- * @readonly
- * @enum {number}
- */
-const MbitMorePullModeName = {
-    NONE: 'NONE',
-    DOWN: 'DOWN',
-    UP: 'UP'
-};
-
-/**
- * Enum for ID of pull mode.
- * @readonly
- * @enum {number}
- */
-const MbitMorePullModeID = {
-    NONE: 0,
-    DOWN: 1,
-    UP: 2
-};
-
-/**
- * Enum for data format.
- * @readonly
- * @enum {number}
- */
-const MbitMoreDataFormat = {
-    CONFIG: 0x10, // not used at this version
-    PIN_EVENT: 0x11,
-    ACTION_EVENT: 0x12,
-    DATA_NUMBER: 0x13,
-    DATA_TEXT: 0x14
-};
-
-/**
- * Enum for action event type.
- * @readonly
- * @enum {number}
- */
-const MbitMoreActionEvent = {
-    BUTTON: 0x01,
-    GESTURE: 0x02
-};
-
-/**
- * Enum for ID of pin-mode
- * @readonly
- * @enum {string}
- */
-const MbitMorePinMode = {
-    INPUT: 'INPUT',
-    OUTPUT: 'OUTPUT',
-    PWM: 'PWM',
-    SERVO: 'SERVO',
-    TOUCH: 'TOUCH'
-};
-
-/**
- * Enum for ID of buttons
- * @readonly
- * @enum {string}
- */
-const MbitMoreButtonName = {
-    P0: 'P0',
-    P1: 'P1',
-    P2: 'P2',
-    A: 'A',
-    B: 'B',
-    LOGO: 'LOGO'
-};
-
-/**
- * Enum for componentID of buttons
- * @readonly
- * @enum {string}
- */
-const MbitMoreButtonID = {
-    1: 'A',
-    2: 'B',
-    100: 'P0',
-    101: 'P1',
-    102: 'P2',
-    121: 'LOGO'
-};
-
-/**
- * Enum for index of pin for buttons
- * @readonly
- * @enum {number}
- */
-const MbitMoreButtonPinIndex = {
-    P0: 0,
-    P1: 1,
-    P2: 2
-};
-
-/**
- * Enum for index in data of button state
- * @readonly
- * @enum {number}
- */
-const MbitMoreButtonStateIndex = {
-    P0: 0,
-    P1: 1,
-    P2: 2,
-    A: 3,
-    B: 4,
-    LOGO: 5
-};
-
-/**
- * Enum for name of event from button
- * @readonly
- * @enum {string}
- */
-const MbitMoreButtonEventName = {
-    DOWN: 'DOWN',
-    UP: 'UP',
-    CLICK: 'CLICK',
-    LONG_CLICK: 'LONG_CLICK',
-    HOLD: 'HOLD',
-    DOUBLE_CLICK: 'DOUBLE_CLICK'
-};
-
-/**
- * Enum for ID of event from button
- * @readonly
- * @enum {string}
- */
-const MbitMoreButtonEventID = {
-    1: 'DOWN',
-    2: 'UP',
-    3: 'CLICK',
-    4: 'LONG_CLICK',
-    5: 'HOLD',
-    6: 'DOUBLE_CLICK'
-};
-
-/**
- * Enum for name of gesture.
- * @readonly
- * @enum {string}
- */
-const MbitMoreGestureName =
-{
-    TILT_UP: 'TILT_UP',
-    TILT_DOWN: 'TILT_DOWN',
-    TILT_LEFT: 'TILT_LEFT',
-    TILT_RIGHT: 'TILT_RIGHT',
-    FACE_UP: 'FACE_UP',
-    FACE_DOWN: 'FACE_DOWN',
-    FREEFALL: 'FREEFALL',
-    G3: 'G3',
-    G6: 'G6',
-    G8: 'G8',
-    SHAKE: 'SHAKE'
-};
-
-/**
- * Enum for ID of gesture.
- * @readonly
- * @enum {string}
- */
-const MbitMoreGestureID =
-{
-    1: 'TILT_UP',
-    2: 'TILT_DOWN',
-    3: 'TILT_LEFT',
-    4: 'TILT_RIGHT',
-    5: 'FACE_UP',
-    6: 'FACE_DOWN',
-    7: 'FREEFALL',
-    8: 'G3',
-    9: 'G6',
-    10: 'G8',
-    11: 'SHAKE'
-};
-
-/**
- * Enum for event type in the micro:bit runtime.
- * @readonly
- * @enum {number}
- */
-const MbitMorePinEventType = {
-    NONE: 0,
-    ON_EDGE: 1,
-    ON_PULSE: 2,
-    ON_TOUCH: 3
-};
-
-/**
- * Enum for event value in the micro:bit runtime.
- * @readonly
- * @enum {number}
- */
-const MbitMorePinEvent = {
-    RISE: 2,
-    FALL: 3,
-    PULSE_HIGH: 4,
-    PULSE_LOW: 5
-};
-
-/**
- * Enum for data type of data-sending.
- * @readonly
- * @enum {number}
- */
-const MbitMoreSendingDataType = {
-    NUMBER: 1,
-    TEXT: 2
-};
-
-/**
- * Enum for sub-command about configurations.
- * @readonly
- * @enum {number}
- */
-const MbitMoreConfig =
-{
-    MIC: 0x01,
-    TOUCH: 0x02
-};
-
-/**
- * Enum for sub-command about audio.
- * @readonly
- * @enum {number}
- */
-const MbitMoreAudioCommand =
-{
-    STOP_TONE: 0x00,
-    PLAY_TONE: 0x01
-};
-
-/**
- * A time interval to wait (in milliseconds) before reporting to the BLE socket
- * that data has stopped coming from the peripheral.
- */
-const BLETimeout = 4500;
-
-
-/**
- * A string to report to the BLE socket when the micro:bit has stopped receiving data.
- * @type {string}
- */
-const BLEDataStoppedError = 'micro:bit extension stopped receiving data';
-
-const MM_SERVICE = {
-    ID: '0b50f3e4-607f-4151-9091-7d008d6ffc5c',
-    COMMAND_CH: '0b500100-607f-4151-9091-7d008d6ffc5c',
-    STATE_CH: '0b500101-607f-4151-9091-7d008d6ffc5c',
-    MOTION_CH: '0b500102-607f-4151-9091-7d008d6ffc5c',
-    PIN_EVENT_CH: '0b500110-607f-4151-9091-7d008d6ffc5c',
-    ACTION_EVENT_CH: '0b500111-607f-4151-9091-7d008d6ffc5c',
-    ANALOG_IN_CH: [
-        '0b500120-607f-4151-9091-7d008d6ffc5c',
-        '0b500121-607f-4151-9091-7d008d6ffc5c',
-        '0b500122-607f-4151-9091-7d008d6ffc5c'
-    ],
-    MESSAGE_CH: '0b500130-607f-4151-9091-7d008d6ffc5c'
-};
-
-/**
- * Enum for axis menu options.
- * @readonly
- * @enum {string}
- */
-const AxisSymbol = {
-    X: 'x',
-    Y: 'y',
-    Z: 'z',
-    Absolute: 'absolute'
-};
-
-/**
- * The unit-value of the gravitational acceleration from Micro:bit.
- * @type {number}
- */
-const G = 1024;
-
-/**
- * Manage communication with a MicroBit peripheral over a Scrath Link client socket.
- */
-class MbitMore {
+class ExtensionBlocks {
 
     /**
-     * Construct a MicroBit communication object.
-     * @param {Runtime} runtime - the Scratch 3.0 runtime
-     * @param {string} extensionId - the id of the extension
+     * @return {string} - the name of this extension.
      */
-    constructor (runtime, extensionId) {
+    static get EXTENSION_NAME () {
+        return formatMessage({
+            id: 'sxratchtest.name',
+            default: 'sxratchtest',
+            description: 'name of the extension'
+        });
+    }
 
+    /**
+     * @return {string} - the ID of this extension.
+     */
+    static get EXTENSION_ID () {
+        return EXTENSION_ID;
+    }
+
+    /**
+     * URL to get this extension.
+     * @type {string}
+     */
+    static get extensionURL () {
+        return extensionURL;
+    }
+
+    /**
+     * Set URL to get this extension.
+     * The extensionURL will be changed to the URL of the loading server.
+     * @param {string} url - URL
+     */
+    static set extensionURL (url) {
+        extensionURL = url;
+    }
+
+    /**
+     * Construct a set of blocks for sxratchtest.
+     * @param {Runtime} runtime - the Scratch 3.0 runtime.
+     */
+    constructor (runtime) {
         /**
-         * The Scratch 3.0 runtime used to trigger the green flag button.
+         * The Scratch 3.0 runtime.
          * @type {Runtime}
-         * @private
          */
         this.runtime = runtime;
 
-        /**
-         * The BluetoothLowEnergy connection socket for reading/writing peripheral data.
-         * @type {BLE}
-         * @private
-         */
-        this._ble = null;
-        this.runtime.registerPeripheralExtension(extensionId, this);
-
-        /**
-         * The id of the extension this peripheral belongs to.
-         */
-        this._extensionId = extensionId;
-
-        this.digitalLevel = {};
-        this.lightLevel = 0;
-        this.temperature = 0;
-        this.soundLevel = 0;
-        this.pitch = 0;
-        this.roll = 0;
-        this.acceleration = {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-        this.compassHeading = 0;
-        this.magneticForce = {
-            x: 0,
-            y: 0,
-            z: 0
-        };
-
-        this.buttonState = {};
-
-        /**
-         * The most recently received button events for each buttons.
-         * @type {Object} - Store of buttons which has events.
-         * @private
-         */
-        this.buttonEvents = {};
-        Object.keys(MbitMoreButtonStateIndex).forEach(name => {
-            this.buttonEvents[name] = {};
-        });
-
-        /**
-         * The most recently received gesture events.
-         * @type {Object <number, number>} - Store of gesture ID and timestamp.
-         * @private
-         */
-        this.gestureEvents = {};
-
-
-        /**
-         * The most recently received events for each pin.
-         * @type {Object} - Store of pins which has events.
-         * @private
-         */
-        this._pinEvents = {};
-
-        /**
-         * The most recently received data from micro:bit.
-         * @type {Object} - Store of received data
-         * @private
-         */
-        this.receivedData = {};
-
-        this.analogIn = [0, 1, 2];
-        this.analogValue = [];
-        this.analogIn.forEach(pinIndex => {
-            this.analogValue[pinIndex] = 0;
-        });
-
-        this.gpio = [
-            0, 1, 2,
-            8,
-            12, 13, 14, 15, 16
-        ];
-        this.gpio.forEach(pinIndex => {
-            this.digitalLevel[pinIndex] = 0;
-        });
-
-        /**
-         * Interval ID for data reading timeout.
-         * @type {number}
-         * @private
-         */
-        this._timeoutID = null;
-
-        /**
-         * A flag that is true while we are busy sending data to the BLE socket.
-         * @type {boolean}
-         * @private
-         */
-        this.bleBusy = true;
-
-        /**
-         * ID for a timeout which is used to clear the busy flag if it has been
-         * true for a long time.
-         */
-        this.bleBusyTimeoutID = null;
-
-        this.onDisconnect = this.onDisconnect.bind(this);
-        this._onConnect = this._onConnect.bind(this);
-        this.onNotify = this.onNotify.bind(this);
-
-        this.stopTone = this.stopTone.bind(this);
-        if (this.runtime) {
-            this.runtime.on('PROJECT_STOP_ALL', this.stopTone);
+        if (runtime.formatMessage) {
+            // Replace 'formatMessage' to a formatter which is used in the runtime.
+            formatMessage = runtime.formatMessage;
         }
+    }
 
-        this.analogInUpdateInterval = 100; // milli-seconds
-        this.analogInLastUpdated = [Date.now(), Date.now(), Date.now()];
-
-        /**
-         * A time interval to wait (in milliseconds) while a block that sends a BLE message is running.
-         * @type {number}
-         */
-        this.sendCommandInterval = 30;
-
-        this.initConfig();
-
-        // keyboard state monitor
-        this.keyState = {};
-        document.body.addEventListener('keydown', e => {
-            this.keyState[e.code] = {
-                key: e.key,
-                code: e.code,
-                alt: e.altKey,
-                ctrl: e.ctrlKey,
-                meta: e.metaKey,
-                shift: e.shiftKey
-            };
-        });
-        document.body.addEventListener('keyup', e => {
-            delete this.keyState[e.code];
-        });
+    doIt (args) {
+        const func = new Function(`return (${Cast.toString(args.SCRIPT)})`);
+        const result = func.call(this);
+        console.log(result);
+        return result;
     }
 
     /**
-     * Initialize configuration of the micro:bit.
+     * @returns {object} metadata for this extension and its blocks.
      */
-    initConfig () {
-        this.config = {};
-        this.config.mic = false;
-        this.config.pinMode = {};
-    }
-
-    /**
-     * Start updating process for micro:bit state and motion.
-     */
-    startUpdater () {
-        if (this.updater) {
-            clearTimeout(this.updater);
-        }
-        if (this.bleAccessWaiting) {
-            this.updater = setTimeout(() => this.startUpdater(), 0);
-            return;
-        }
-        this.updateState()
-            .then(() => this.updateMotion())
-            .finally(() => {
-                this.updater = setTimeout(
-                    () => this.startUpdater(),
-                    this.microbitUpdateInterval
-                );
-            });
-    }
-
-    /**
-     * Stop updating process for micro:bit state and motion.
-     */
-    stopUpdater () {
-        clearTimeout(this.updater);
-    }
-
-    /**
-     * @param {string} text - the text to display.
-     * @param {number} delay - The time to delay between characters, in milliseconds.
-     * @param {object} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    displayText (text, delay, util) {
-        const textLength = Math.min(18, text.length);
-        const textData = new Uint8Array(textLength + 1);
-        for (let i = 0; i < textLength; i++) {
-            textData[i] = text.charCodeAt(i);
-        }
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_DISPLAY << 5) | MbitMoreDisplayCommand.TEXT,
-                message: new Uint8Array([
-                    Math.min(255, (Math.max(0, delay) / 10)),
-                    ...textData
-                ])
-            }],
-            util
-        );
-    }
-
-    /**
-     * Send display pixcels command to micro:bit.
-     * @param {Array.<Array.<number>>} matrix - pattern to display.
-     * @param {object} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    displayPixels (matrix, util) {
-        const cmdSet = [
-            {
-                id: (BLECommand.CMD_DISPLAY << 5) | MbitMoreDisplayCommand.PIXELS_0,
-                message: new Uint8Array([
-                    ...matrix[0],
-                    ...matrix[1],
-                    ...matrix[2]
-                ])
-            },
-            {
-                id: (BLECommand.CMD_DISPLAY << 5) | MbitMoreDisplayCommand.PIXELS_1,
-                message: new Uint8Array([
-                    ...matrix[3],
-                    ...matrix[4]
-                ])
-            }
-        ];
-        return this.sendCommandSet(cmdSet, util);
-    }
-
-    /**
-     * Set pull mode to the pin.
-     * @param {number} pinIndex - index of the pin
-     * @param {MbitMorePullModeID} pullMode - pull mode to set
-     * @param {BlockUtility} util - utility object provided from the runtime
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    setPullMode (pinIndex, pullMode, util) {
-        this.config.pinMode[pinIndex] = MbitMorePinMode.INPUT;
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_PIN << 5) | MbitMorePinCommand.SET_PULL,
-                message: new Uint8Array([
-                    pinIndex,
-                    pullMode
-                ])
-            }],
-            util
-        );
-    }
-
-    /**
-     * Set pin to digital output mode on the level.
-     * @param {number} pinIndex - Index of pin.
-     * @param {boolean} level - Value in digital (true = High)
-     * @param {BlockUtility} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    setPinOutput (pinIndex, level, util) {
-        this.config.pinMode[pinIndex] = MbitMorePinMode.OUTPUT;
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_PIN << 5) | MbitMorePinCommand.SET_OUTPUT,
-                message: new Uint8Array(
-                    [
-                        pinIndex,
-                        (level ? 1 : 0)
-                    ]
-                )
-            }],
-            util
-        );
-    }
-
-    /**
-     * Set the pin to PWM mode on the level.
-     * @param {number} pinIndex - index of the pin
-     * @param {number} level - value of analog output [0..1024].
-     * @param {BlockUtility} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    setPinPWM (pinIndex, level, util) {
-        this.config.pinMode[pinIndex] = MbitMorePinMode.PWM;
-        const dataView = new DataView(new ArrayBuffer(2));
-        dataView.setUint16(0, level, true);
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_PIN << 5) | MbitMorePinCommand.SET_PWM,
-                message: new Uint8Array(
-                    [
-                        pinIndex,
-                        dataView.getUint8(0),
-                        dataView.getUint8(1)
-                    ]
-                )
-            }],
-            util
-        );
-    }
-
-
-    /**
-     * Set the pin to Servo mode on the angle in the range and center.
-     * @param {number} pinIndex - index of the pin.
-     * @param {number} angle - the level to set on the output pin, in the range 0 - 180.
-     * @param {number} range - the span of possible values. '0' means default(2000).
-     * @param {number} center - the center point from which to calculate the lower and upper bounds.
-     *                          '0' means default(1500).
-     * @param {BlockUtility} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
-     */
-    setPinServo (pinIndex, angle, range, center, util) {
-        this.config.pinMode[pinIndex] = MbitMorePinMode.SERVO;
-        if (!range || range < 0) range = 0;
-        if (!center || center < 0) center = 0;
-        const dataView = new DataView(new ArrayBuffer(6));
-        dataView.setUint16(0, angle, true);
-        dataView.setUint16(2, range, true);
-        dataView.setUint16(4, center, true);
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_PIN << 5) | MbitMorePinCommand.SET_SERVO,
-                message: new Uint8Array(
-                    [
-                        pinIndex,
-                        dataView.getUint8(0),
-                        dataView.getUint8(1),
-                        dataView.getUint8(2),
-                        dataView.getUint8(3),
-                        dataView.getUint8(4),
-                        dataView.getUint8(5)
-                    ]
-                )
-            }],
-            util);
-    }
-
-    /**
-     * Read light level from the light sensor.
-     * @param {object} util - utility object provided by the runtime.
-     * @return {number} - value of the light level [0..255].
-     */
-    readLightLevel () {
-        if (!this.isConnected()) {
-            return 0;
-        }
-        return this.lightLevel;
-    }
-
-    /**
-     * Update data of the analog input.
-     * @param {number} pinIndex - index of the pin to get value.
-     * @param {object} util - utility object provided by the runtime.
-     * @return {?Promise} a Promise that resolves value of analog input or undefined if this process was yield.
-     */
-    readAnalogIn (pinIndex, util) {
-        if (!this.isConnected()) {
-            return Promise.resolve(0);
-        }
-        if ((Date.now() - this.analogInLastUpdated[pinIndex]) < this.analogInUpdateInterval) {
-            return Promise.resolve(this.analogValue[pinIndex]);
-        }
-        if (this.bleBusy) {
-            this.bleAccessWaiting = true;
-            if (util) util.yield(); // re-try this call after a while.
-            return; // Do not return Promise.resolve() to re-try.
-        }
-        this.bleBusy = true;
-        this.bleBusyTimeoutID = window.setTimeout(() => {
-            this.bleBusy = false;
-            this.bleAccessWaiting = false;
-        }, 1000);
-        return new Promise(resolve => this._ble.read(
-            MM_SERVICE.ID,
-            MM_SERVICE.ANALOG_IN_CH[pinIndex],
-            false)
-            .then(result => {
-                window.clearTimeout(this.bleBusyTimeoutID);
-                this.bleBusy = false;
-                this.bleAccessWaiting = false;
-                if (!result) {
-                    return resolve(this.analogValue[pinIndex]);
-                }
-                const data = base64ToUint8Array(result.message);
-                const dataView = new DataView(data.buffer, 0);
-                this.analogValue[pinIndex] = dataView.getUint16(0, true);
-                this.analogInLastUpdated = Date.now();
-                resolve(this.analogValue[pinIndex]);
-            })
-        );
-    }
-
-    /**
-     * Update data of digital level, light level, temperature, sound level.
-     * @return {Promise} - a Promise that resolves updated data holder.
-     */
-    updateState () {
-        if (!this.isConnected()) return Promise.resolve(this);
-        if (this.bleBusy) {
-            return Promise.resolve(this);
-        }
-        this.bleBusy = true;
-        this.bleBusyTimeoutID = window.setTimeout(() => {
-            this.bleBusy = false;
-        }, 1000);
-        return new Promise(resolve => {
-            this._ble.read(
-                MM_SERVICE.ID,
-                MM_SERVICE.STATE_CH,
-                false)
-                .then(result => {
-                    window.clearTimeout(this.bleBusyTimeoutID);
-                    this.bleBusy = false;
-                    if (!result) return resolve(this);
-                    const data = base64ToUint8Array(result.message);
-                    const dataView = new DataView(data.buffer, 0);
-                    // Digital Input
-                    const gpioData = dataView.getUint32(0, true);
-                    for (let i = 0; i < this.gpio.length; i++) {
-                        this.digitalLevel[this.gpio[i]] = (gpioData >> this.gpio[i]) & 1;
+    getInfo () {
+        setupTranslations();
+        return {
+            id: ExtensionBlocks.EXTENSION_ID,
+            name: ExtensionBlocks.EXTENSION_NAME,
+            extensionURL: ExtensionBlocks.extensionURL,
+            blockIconURI: blockIcon,
+            showStatusButton: false,
+            blocks: [
+                {
+                    opcode: 'do-it',
+                    blockType: BlockType.REPORTER,
+                    blockAllThreads: false,
+                    text: formatMessage({
+                        id: 'sxratchtest.doIt',
+                        default: 'do it [SCRIPT]',
+                        description: 'execute javascript for example'
+                    }),
+                    func: 'doIt',
+                    arguments: {
+                        SCRIPT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: '3 + 4'
+                        }
                     }
-                    Object.keys(MbitMoreButtonStateIndex).forEach(
-                        name => {
-                            this.buttonState[name] = (gpioData >> (24 + MbitMoreButtonStateIndex[name])) & 1;
-                        });
-                    this.lightLevel = dataView.getUint8(4);
-                    this.temperature = dataView.getUint8(5) - 128;
-                    this.soundLevel = dataView.getUint8(6);
-                    this.resetConnectionTimeout();
-                    resolve(this);
-                });
-        });
-    }
-
-    /**
-     * Read temperature (integer in celsius) from the micro:bit cpu.
-     * @return {number} - degrees of temperature [centigrade].
-     */
-    readTemperature () {
-        if (!this.isConnected()) {
-            return 0;
-        }
-        return this.temperature;
+                }
+            ],
+            menus: {
+            }
+        };
     }
 
     /**
@@ -3611,6 +2914,9 @@ const extensionTranslations = {
         'mbitMore.digitalValueMenu.Low': 'desligado',
         'mbitMore.digitalValueMenu.High': 'ligado'
     }
+=======
+export {
+    ExtensionBlocks as default,
+    ExtensionBlocks as blockClass
+>>>>>>> parent of 9daba16 (test)
 };
-
-module.exports = MbitMoreBlocks;
