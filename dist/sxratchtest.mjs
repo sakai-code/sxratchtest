@@ -4101,7 +4101,7 @@ var formatMessage = function formatMessage(messageData) {
   return messageData.defaultMessage;
 };
 
-var EXTENSION_ID = 'microbitMore-with-Radio';
+var EXTENSION_ID = 'microbitMore_with_Radio';
 /**
  * URL to get this extension as a module.
  * When it was loaded as a module, 'extensionURL' will be replaced a URL which is retrieved from.
@@ -5112,7 +5112,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanBLE",
     value: function scanBLE() {
-      this.scanSerial();
+      this.scanSerial(); //only use serial root 
     }
     /**
      * Start to scan USB serial devices to find micro:bit v2.
