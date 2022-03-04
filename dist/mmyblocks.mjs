@@ -5932,7 +5932,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanBLE",
     value: function scanBLE() {
-      console.log("scan");
+      console.log("blscan");
       var connectorClass = BLE;
       this._ble = new connectorClass(this.runtime, this._extensionId, {
         filters: [{
@@ -5949,6 +5949,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanSerial",
     value: function scanSerial() {
+      console.log("serialscan");
       this._ble = new WebSerial(this.runtime, this._extensionId, {
         filters: [{
           usbVendorId: 0x0d28,

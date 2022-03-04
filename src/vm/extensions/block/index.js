@@ -1040,7 +1040,7 @@ class MbitMore {
      * Start to scan Bluetooth LE devices to find micro:bit with MicroBit More service.
      */
     scanBLE () {
-        console.log("scan");
+        console.log("blscan");
         const connectorClass = BLE;
         this._ble = new connectorClass(
             this.runtime,
@@ -1060,6 +1060,7 @@ class MbitMore {
      * Start to scan USB serial devices to find micro:bit v2.
      */
     scanSerial () {
+        console.log("serialscan");
         this._ble = new WebSerial(
             this.runtime,
             this._extensionId,
