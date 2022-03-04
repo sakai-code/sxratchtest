@@ -36,7 +36,7 @@ class WebBLE {
         this._peripheralOptions = peripheralOptions;
         this._runtime = runtime;
 
-        //this.requestPeripheral();
+        this.requestPeripheral();
     }
 
     /**
