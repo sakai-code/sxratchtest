@@ -13,7 +13,7 @@ const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
 
 let formatMessage = messageData => messageData.defaultMessage;
 
-const EXTENSION_ID = 'microbitMore';
+const EXTENSION_ID = 'microbitMore-with-Radio';
 
 /**
  * URL to get this extension as a module.
@@ -1040,19 +1040,7 @@ class MbitMore {
      * Start to scan Bluetooth LE devices to find micro:bit with MicroBit More service.
      */
     scanBLE () {
-        const connectorClass = BLE;
-        this._ble = new connectorClass(
-            this.runtime,
-            this._extensionId,
-            {
-                filters: [
-                    {namePrefix: 'BBC micro:bit'},
-                    {services: [MM_SERVICE.ID]}
-                ]
-            },
-            this._onConnect,
-            this.onDisconnect
-        );
+        this.scanSerial();
     }
 
     /**
