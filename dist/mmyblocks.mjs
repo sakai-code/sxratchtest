@@ -5932,6 +5932,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanBLE",
     value: function scanBLE() {
+      console.log("scan");
       var connectorClass = BLE;
       this._ble = new connectorClass(this.runtime, this._extensionId, {
         filters: [{
