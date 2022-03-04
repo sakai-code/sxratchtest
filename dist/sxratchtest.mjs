@@ -4932,7 +4932,11 @@ var formatMessage = function formatMessage(messageData) {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var EXTENSION_ID = 'microbitMore_with_Radio';
+=======
+var EXTENSION_ID = 'microbitMore';
+>>>>>>> parent of 49fd707 (test2)
 =======
 var EXTENSION_ID = 'microbitMore';
 >>>>>>> parent of 49fd707 (test2)
@@ -5947,8 +5951,11 @@ var MbitMore = /*#__PURE__*/function () {
     key: "scanBLE",
     value: function scanBLE() {
 <<<<<<< HEAD
+<<<<<<< HEAD
       this.scanSerial(); //only use serial root 
 =======
+=======
+>>>>>>> parent of 49fd707 (test2)
       var connectorClass = BLE;
       this._ble = new connectorClass(this.runtime, this._extensionId, {
         filters: [{
@@ -5957,6 +5964,9 @@ var MbitMore = /*#__PURE__*/function () {
           services: [MM_SERVICE.ID]
         }]
       }, this._onConnect, this.onDisconnect);
+<<<<<<< HEAD
+>>>>>>> parent of 49fd707 (test2)
+=======
 >>>>>>> parent of 49fd707 (test2)
     }
     /**

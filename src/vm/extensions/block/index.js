@@ -14,7 +14,11 @@ const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
 let formatMessage = messageData => messageData.defaultMessage;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const EXTENSION_ID = 'microbitMore_with_Radio';
+=======
+const EXTENSION_ID = 'microbitMore';
+>>>>>>> parent of 49fd707 (test2)
 =======
 const EXTENSION_ID = 'microbitMore';
 >>>>>>> parent of 49fd707 (test2)
@@ -1045,8 +1049,11 @@ class MbitMore {
      */
     scanBLE () {
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.scanSerial(); //only use serial root 
 =======
+=======
+>>>>>>> parent of 49fd707 (test2)
         const connectorClass = BLE;
         this._ble = new connectorClass(
             this.runtime,
@@ -1060,6 +1067,9 @@ class MbitMore {
             this._onConnect,
             this.onDisconnect
         );
+<<<<<<< HEAD
+>>>>>>> parent of 49fd707 (test2)
+=======
 >>>>>>> parent of 49fd707 (test2)
     }
 
