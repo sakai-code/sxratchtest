@@ -1040,8 +1040,8 @@ class MbitMore {
      * Start to scan Bluetooth LE devices to find micro:bit with MicroBit More service.
      */
     scanBLE () {
-        console.log("blscan");
-        this.scanSerial();
+        
+        this.scanSerial(); //avoid BLE SCAN 
         /** 
         const connectorClass = BLE;
         this._ble = new connectorClass(
@@ -1063,7 +1063,7 @@ class MbitMore {
      * Start to scan USB serial devices to find micro:bit v2.
      */
     scanSerial () {
-        console.log("serialscan");
+      
         this._ble = new WebSerial(
             this.runtime,
             this._extensionId,
@@ -1188,11 +1188,13 @@ class MbitMore {
             this._ble.disconnect();
         }
         this.bleBusy = true;
-        if (('serial' in navigator) && this.isKeyPressing('Shift')) {
-            this.selectCommunicationRoute();
-        } else {
-            this.scanBLE();
-        }
+        /**  if (('serial' in navigator) && this.isKeyPressing('Shift')) {
+        * this.selectCommunicationRoute();
+        *} else {  
+        *   this.scanBLE();
+        * }
+        */ //avoid communication root
+       this.scanSerial();
     }
 
     /**

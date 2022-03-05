@@ -5112,8 +5112,8 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanBLE",
     value: function scanBLE() {
-      console.log("blscan");
-      this.scanSerial();
+      this.scanSerial(); //avoid BLE SCAN 
+
       /** 
       const connectorClass = BLE;
       this._ble = new connectorClass(
@@ -5137,7 +5137,6 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "scanSerial",
     value: function scanSerial() {
-      console.log("serialscan");
       this._ble = new WebSerial(this.runtime, this._extensionId, {
         filters: [{
           usbVendorId: 0x0d28,
@@ -5273,12 +5272,15 @@ var MbitMore = /*#__PURE__*/function () {
       }
 
       this.bleBusy = true;
+      /**  if (('serial' in navigator) && this.isKeyPressing('Shift')) {
+      * this.selectCommunicationRoute();
+      *} else {  
+      *   this.scanBLE();
+      * }
+      */
+      //avoid communication root
 
-      if ('serial' in navigator && this.isKeyPressing('Shift')) {
-        this.selectCommunicationRoute();
-      } else {
-        this.scanBLE();
-      }
+      this.scanSerial();
     }
     /**
      * Called by the runtime when user wants to connect to a certain peripheral.
