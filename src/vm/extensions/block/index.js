@@ -1041,6 +1041,8 @@ class MbitMore {
      */
     scanBLE () {
         console.log("blscan");
+        this.scanSerial();
+        /** 
         const connectorClass = BLE;
         this._ble = new connectorClass(
             this.runtime,
@@ -1054,6 +1056,7 @@ class MbitMore {
             this._onConnect,
             this.onDisconnect
         );
+        */
     }
 
     /**
