@@ -7769,7 +7769,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosendnumber",
     value: function radiosendnumber(args) {
-      var sendnumber = args.NUM;
+      var sendnumber = args.NV;
       console.log(sendnumber);
     }
     /**

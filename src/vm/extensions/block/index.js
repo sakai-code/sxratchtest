@@ -3587,7 +3587,7 @@ class MbitMoreBlocks {
      */
 
     radiosendnumber(args){
-        const sendnumber = args.NUM;
+        const sendnumber = args.NV;
         console.log(sendnumber);
 
     }
