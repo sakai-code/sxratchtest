@@ -2799,7 +2799,7 @@ class MbitMoreBlocks {
                     
                 },
                 {
-                    opcode: 'radiosendnnumber',
+                    opcode: 'radiosendnumber',
                     text: formatMessage({
                         id: 'mbitMore.radiosendnumber',
                         default: 'radio send number:  [NV]',
