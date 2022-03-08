@@ -3548,7 +3548,8 @@ const extensionTranslations = {
         'mbitMore.selectCommunicationRoute.bluetooth': 'Bluetooth',
         'mbitMore.selectCommunicationRoute.usb': 'USB',
         'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
-        'mbitMore.selectCommunicationRoute.cancel': 'やめる'
+        'mbitMore.selectCommunicationRoute.cancel': 'やめる',
+        'mbitMore.radioinit':'ラジオ機能有効'
     },
     'ja-Hira': {
         'mbitMore.whenButtonEvent': '[NAME] ボタンが [EVENT] とき',
@@ -3635,7 +3636,8 @@ const extensionTranslations = {
         'mbitMore.selectCommunicationRoute.bluetooth': 'むせん',
         'mbitMore.selectCommunicationRoute.usb': 'ゆうせん',
         'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
-        'mbitMore.selectCommunicationRoute.cancel': 'やめる'
+        'mbitMore.selectCommunicationRoute.cancel': 'やめる',
+        'mbitMore.radioinit':'らじおきのう有効'
     },
     'pt-br': {
         'mbitMore.lightLevel': 'Intensidade da Luz',
