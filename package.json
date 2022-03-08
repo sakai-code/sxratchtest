@@ -2,8 +2,8 @@
   "name": "microbitMore",
   "version": "0.0.0",
   "scripts": {
-    "register": "npx xcratch-register --id=mmyblocks --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry --core --link --use=extension-support util",
-    "build": "npx xcratch-build --module=mmyblocks --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry"
+    "register": "npx xcratch-register --id=microbitmorev2 --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry --core --link --use=extension-support util",
+    "build": "npx xcratch-build --module=microbitmorev2 --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry"
   },
   "devDependencies": {
     "xcratch-build": "^0.4.0",
