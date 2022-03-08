@@ -2791,12 +2791,12 @@ class MbitMoreBlocks {
                     opcode: 'radiosendnnumber',
                     text: formatMessage({
                         id: 'mbitMore.radiosendnumber',
-                        default: 'radio send number:  [NUM]',
+                        default: 'radio send number:  [NV]',
                         description: 'radio send number '
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
-                        NUM: {
+                        NV: {
                             type: ArgumentType.NUMBER,
                             defaultValue: 0
                         },
