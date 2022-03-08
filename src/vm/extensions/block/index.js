@@ -2756,6 +2756,17 @@ class MbitMoreBlocks {
                 },
                 '---',
                 {
+                    opcode: 'whenradiopacketreceived',
+                    text: formatMessage({
+                        id: 'mbitMore.whenradiopacketreceived',
+                        default: 'when radio received',
+                        description: 'when radio packet received  '
+                    }),
+                    blockType: BlockType.HAT
+                    
+                    
+                },
+                {
                     opcode: 'radiosetgroup',
                     text: formatMessage({
                         id: 'mbitMore.radiosetgroup',
@@ -2833,7 +2844,7 @@ class MbitMoreBlocks {
                 
                     opcode: 'radiosendpowerset',
                     text: formatMessage({
-                        id: 'mbitMore.radiossendpowerset',
+                        id: 'mbitMore.radiosendpowerset',
                         default: 'radio send power : [POWER]',
                         description: 'radio send power '
                     }),
