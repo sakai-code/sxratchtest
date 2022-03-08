@@ -4591,7 +4591,11 @@ var MbitMore = /*#__PURE__*/function () {
     });
     document.body.addEventListener('keyup', function (e) {
       delete _this.keyState[e.code];
-    });
+    }); //radio function add 
+
+    this.radioinitstate = 0;
+    this.radiotranspower = 0;
+    this.radiogroup = 0;
   }
   /**
    * Initialize configuration of the micro:bit.
@@ -6789,6 +6793,14 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
               defaultValue: 'data'
             }
           }
+        }, {
+          opcode: 'radioinit',
+          text: formatMessage({
+            id: 'mbitMore.radioinit',
+            default: 'radio function initt',
+            description: 'radio init '
+          }),
+          blockType: BlockType.COMMAND
         }],
         menus: {
           buttonIDMenu: {
@@ -7631,6 +7643,14 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
       if (localeSetup && localeSetup.translations[localeSetup.locale]) {
         Object.assign(localeSetup.translations[localeSetup.locale], // eslint-disable-next-line no-use-before-define
         extensionTranslations[localeSetup.locale]);
+      }
+    } //add radio function
+
+  }, {
+    key: "initradio",
+    value: function initradio() {
+      if (!this.radioinitstate) {
+        this.radioinitstate = 1;
       }
     }
   }], [{

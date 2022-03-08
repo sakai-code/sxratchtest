@@ -525,6 +525,14 @@ class MbitMore {
         document.body.addEventListener('keyup', e => {
             delete this.keyState[e.code];
         });
+
+
+        //radio function add 
+
+        this.radioinitstate = 0;
+        this.radiotranspower = 0;
+        this.radiogroup = 0;
+    
     }
 
     /**
@@ -2745,7 +2753,18 @@ class MbitMoreBlocks {
                             defaultValue: 'data'
                         }
                     }
+                },
+                {
+                    opcode: 'radioinit',
+                    text: formatMessage({
+                        id: 'mbitMore.radioinit',
+                        default: 'radio function initt',
+                        description: 'radio init '
+                    }),
+                    blockType: BlockType.COMMAND
+                    
                 }
+
             ],
             menus: {
                 buttonIDMenu: {
@@ -3417,6 +3436,30 @@ class MbitMoreBlocks {
             );
         }
     }
+
+     
+    //add radio function
+ 
+    initradio ( ) {
+
+        if(!this.radioinitstate){
+            this.radioinitstate = 1;
+
+        }
+
+
+    }
+
+
+
+   
+
+
+
+
+
+
+
 }
 
 const extensionTranslations = {
