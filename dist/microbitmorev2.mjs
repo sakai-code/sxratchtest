@@ -7869,7 +7869,7 @@ var extensionTranslations = {
     'mbitMore.selectCommunicationRoute.usb': 'ゆうせん',
     'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
     'mbitMore.selectCommunicationRoute.cancel': 'やめる',
-    'mbitMore.radioinit': 'らじおきのう有効'
+    'mbitMore.radioinit': 'らじおきのうゆうこう'
   },
   'pt-br': {
     'mbitMore.lightLevel': 'Intensidade da Luz',
