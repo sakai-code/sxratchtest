@@ -2780,9 +2780,9 @@ class MbitMoreBlocks {
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
-                        GROUP: {
-                            type: ArgumentType.TEXT,
-                            defaultValue: 'HEllo!'
+                        TEXT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: 'Hello!'
                         },
                     }
                     
@@ -2796,7 +2796,7 @@ class MbitMoreBlocks {
                     }),
                     blockType: BlockType.COMMAND,
                     arguments: {
-                        GROUP: {
+                        NUM: {
                             type: ArgumentType.NUMBER,
                             defaultValue: 0
                         },
