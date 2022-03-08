@@ -6793,14 +6793,78 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
               defaultValue: 'data'
             }
           }
-        }, {
-          opcode: 'radioinit',
+        }, '---', {
+          opcode: 'radiosetgroup',
           text: formatMessage({
-            id: 'mbitMore.radioinit',
-            default: 'radio function initt',
-            description: 'radio init '
+            id: 'mbitMore.radiosetgroup',
+            default: 'radio group set group:  [GROUP]',
+            description: 'radio set group  '
           }),
-          blockType: BlockType.COMMAND
+          blockType: BlockType.COMMAND,
+          arguments: {
+            GROUP: {
+              type: ArgumentType.NUMBER,
+              defaultValue: 0
+            }
+          }
+        }, {
+          opcode: 'radiosendstring',
+          text: formatMessage({
+            id: 'mbitMore.radiosendstring',
+            default: 'radio send text:  [TEXT]',
+            description: 'radio send string '
+          }),
+          blockType: BlockType.COMMAND,
+          arguments: {
+            GROUP: {
+              type: ArgumentType.TEXT,
+              defaultValue: 'HEllo!'
+            }
+          }
+        }, {
+          opcode: 'radiosendnnumber',
+          text: formatMessage({
+            id: 'mbitMore.radiosendnumber',
+            default: 'radio send number:  [NUM]',
+            description: 'radio send number '
+          }),
+          blockType: BlockType.COMMAND,
+          arguments: {
+            GROUP: {
+              type: ArgumentType.NUMBER,
+              defaultValue: 0
+            }
+          }
+        }, {
+          opcode: 'radioreceivedstring',
+          text: formatMessage({
+            id: 'mbitMore.radioreceivedstring',
+            default: 'radiosreceivedstring',
+            description: 'radio receivedstring '
+          }),
+          blockType: BlockType.REPORTER
+        }, {
+          opcode: 'radioreceivednumber',
+          text: formatMessage({
+            id: 'mbitMore.radioreceivednumber',
+            default: 'radioreceivednumber',
+            description: 'radio receivednumber '
+          }),
+          blockType: BlockType.REPORTER
+        }, {
+          opcode: 'radiosendpowerset',
+          text: formatMessage({
+            id: 'mbitMore.radiossendpowerset',
+            default: 'radio send power : [POWER]',
+            description: 'radio send power '
+          }),
+          blockType: BlockType.REPORTER,
+          arguments: {
+            POWER: {
+              type: ArgumentType.NUMBER,
+              defaultValue: 0
+            }
+          }
         }],
         menus: {
           buttonIDMenu: {
@@ -7644,7 +7708,10 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
         Object.assign(localeSetup.translations[localeSetup.locale], // eslint-disable-next-line no-use-before-define
         extensionTranslations[localeSetup.locale]);
       }
-    } //add radio function
+    }
+    /**
+     * add radio function
+     */
 
   }, {
     key: "initradio",
@@ -7653,6 +7720,91 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
         this.radioinitstate = 1;
       }
     }
+    /**
+     * sendradiobuffer
+     */
+
+  }, {
+    key: "sendradiobuf",
+    value: function sendradiobuf() {}
+    /**
+     * when radio received
+     */
+
+  }, {
+    key: "whenradiopacketreceived",
+    value: function whenradiopacketreceived() {}
+    /**
+     * radio set group 
+     */
+
+  }, {
+    key: "radiosetgroup",
+    value: function radiosetgroup(args) {
+      var groupnumber = args.GROUP;
+      console.log(groupnumber);
+    }
+    /**
+     * radio send string
+     */
+
+  }, {
+    key: "radiosendstring",
+    value: function radiosendstring(args) {
+      var sendstring = args.TEXT;
+      console.log(sendstring);
+    }
+    /**
+     * radio send number
+     */
+
+  }, {
+    key: "radiosendnumber",
+    value: function radiosendnumber(args) {
+      var sendnumber = args.NUM;
+      console.log(sendnumber);
+    }
+    /**
+     * latest radio received string
+     */
+
+  }, {
+    key: "radioreceivedstring",
+    value: function radioreceivedstring() {
+      console.log("receivedstring");
+      var a = "hello";
+      return a;
+    }
+    /**
+     * 
+     *latest radio received number
+     */
+
+  }, {
+    key: "radioreceivednumber",
+    value: function radioreceivednumber() {
+      console.log("receivednumber");
+      var b = 0;
+      return b;
+    }
+    /**
+     * set radio send power
+     *
+     */
+
+  }, {
+    key: "radiosendpowerset",
+    value: function radiosendpowerset(args) {
+      var radiopower = args.POWER;
+      console.log(radiopower);
+    }
+    /**
+     * last received packet RSSI
+     */
+
+  }, {
+    key: "radioreceivedRSSI",
+    value: function radioreceivedRSSI() {}
   }], [{
     key: "EXTENSION_NAME",
     get:

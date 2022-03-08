@@ -2754,16 +2754,101 @@ class MbitMoreBlocks {
                         }
                     }
                 },
+                '---',
                 {
-                    opcode: 'radioinit',
+                    opcode: 'radiosetgroup',
                     text: formatMessage({
-                        id: 'mbitMore.radioinit',
-                        default: 'radio function initt',
-                        description: 'radio init '
+                        id: 'mbitMore.radiosetgroup',
+                        default: 'radio group set group:  [GROUP]',
+                        description: 'radio set group  '
                     }),
-                    blockType: BlockType.COMMAND
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        GROUP: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0
+                        },
+                    }
+                    
+                },
+                {
+                    opcode: 'radiosendstring',
+                    text: formatMessage({
+                        id: 'mbitMore.radiosendstring',
+                        default: 'radio send text:  [TEXT]',
+                        description: 'radio send string '
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        GROUP: {
+                            type: ArgumentType.TEXT,
+                            defaultValue: 'HEllo!'
+                        },
+                    }
+                    
+                },
+                {
+                    opcode: 'radiosendnnumber',
+                    text: formatMessage({
+                        id: 'mbitMore.radiosendnumber',
+                        default: 'radio send number:  [NUM]',
+                        description: 'radio send number '
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        GROUP: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0
+                        },
+                    }
+                    
+                },
+                {
+                
+                    opcode: 'radioreceivedstring',
+                    text: formatMessage({
+                        id: 'mbitMore.radioreceivedstring',
+                        default: 'radiosreceivedstring',
+                        description: 'radio receivedstring '
+                    }),
+                    blockType: BlockType.REPORTER
+                    
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radioreceivednumber',
+                    text: formatMessage({
+                        id: 'mbitMore.radioreceivednumber',
+                        default: 'radioreceivednumber',
+                        description: 'radio receivednumber '
+                    }),
+                    blockType: BlockType.REPORTER,
+                  
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radiosendpowerset',
+                    text: formatMessage({
+                        id: 'mbitMore.radiossendpowerset',
+                        default: 'radio send power : [POWER]',
+                        description: 'radio send power '
+                    }),
+                    blockType: BlockType.REPORTER,
+                    arguments: {
+                        POWER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 0
+                        },
+                    }
                     
                 }
+
+
+
 
             ],
             menus: {
@@ -3438,7 +3523,9 @@ class MbitMoreBlocks {
     }
 
      
-    //add radio function
+    /**
+     * add radio function
+     */
  
     initradio ( ) {
 
@@ -3450,9 +3537,91 @@ class MbitMoreBlocks {
 
     }
 
+   /**
+    * sendradiobuffer
+    */
+    sendradiobuf(){
+
+    }
+    
+    
+    /**
+     * when radio received
+     */
+    whenradiopacketreceived(){
+
+    }
+    /**
+     * radio set group 
+     */
 
 
-   
+    radiosetgroup(args){
+        const groupnumber = args.GROUP;
+
+        console.log(groupnumber);
+
+    }
+    /**
+     * radio send string
+     */
+
+    radiosendstring(args){
+        const sendstring = args.TEXT;
+        console.log(sendstring);
+
+    }
+    /**
+     * radio send number
+     */
+
+    radiosendnumber(args){
+        const sendnumber = args.NUM;
+        console.log(sendnumber);
+
+    }
+
+    /**
+     * latest radio received string
+     */
+
+    radioreceivedstring(){
+        console.log("receivedstring");
+        let a = "hello"
+        return  a;
+
+    }
+    /**
+     * 
+     *latest radio received number
+     */
+
+    radioreceivednumber(){
+        console.log("receivednumber")
+        let b = 0;
+        return b;
+
+    }
+    /**
+     * set radio send power
+     *
+     */
+
+    radiosendpowerset(args){
+
+    const radiopower = args.POWER;
+    console.log(radiopower);
+
+
+    }
+
+    /**
+     * last received packet RSSI
+     */
+
+    radioreceivedRSSI(){
+
+    } 
 
 
 
