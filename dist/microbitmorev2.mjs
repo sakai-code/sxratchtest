@@ -5603,7 +5603,7 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosetgroup",
-    value: function radiosetgroup(args, util) {
+    value: function radiosetgroup(args) {
       if (!this.isConnected()) {
         return Promise.resolve();
       }
@@ -5611,7 +5611,7 @@ var MbitMore = /*#__PURE__*/function () {
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5,
         message: new Uint8Array([])
-      }], util);
+      }], 0);
     }
     /**
      * radio send string
