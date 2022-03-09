@@ -4147,7 +4147,9 @@ var BLECommand = {
   CMD_PIN: 0x01,
   CMD_DISPLAY: 0x02,
   CMD_AUDIO: 0x03,
-  CMD_DATA: 0x04
+  CMD_DATA: 0x04,
+  CMD_RADIO: 0x05 //add radio function 
+
 };
 /**
  * Enum for command about gpio pins.
@@ -7748,9 +7750,15 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
 
   }, {
     key: "radiosetgroup",
-    value: function radiosetgroup(args) {
-      var groupnumber = args.GROUP;
-      console.log(groupnumber);
+    value: function radiosetgroup(args, util) {
+      if (!this.isConnected()) {
+        return Promise.resolve();
+      }
+
+      return this.sendCommandSet([{
+        id: BLECommand.CMD_RADIO << 5,
+        message: new Uint8Array([])
+      }], util);
     }
     /**
      * radio send string
