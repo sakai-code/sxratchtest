@@ -1646,7 +1646,7 @@ class MbitMore {
         return null;
     }
 
-    initradio ( ) {
+        initradio ( ) {
 
         if(!this.radioinitstate){
             this.radioinitstate = 1;
@@ -3674,9 +3674,7 @@ class MbitMoreBlocks {
 
 
     radiosetgroup(args,util){
-        if (!this.isConnected()) {
-            return Promise.resolve();
-        }
+       
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) ,

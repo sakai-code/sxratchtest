@@ -7849,10 +7849,6 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosetgroup",
     value: function radiosetgroup(args, util) {
-      if (!this.isConnected()) {
-        return Promise.resolve();
-      }
-
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5,
         message: new Uint8Array([])
