@@ -5608,6 +5608,7 @@ var MbitMore = /*#__PURE__*/function () {
         return Promise.resolve();
       }
 
+      console.log(group);
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5,
         message: new Uint8Array([])
@@ -7820,8 +7821,9 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosetgroup",
     value: function radiosetgroup(args, util) {
+      var groupnumber = args.GROUP;
       console.log(args.GROUP);
-      return this._peripheral.radiosetgroup(util);
+      return this._peripheral.radiosetgroup(groupnumber, util);
     }
   }], [{
     key: "EXTENSION_NAME",

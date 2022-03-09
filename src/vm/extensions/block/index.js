@@ -1479,6 +1479,7 @@ class MbitMore {
         if (!this.isConnected()) {
             return Promise.resolve();
         }
+        console.log(group)
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) ,
@@ -3641,9 +3642,10 @@ class MbitMoreBlocks {
     }
 
     radiosetgroup(args,util){
-        console.log(args.GROUP)
+        const groupnumber = args.GROUP;
+        console.log(args.GROUP);
 
-        return this._peripheral.radiosetgroup(util);
+        return this._peripheral.radiosetgroup(groupnumber, util);
 
     }
 
