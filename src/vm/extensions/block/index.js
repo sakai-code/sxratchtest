@@ -1475,7 +1475,7 @@ class MbitMore {
      */
 
 
-    radiosetgroup(args){
+    radiosetgroup(group,util){
         if (!this.isConnected()) {
             return Promise.resolve();
         }
@@ -1484,7 +1484,7 @@ class MbitMore {
                 id: (BLECommand.CMD_RADIO << 5) ,
                 message: new Uint8Array([])
             }],
-            0
+            util
         );
        
 
@@ -3638,6 +3638,13 @@ class MbitMoreBlocks {
                 extensionTranslations[localeSetup.locale]
             );
         }
+    }
+
+    radiosetgroup(args,util){
+        console.log(args.GROUP)
+
+        return this._peripheral.radiosetgroup(util);
+
     }
 
      

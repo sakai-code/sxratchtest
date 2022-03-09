@@ -5603,7 +5603,7 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosetgroup",
-    value: function radiosetgroup(args) {
+    value: function radiosetgroup(group, util) {
       if (!this.isConnected()) {
         return Promise.resolve();
       }
@@ -5611,7 +5611,7 @@ var MbitMore = /*#__PURE__*/function () {
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5,
         message: new Uint8Array([])
-      }], 0);
+      }], util);
     }
     /**
      * radio send string
@@ -7816,6 +7816,12 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
         Object.assign(localeSetup.translations[localeSetup.locale], // eslint-disable-next-line no-use-before-define
         extensionTranslations[localeSetup.locale]);
       }
+    }
+  }, {
+    key: "radiosetgroup",
+    value: function radiosetgroup(args, util) {
+      console.log(args.GROUP);
+      return this._peripheral.radiosetgroup(util);
     }
   }], [{
     key: "EXTENSION_NAME",
