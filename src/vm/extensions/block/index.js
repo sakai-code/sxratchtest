@@ -1645,6 +1645,111 @@ class MbitMore {
         }
         return null;
     }
+
+    initradio ( ) {
+
+        if(!this.radioinitstate){
+            this.radioinitstate = 1;
+
+        }
+
+
+    }
+
+   /**
+    * sendradiobuffer
+    */
+    sendradiobuf(){
+
+    }
+    
+    
+    /**
+     * when radio received
+     */
+    whenradiopacketreceived(){
+
+    }
+    /**
+     * radio set group 
+     */
+
+
+    radiosetgroup(args,util){
+        if (!this.isConnected()) {
+            return Promise.resolve();
+        }
+        return this.sendCommandSet(
+            [{
+                id: (BLECommand.CMD_RADIO << 5) ,
+                message: new Uint8Array([])
+            }],
+            util
+        );
+       
+
+    }
+    /**
+     * radio send string
+     */
+
+    radiosendstring(args){
+        const sendstring = args.TEXT;
+        console.log(sendstring);
+
+    }
+    /**
+     * radio send number
+     */
+
+    radiosendnumber(args){
+        const sendnumber = args.NV;
+        console.log(sendnumber);
+
+    }
+
+    /**
+     * latest radio received string
+     */
+
+    radioreceivedstring(){
+        console.log("receivedstring");
+        let a = "hello"
+        return  a;
+
+    }
+    /**
+     * 
+     *latest radio received number
+     */
+
+    radioreceivednumber(){
+        console.log("receivednumber")
+        let b = 0;
+        return b;
+
+    }
+    /**
+     * set radio send power
+     *
+     */
+
+    radiosendpowerset(args){
+
+    const radiopower = args.POWER;
+    console.log(radiopower);
+
+
+    }
+
+    /**
+     * last received packet RSSI
+     */
+
+    radioreceivedRSSI(){
+
+    } 
+
 }
 
 /**

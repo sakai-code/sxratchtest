@@ -5786,6 +5786,104 @@ var MbitMore = /*#__PURE__*/function () {
 
       return null;
     }
+  }, {
+    key: "initradio",
+    value: function initradio() {
+      if (!this.radioinitstate) {
+        this.radioinitstate = 1;
+      }
+    }
+    /**
+     * sendradiobuffer
+     */
+
+  }, {
+    key: "sendradiobuf",
+    value: function sendradiobuf() {}
+    /**
+     * when radio received
+     */
+
+  }, {
+    key: "whenradiopacketreceived",
+    value: function whenradiopacketreceived() {}
+    /**
+     * radio set group 
+     */
+
+  }, {
+    key: "radiosetgroup",
+    value: function radiosetgroup(args, util) {
+      if (!this.isConnected()) {
+        return Promise.resolve();
+      }
+
+      return this.sendCommandSet([{
+        id: BLECommand.CMD_RADIO << 5,
+        message: new Uint8Array([])
+      }], util);
+    }
+    /**
+     * radio send string
+     */
+
+  }, {
+    key: "radiosendstring",
+    value: function radiosendstring(args) {
+      var sendstring = args.TEXT;
+      console.log(sendstring);
+    }
+    /**
+     * radio send number
+     */
+
+  }, {
+    key: "radiosendnumber",
+    value: function radiosendnumber(args) {
+      var sendnumber = args.NV;
+      console.log(sendnumber);
+    }
+    /**
+     * latest radio received string
+     */
+
+  }, {
+    key: "radioreceivedstring",
+    value: function radioreceivedstring() {
+      console.log("receivedstring");
+      var a = "hello";
+      return a;
+    }
+    /**
+     * 
+     *latest radio received number
+     */
+
+  }, {
+    key: "radioreceivednumber",
+    value: function radioreceivednumber() {
+      console.log("receivednumber");
+      var b = 0;
+      return b;
+    }
+    /**
+     * set radio send power
+     *
+     */
+
+  }, {
+    key: "radiosendpowerset",
+    value: function radiosendpowerset(args) {
+      var radiopower = args.POWER;
+      console.log(radiopower);
+    }
+    /**
+     * last received packet RSSI
+     */
+
+  }, {
+    key: "radioreceivedRSSI",
+    value: function radioreceivedRSSI() {}
   }]);
 
   return MbitMore;
