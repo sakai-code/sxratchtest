@@ -77,6 +77,9 @@ const RadioCommand = {
     GETLASTPACKET : 0x05,
     GETLASTPACKETSIGNAL : 0x06
 
+
+
+
 }
 
 /**
@@ -1510,7 +1513,6 @@ class MbitMore {
      */
 
     radiosendstring(text,util){
-
         const textLength = Math.min(17, text.length);
         const textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
