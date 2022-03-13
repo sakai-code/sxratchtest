@@ -5643,7 +5643,7 @@ var MbitMore = /*#__PURE__*/function () {
 
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDSTRING,
-        message: new Uint8Array([Math.min(255, Math.max(0, delay) / 10)].concat(_toConsumableArray(textData)))
+        message: new Uint8Array(_toConsumableArray(textData))
       }], util);
     }
     /**
@@ -7864,8 +7864,11 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosendstring",
     value: function radiosendstring(args, util) {
-      var sendstring = args.STRING;
-      return this._peripheral.radiosendstring(sendstring, util);
+      var text = String(args.STRING).replace(/！-～/g, function (zenkaku) {
+        return String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0);
+      }) // zenkaku to hankaku
+      .replace(/[^ -~]/g, '?');
+      return this._peripheral.radiosendstring(text, util);
     }
   }], [{
     key: "EXTENSION_NAME",

@@ -1522,7 +1522,6 @@ class MbitMore {
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDSTRING,
                 message: new Uint8Array([
-                    Math.min(255, (Math.max(0, delay) / 10)),
                     ...textData
                 ])
             }],
@@ -3693,9 +3692,12 @@ class MbitMoreBlocks {
    * @returns 
    */
     radiosendstring(args,util){
-        const sendstring = args.STRING;
-
-        return this._peripheral.radiosendstring(sendstring,util);
+        const text = String(args.STRING)
+        .replace(/！-～/g, zenkaku =>
+            String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0)) // zenkaku to hankaku
+        .replace(/[^ -~]/g, '?');
+        return  this._peripheral.radiosendstring(text,util);
+   
 
     }
 
