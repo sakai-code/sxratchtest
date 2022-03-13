@@ -1512,7 +1512,7 @@ class MbitMore {
      * 
      * @param {string} text 
      * @param {object} util 
-     * @returns {}
+     * @returns {promise | undefined}
      */
 
     radiosendstring(text,util){
@@ -3693,7 +3693,7 @@ class MbitMoreBlocks {
    * @param {object} args
    * @param {string} args.STRING 
    * @param {object} util 
-   * @returns {}
+   * @returns {promise | undefined}
    */
     radiosendstring(args,util){
         const text = String(args.STRING)

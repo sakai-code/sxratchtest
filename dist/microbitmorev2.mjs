@@ -5631,7 +5631,7 @@ var MbitMore = /*#__PURE__*/function () {
      * 
      * @param {string} text 
      * @param {object} util 
-     * @returns {}
+     * @returns {promise | undefined}
      */
 
   }, {
@@ -7863,7 +7863,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
      * @param {object} args
      * @param {string} args.STRING 
      * @param {object} util 
-     * @returns {}
+     * @returns {promise | undefined}
      */
 
   }, {
