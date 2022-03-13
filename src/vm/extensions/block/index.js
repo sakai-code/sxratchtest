@@ -65,6 +65,21 @@ const BLECommand = {
 };
 
 /**
+ * Radio command 
+ */
+
+const RadioCommand = {
+    SETGROUP : 0x00,
+    SETSIGNALPOWER : 0x01,
+    SENDSTRING : 0x02,
+    SENDNUMBER : 0x03,
+    SENDVALUE : 0x04,
+    GETLASTPACKET : 0x05,
+    GETLASTPACKETSIGNAL : 0x06
+
+}
+
+/**
  * Enum for command about gpio pins.
  * @readonly
  * @enum {number}
@@ -580,7 +595,7 @@ class MbitMore {
      * @return {?Promise} a Promise that resolves when command sending done or undefined if this process was yield.
      */
     displayText (text, delay, util) {
-        const textLength = Math.min(18, text.length);
+        const textLength = Math.min(17, text.length);
         const textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
             textData[i] = text.charCodeAt(i);
@@ -1494,9 +1509,24 @@ class MbitMore {
      * radio send string
      */
 
-    radiosendstring(args){
-        const sendstring = args.TEXT;
-        console.log(sendstring);
+    radiosendstring(text,util){
+
+        const textLength = Math.min(17, text.length);
+        const textData = new Uint8Array(textLength + 1);
+        for (let i = 0; i < textLength; i++) {
+            textData[i] = text.charCodeAt(i);
+        }
+        return this.sendCommandSet(
+            [{
+                id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDSTRING,
+                message: new Uint8Array([
+                    Math.min(255, (Math.max(0, delay) / 10)),
+                    ...textData
+                ])
+            }],
+            util
+        );
+        
 
     }
     /**
@@ -2894,7 +2924,7 @@ class MbitMoreBlocks {
                     opcode: 'radiosendstring',
                     text: formatMessage({
                         id: 'mbitMore.radiosendstring',
-                        default: 'radio send text:  [TEXT]',
+                        default: 'radio send text:  [TEXT] (MAX17word)',
                         description: 'radio send string '
                     }),
                     blockType: BlockType.COMMAND,
@@ -3640,12 +3670,30 @@ class MbitMoreBlocks {
             );
         }
     }
-
+   /**
+    * Radio set group command
+    * @param {object} args 
+    * @param {number} util 
+    * @returns {boolean}
+    */
     radiosetgroup(args,util){
         const groupnumber = args.GROUP;
         console.log(args.GROUP);
 
         return this._peripheral.radiosetgroup(groupnumber, util);
+
+    }
+
+  /**
+   * Radio send string MAX 17 WORD
+   * @param {*} args 
+   * @param {*} util 
+   * @returns 
+   */
+    radiosendstring(args,util){
+        const sendstring = args.STRING;
+
+        return this._peripheral.radioreceivedstring(sendstring.util);
 
     }
 
