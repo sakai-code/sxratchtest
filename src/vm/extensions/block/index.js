@@ -1509,7 +1509,10 @@ class MbitMore {
 
     }
     /**
-     * radio send string
+     * 
+     * @param {string} text 
+     * @param {object} util 
+     * @returns {}
      */
 
     radiosendstring(text,util){
@@ -1541,9 +1544,9 @@ class MbitMore {
     }
 
     /**
-     * latest radio received string
+     * 
+     * @returns 
      */
-
     radioreceivedstring(){
         console.log("receivedstring");
         let a = "hello"
@@ -3230,7 +3233,7 @@ class MbitMoreBlocks {
      * @param {number} args.DELAY - The time to delay between characters, in milliseconds.
      * @param {object} util - utility object provided by the runtime.
      * @return {Promise} - a Promise that resolves after the text is done printing or undefinde if yield.
-     * Note the limit is 18 characters
+     * Note the limit is 17 characters
      * The print time is calculated by multiplying the number of horizontal pixels
      * by the default scroll delay of 120ms.
      * The number of horizontal pixels = 6px for each character in the string,
@@ -3687,9 +3690,10 @@ class MbitMoreBlocks {
 
   /**
    * Radio send string MAX 17 WORD
-   * @param {*} args 
-   * @param {*} util 
-   * @returns 
+   * @param {object} args
+   * @param {string} args.STRING 
+   * @param {object} util 
+   * @returns {}
    */
     radiosendstring(args,util){
         const text = String(args.STRING)
