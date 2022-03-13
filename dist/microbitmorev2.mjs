@@ -7865,7 +7865,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
     key: "radiosendstring",
     value: function radiosendstring(args, util) {
       var sendstring = args.STRING;
-      return this._peripheral.radioreceivedstring(sendstring, util);
+      return this._peripheral.radiosendstring(sendstring, util);
     }
   }], [{
     key: "EXTENSION_NAME",

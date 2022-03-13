@@ -3695,7 +3695,7 @@ class MbitMoreBlocks {
     radiosendstring(args,util){
         const sendstring = args.STRING;
 
-        return this._peripheral.radioreceivedstring(sendstring,util);
+        return this._peripheral.radiosendstring(sendstring,util);
 
     }
 
