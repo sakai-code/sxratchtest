@@ -3691,12 +3691,12 @@ class MbitMoreBlocks {
   /**
    * Radio send string MAX 17 WORD
    * @param {object} args
-   * @param {string} args.STRING 
+   * @param {string} args.TEXT
    * @param {object} util 
    * @returns {promise | undefined}
    */
     radiosendstring(args,util){
-        const text = String(args.STRING)
+        const text = String(args.TEXT)
         .replace(/！-～/g, zenkaku =>
             String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0)) // zenkaku to hankaku
         .replace(/[^ -~]/g, '?');

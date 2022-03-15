@@ -7861,7 +7861,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
     /**
      * Radio send string MAX 17 WORD
      * @param {object} args
-     * @param {string} args.STRING 
+     * @param {string} args.TEXT
      * @param {object} util 
      * @returns {promise | undefined}
      */
@@ -7869,7 +7869,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosendstring",
     value: function radiosendstring(args, util) {
-      var text = String(args.STRING).replace(/！-～/g, function (zenkaku) {
+      var text = String(args.TEXT).replace(/！-～/g, function (zenkaku) {
         return String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0);
       }) // zenkaku to hankaku
       .replace(/[^ -~]/g, '?');
