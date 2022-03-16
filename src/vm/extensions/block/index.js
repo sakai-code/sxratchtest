@@ -1494,14 +1494,18 @@ class MbitMore {
 
 
     radiosetgroup(group,util){
-        if (!this.isConnected()) {
+
+        const GROUPNUMBER = Math.min(256, group);
+        const groupdata = new Uint8Array(1);
+        groupdata[0] = GROUPNUMBER.charCodeAt(0)
+         if (!this.isConnected()) {
             return Promise.resolve();
         }
-        console.log(group)
+   
         return this.sendCommandSet(
             [{
-                id: (BLECommand.CMD_RADIO << 5) ,
-                message: new Uint8Array([])
+                id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETGROUP,
+                message: new Uint8Array([groupdata[0]])
             }],
             util
         );
@@ -1538,8 +1542,11 @@ class MbitMore {
      */
 
     radiosendnumber(args){
-        const sendnumber = args.NV;
-        console.log(sendnumber);
+        const sendnumber = args;
+        const doubleBuf = Buffer.from(new Float64Array([1.2345]).buffer)
+        console.log(doubleBuf);
+        const double = doubleBuf.readDoubleLE(0)
+        return double
 
     }
 
@@ -3682,9 +3689,9 @@ class MbitMoreBlocks {
     */
     radiosetgroup(args,util){
         const groupnumber = args.GROUP;
-        console.log(args.GROUP);
+         NUM = parseInt(groupnumber)
 
-        return this._peripheral.radiosetgroup(groupnumber, util);
+        return this._peripheral.radiosetgroup(NUM, util);
 
     }
 
@@ -3702,6 +3709,18 @@ class MbitMoreBlocks {
         .replace(/[^ -~]/g, '?');
         return  this._peripheral.radiosendstring(text,util);
    
+
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {number} args.NV
+     * @param {object} util 
+     * @returns {promise | undefined}
+     */
+    radiosendnumber(args,util){
+     const sendnumber = args.NV;
+     return this._peripheral.radiosendnumber(sendnumber,util)
 
     }
 

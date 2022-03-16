@@ -5617,14 +5617,17 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiosetgroup",
     value: function radiosetgroup(group, util) {
+      var GROUPNUMBER = Math.min(256, group);
+      var groupdata = new Uint8Array(1);
+      groupdata[0] = GROUPNUMBER.charCodeAt(0);
+
       if (!this.isConnected()) {
         return Promise.resolve();
       }
 
-      console.log(group);
       return this.sendCommandSet([{
-        id: BLECommand.CMD_RADIO << 5,
-        message: new Uint8Array([])
+        id: BLECommand.CMD_RADIO << 5 | RadioCommand.SETGROUP,
+        message: new Uint8Array([groupdata[0]])
       }], util);
     }
     /**
@@ -5656,8 +5659,10 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiosendnumber",
     value: function radiosendnumber(args) {
-      var sendnumber = args.NV;
-      console.log(sendnumber);
+      var doubleBuf = Buffer.from(new Float64Array([1.2345]).buffer);
+      console.log(doubleBuf);
+      var double = doubleBuf.readDoubleLE(0);
+      return double;
     }
     /**
      * 
@@ -7855,8 +7860,8 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
     key: "radiosetgroup",
     value: function radiosetgroup(args, util) {
       var groupnumber = args.GROUP;
-      console.log(args.GROUP);
-      return this._peripheral.radiosetgroup(groupnumber, util);
+      NUM = parseInt(groupnumber);
+      return this._peripheral.radiosetgroup(NUM, util);
     }
     /**
      * Radio send string MAX 17 WORD
@@ -7874,6 +7879,20 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
       }) // zenkaku to hankaku
       .replace(/[^ -~]/g, '?');
       return this._peripheral.radiosendstring(text, util);
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {number} args.NV
+     * @param {object} util 
+     * @returns {promise | undefined}
+     */
+
+  }, {
+    key: "radiosendnumber",
+    value: function radiosendnumber(args, util) {
+      var sendnumber = args.NV;
+      return this._peripheral.radiosendnumber(sendnumber, util);
     }
   }], [{
     key: "EXTENSION_NAME",
