@@ -1480,8 +1480,34 @@ class MbitMore {
      sendradiobuf(){
 
     }
-    
-    
+    /**
+     * float to array(uint8)
+     * @param {number} NUM(int or double) 
+     * @return {Buffer}
+     */
+    getFloattoArray(NUM){
+        
+        const doubleBuf = Buffer.from(new Float64Array([NUM]).buffer)
+        
+        return doubleBuf
+
+    }
+
+    /**
+     * 
+     * @param {Buffer} Buf 
+     * @returns number(double)
+     */
+    getArraytoFloat(Buf){
+   
+        const doubleBuf = Buffer.from(Buf)
+      
+        const double = doubleBuf.readDoubleLE(0)
+        return double
+
+
+
+    }
     /**
      * when radio received
      */
@@ -1541,9 +1567,9 @@ class MbitMore {
      * radio send number
      */
 
-    radiosendnumber(args){
-        const sendnumber = args;
-        const doubleBuf = Buffer.from(new Float64Array([1]).buffer)
+    radiosendnumber(NUM){
+        const sendnumber = NUM;
+        const doubleBuf = Buffer.from( this.getFloattoArray(sendnumber));
         console.log(doubleBuf);
         const double = doubleBuf.readDoubleLE(0)
         return double

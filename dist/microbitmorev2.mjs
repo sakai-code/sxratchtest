@@ -5604,6 +5604,31 @@ var MbitMore = /*#__PURE__*/function () {
     key: "sendradiobuf",
     value: function sendradiobuf() {}
     /**
+     * float to array(uint8)
+     * @param {number} NUM(int or double) 
+     * @return {Buffer}
+     */
+
+  }, {
+    key: "getFloattoArray",
+    value: function getFloattoArray(NUM) {
+      var doubleBuf = Buffer.from(new Float64Array([NUM]).buffer);
+      return doubleBuf;
+    }
+    /**
+     * 
+     * @param {Buffer} Buf 
+     * @returns number(double)
+     */
+
+  }, {
+    key: "getArraytoFloat",
+    value: function getArraytoFloat(Buf) {
+      var doubleBuf = Buffer.from(Buf);
+      var double = doubleBuf.readDoubleLE(0);
+      return double;
+    }
+    /**
      * when radio received
      */
 
@@ -5658,8 +5683,9 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosendnumber",
-    value: function radiosendnumber(args) {
-      var doubleBuf = Buffer.from(new Float64Array([1]).buffer);
+    value: function radiosendnumber(NUM) {
+      var sendnumber = NUM;
+      var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
       console.log(doubleBuf);
       var double = doubleBuf.readDoubleLE(0);
       return double;
