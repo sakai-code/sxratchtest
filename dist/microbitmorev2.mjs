@@ -7058,7 +7058,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
           opcode: 'radiosendvalue',
           text: formatMessage({
             id: 'mbitMore.radiosendvalue',
-            default: 'radio send text(max 8 word) : [text] number [numeber]',
+            default: 'radio send text(max 8 word) : [text] number [number]',
             description: 'radio send value '
           }),
           blockType: BlockType.REPORTER,
