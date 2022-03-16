@@ -3825,7 +3825,7 @@ class MbitMoreBlocks {
      */
     radiosendpowerset(args){
 
-        const radiopower = parent( args.POWER);
+        const radiopower = parseInt( args.POWER);
 
         return this._peripheral.radiosendpowerset(radiopower);
         

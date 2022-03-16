@@ -7971,7 +7971,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radiosendpowerset",
     value: function radiosendpowerset(args) {
-      var radiopower = parent(args.POWER);
+      var radiopower = parseInt(args.POWER);
       return this._peripheral.radiosendpowerset(radiopower);
     }
   }], [{
