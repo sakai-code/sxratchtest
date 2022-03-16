@@ -580,10 +580,10 @@ function color$3(fg, isInverse) {
   }
 }
 
-var util = color$3;
+var util$1 = color$3;
 
 var Transform$5 = transform,
-    color$2 = util;
+    color$2 = util$1;
 var colors$1 = {
   debug: ['cyan'],
   info: ['purple'],
@@ -607,7 +607,7 @@ logger$4.pipe = function () {};
 var color_1 = logger$4;
 
 var Transform$4 = transform,
-    color$1 = util,
+    color$1 = util$1,
     colors = {
   debug: ['gray'],
   info: ['purple'],
@@ -5686,9 +5686,10 @@ var MbitMore = /*#__PURE__*/function () {
     value: function radiosendnumber(NUM) {
       var sendnumber = NUM;
       var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
-      console.log(doubleBuf);
-      var double = doubleBuf.readDoubleLE(0);
-      return double;
+      return this.sendCommandSet([{
+        id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDNUMBER,
+        message: new Uint8Array(_toConsumableArray(doubleBuf))
+      }], util);
     }
     /**
      * 
@@ -5721,9 +5722,31 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosendpowerset",
-    value: function radiosendpowerset(args) {
-      var radiopower = args.POWER;
-      console.log(radiopower);
+    value: function radiosendpowerset(RADIOPOWER) {
+      var radiopower = Math.min(7, RADIOPOWER);
+      var powerdata = new Uint8Array(1);
+      powerdata[0] = radiopower.charCodeAt(0);
+      return this.sendCommandSet([{
+        id: BLECommand.CMD_RADIO << 5 | RadioCommand.SETSIGNALPOWER,
+        message: new Uint8Array([powerdata])
+      }], util);
+    }
+  }, {
+    key: "radiosendvalue",
+    value: function radiosendvalue(text, num) {
+      var textLength = Math.min(8, text.length);
+      var textData = new Uint8Array(textLength + 1);
+
+      for (var i = 0; i < textLength; i++) {
+        textData[i] = text.charCodeAt(i);
+      }
+
+      var sendnumber = num;
+      var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
+      return this.sendCommandSet([{
+        id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDVALUE,
+        message: new Uint8Array([].concat(_toConsumableArray(doubleBuf), [textLength.charCodeAt(0), textData]))
+      }], util);
     }
     /**
      * last received packet RSSI
@@ -7024,11 +7047,29 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             default: 'radio send power : [POWER]',
             description: 'radio send power '
           }),
-          blockType: BlockType.REPORTER,
+          blockType: BlockType.COMMAND,
           arguments: {
-            POWER: {
+            text: {
               type: ArgumentType.NUMBER,
               defaultValue: 0
+            }
+          }
+        }, {
+          opcode: 'radiosendvalue',
+          text: formatMessage({
+            id: 'mbitMore.radiosendvalue',
+            default: 'radio send text(max 8 word) : [text] number [numeber]',
+            description: 'radio send value '
+          }),
+          blockType: BlockType.REPORTER,
+          arguments: {
+            number: {
+              type: ArgumentType.NUMBER,
+              defaultValue: 0
+            },
+            text: {
+              type: ArgumentType.STRING,
+              defaultValue: "HEllo!"
             }
           }
         }],
@@ -7919,6 +7960,19 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
     value: function radiosendnumber(args, util) {
       var sendnumber = args.NV;
       return this._peripheral.radiosendnumber(sendnumber, util);
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {number} args.POWER
+     * @returns {promise | undefined}
+     */
+
+  }, {
+    key: "radiosendpowerset",
+    value: function radiosendpowerset(args) {
+      var radiopower = parent(args.POWER);
+      return this._peripheral.radiosendpowerset(radiopower);
     }
   }], [{
     key: "EXTENSION_NAME",
