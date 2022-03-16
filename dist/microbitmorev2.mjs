@@ -5659,7 +5659,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiosendnumber",
     value: function radiosendnumber(args) {
-      var doubleBuf = Buffer.from(new Float64Array([1.2345]).buffer);
+      var doubleBuf = Buffer.from(new Float64Array([1]).buffer);
       console.log(doubleBuf);
       var double = doubleBuf.readDoubleLE(0);
       return double;

@@ -1543,7 +1543,7 @@ class MbitMore {
 
     radiosendnumber(args){
         const sendnumber = args;
-        const doubleBuf = Buffer.from(new Float64Array([1.2345]).buffer)
+        const doubleBuf = Buffer.from(new Float64Array([1]).buffer)
         console.log(doubleBuf);
         const double = doubleBuf.readDoubleLE(0)
         return double
