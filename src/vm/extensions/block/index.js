@@ -1523,7 +1523,7 @@ class MbitMore {
 
         const GROUPNUMBER = Math.min(256, group);
         const groupdata = new Uint8Array(1);
-        groupdata[0] = GROUPNUMBER.charCodeAt(0)
+        groupdata[0] = GROUPNUMBER.charCodeAt()
          if (!this.isConnected()) {
             return Promise.resolve();
         }
@@ -1613,7 +1613,7 @@ class MbitMore {
     const radiopower =  Math.min(7, RADIOPOWER); 
 
     const powerdata = new Uint8Array(1);
-   powerdata[0] = radiopower.charCodeAt(0)
+   powerdata[0] = radiopower.charCodeAt()
     return this.sendCommandSet(
         [{
             id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETSIGNALPOWER,
@@ -1646,7 +1646,7 @@ class MbitMore {
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDVALUE,
                 message: new Uint8Array([
                     ...doubleBuf,
-                    textLength.charCodeAt(0),
+                    textLength.charCodeAt(),
                     textData
                 ])
             }],
@@ -3783,7 +3783,7 @@ class MbitMoreBlocks {
     */
     radiosetgroup(args,util){
         const groupnumber = args.GROUP;
-         NUM = parseInt(groupnumber)
+        const NUM = parseInt(groupnumber)
 
         return this._peripheral.radiosetgroup(NUM, util);
 
@@ -3844,7 +3844,11 @@ class MbitMoreBlocks {
     radiosendvalue(args,util){
 
         const number = args.number;
-        const text = args.text;
+     
+        const text = String(args.text)
+        .replace(/！-～/g, zenkaku =>
+            String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0)) // zenkaku to hankaku
+        .replace(/[^ -~]/g, '?');
 
         return this._peripheral.radiosendvalue(number,text,util);
 
