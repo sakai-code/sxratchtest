@@ -580,10 +580,10 @@ function color$3(fg, isInverse) {
   }
 }
 
-var util$1 = color$3;
+var util = color$3;
 
 var Transform$5 = transform,
-    color$2 = util$1;
+    color$2 = util;
 var colors$1 = {
   debug: ['cyan'],
   info: ['purple'],
@@ -607,7 +607,7 @@ logger$4.pipe = function () {};
 var color_1 = logger$4;
 
 var Transform$4 = transform,
-    color$1 = util$1,
+    color$1 = util,
     colors = {
   debug: ['gray'],
   info: ['purple'],
@@ -5683,7 +5683,7 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosendnumber",
-    value: function radiosendnumber(NUM) {
+    value: function radiosendnumber(NUM, util) {
       var sendnumber = NUM;
       var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
       return this.sendCommandSet([{
@@ -5722,7 +5722,7 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radiosendpowerset",
-    value: function radiosendpowerset(RADIOPOWER) {
+    value: function radiosendpowerset(RADIOPOWER, util) {
       var radiopower = Math.min(7, RADIOPOWER);
       var powerdata = new Uint8Array(1);
       powerdata[0] = radiopower.charCodeAt(0);
@@ -5733,7 +5733,7 @@ var MbitMore = /*#__PURE__*/function () {
     }
   }, {
     key: "radiosendvalue",
-    value: function radiosendvalue(text, num) {
+    value: function radiosendvalue(num, text, util) {
       var textLength = Math.min(8, text.length);
       var textData = new Uint8Array(textLength + 1);
 
@@ -7920,7 +7920,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
      * Radio set group command
      * @param {object} args 
      * @param {number} util 
-     * @returns {boolean}
+     * @returns {promise | undefined}
      */
 
   }, {
@@ -7970,9 +7970,25 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
 
   }, {
     key: "radiosendpowerset",
-    value: function radiosendpowerset(args) {
+    value: function radiosendpowerset(args, util) {
       var radiopower = parseInt(args.POWER);
-      return this._peripheral.radiosendpowerset(radiopower);
+      return this._peripheral.radiosendpowerset(radiopower, util);
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {number} args.number
+     * @param {string} args.text
+     * @param {object} util 
+     * @returns {promise | undefined}
+     */
+
+  }, {
+    key: "radiosendvalue",
+    value: function radiosendvalue(args, util) {
+      var number = args.number;
+      var text = args.text;
+      return this._peripheral.radiosendvalue(number, text, util);
     }
   }], [{
     key: "EXTENSION_NAME",

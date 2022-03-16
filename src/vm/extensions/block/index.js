@@ -1567,7 +1567,7 @@ class MbitMore {
      * radio send number
      */
 
-    radiosendnumber(NUM){
+    radiosendnumber(NUM,util){
         const sendnumber = NUM;
         const doubleBuf = Buffer.from( this.getFloattoArray(sendnumber));
         return this.sendCommandSet(
@@ -1608,7 +1608,7 @@ class MbitMore {
      *
      */
 
-    radiosendpowerset(RADIOPOWER){
+    radiosendpowerset(RADIOPOWER,util){
 
     const radiopower =  Math.min(7, RADIOPOWER); 
 
@@ -1633,7 +1633,7 @@ class MbitMore {
 
     }
 
-    radiosendvalue(text,num){
+    radiosendvalue(num,text,util){
         const textLength = Math.min(8, text.length);
         const textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
@@ -3779,7 +3779,7 @@ class MbitMoreBlocks {
     * Radio set group command
     * @param {object} args 
     * @param {number} util 
-    * @returns {boolean}
+    * @returns {promise | undefined}
     */
     radiosetgroup(args,util){
         const groupnumber = args.GROUP;
@@ -3823,15 +3823,39 @@ class MbitMoreBlocks {
      * @param {number} args.POWER
      * @returns {promise | undefined}
      */
-    radiosendpowerset(args){
+    radiosendpowerset(args,util){
 
         const radiopower = parseInt( args.POWER);
 
-        return this._peripheral.radiosendpowerset(radiopower);
+        return this._peripheral.radiosendpowerset(radiopower,util);
         
     
     
-        }
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {number} args.number
+     * @param {string} args.text
+     * @param {object} util 
+     * @returns {promise | undefined}
+     */
+
+    radiosendvalue(args,util){
+
+        const number = args.number;
+        const text = args.text;
+
+        return this._peripheral.radiosendvalue(number,text,util);
+
+
+
+
+
+
+    }
+
+    
 
      
 
