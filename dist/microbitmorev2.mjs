@@ -5685,7 +5685,8 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendnumber",
     value: function radiosendnumber(NUM, util) {
       var sendnumber = NUM;
-      var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
+      var doubleBuf = this.getFloattoArray(sendnumber);
+      console.log(doubleBuf);
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDNUMBER,
         message: new Uint8Array(_toConsumableArray(doubleBuf))
@@ -5742,7 +5743,7 @@ var MbitMore = /*#__PURE__*/function () {
       }
 
       var sendnumber = num;
-      var doubleBuf = Buffer.from(this.getFloattoArray(sendnumber));
+      var doubleBuf = this.getFloattoArray(sendnumber);
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDVALUE,
         message: new Uint8Array([].concat(_toConsumableArray(doubleBuf), [textLength.charCodeAt(), textData]))
@@ -7025,6 +7026,20 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             }
           }
         }, {
+          opcode: 'radiosendpowerset',
+          text: formatMessage({
+            id: 'mbitMore.radiosendpowerset',
+            default: 'radio send power : [POWER]',
+            description: 'radio send power '
+          }),
+          blockType: BlockType.COMMAND,
+          arguments: {
+            POWER: {
+              type: ArgumentType.NUMBER,
+              defaultValue: 6
+            }
+          }
+        }, {
           opcode: 'radioreceivedstring',
           text: formatMessage({
             id: 'mbitMore.radioreceivedstring',
@@ -7041,27 +7056,13 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
           }),
           blockType: BlockType.REPORTER
         }, {
-          opcode: 'radiosendpowerset',
-          text: formatMessage({
-            id: 'mbitMore.radiosendpowerset',
-            default: 'radio send power : [POWER]',
-            description: 'radio send power '
-          }),
-          blockType: BlockType.COMMAND,
-          arguments: {
-            text: {
-              type: ArgumentType.NUMBER,
-              defaultValue: 0
-            }
-          }
-        }, {
           opcode: 'radiosendvalue',
           text: formatMessage({
             id: 'mbitMore.radiosendvalue',
             default: 'radio send text(max 8 word) : [text] number [number]',
             description: 'radio send value '
           }),
-          blockType: BlockType.REPORTER,
+          blockType: BlockType.COMMAND,
           arguments: {
             number: {
               type: ArgumentType.NUMBER,
@@ -7069,7 +7070,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             },
             text: {
               type: ArgumentType.STRING,
-              defaultValue: "HEllo!"
+              defaultValue: "Hello!"
             }
           }
         }],

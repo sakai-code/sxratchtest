@@ -1569,7 +1569,8 @@ class MbitMore {
 
     radiosendnumber(NUM,util){
         const sendnumber = NUM;
-        const doubleBuf = Buffer.from( this.getFloattoArray(sendnumber));
+        const doubleBuf = this.getFloattoArray(sendnumber);
+        console.log(doubleBuf);
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDNUMBER,
@@ -1633,6 +1634,8 @@ class MbitMore {
 
     }
 
+    
+    
     radiosendvalue(num,text,util){
         const textLength = Math.min(8, text.length);
         const textData = new Uint8Array(textLength + 1);
@@ -1640,7 +1643,7 @@ class MbitMore {
             textData[i] = text.charCodeAt(i);
         }
         const sendnumber = num;
-        const doubleBuf = Buffer.from( this.getFloattoArray(sendnumber));
+        const doubleBuf = this.getFloattoArray(sendnumber);
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDVALUE,
@@ -3036,6 +3039,24 @@ class MbitMoreBlocks {
                 },
                 {
                 
+                    opcode: 'radiosendpowerset',
+                    text: formatMessage({
+                        id: 'mbitMore.radiosendpowerset',
+                        default: 'radio send power : [POWER]',
+                        description: 'radio send power '
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        POWER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 6
+                        },
+                        
+                    }
+                    
+                },
+                {
+                
                     opcode: 'radioreceivedstring',
                     text: formatMessage({
                         id: 'mbitMore.radioreceivedstring',
@@ -3059,25 +3080,7 @@ class MbitMoreBlocks {
                   
                     
                     
-                },
-                {
-                
-                    opcode: 'radiosendpowerset',
-                    text: formatMessage({
-                        id: 'mbitMore.radiosendpowerset',
-                        default: 'radio send power : [POWER]',
-                        description: 'radio send power '
-                    }),
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                        text: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 0
-                        },
-                        
-                    }
-                    
-                },
+                },     
                 {
                 
                     opcode: 'radiosendvalue',
@@ -3086,7 +3089,7 @@ class MbitMoreBlocks {
                         default: 'radio send text(max 8 word) : [text] number [number]',
                         description: 'radio send value '
                     }),
-                    blockType: BlockType.REPORTER,
+                    blockType: BlockType.COMMAND,
                     arguments: {
                         number: {
                             type: ArgumentType.NUMBER,
@@ -3094,7 +3097,7 @@ class MbitMoreBlocks {
                         },
                         text: {
                             type: ArgumentType.STRING,
-                            defaultValue: "HEllo!"
+                            defaultValue: "Hello!"
 
                         }
                     }
