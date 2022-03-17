@@ -5643,7 +5643,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosetgroup",
     value: function radiosetgroup(group, util) {
       var GROUPNUMBER = Math.min(256, group);
-      groupdata = new Uint8Array(1);
+      var groupdata = new Uint8Array(1);
       groupdata[0] = GROUPNUMBER;
 
       if (!this.isConnected()) {
@@ -5666,7 +5666,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendstring",
     value: function radiosendstring(text, util) {
       var textLength = Math.min(17, text.length);
-      textData = new Uint8Array(textLength + 1);
+      var textData = new Uint8Array(textLength + 1);
 
       for (var i = 0; i < textLength; i++) {
         textData[i] = text.charCodeAt(i);
@@ -5724,7 +5724,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendpowerset",
     value: function radiosendpowerset(RADIOPOWER, util) {
       var radiopower = Math.min(7, RADIOPOWER);
-      powerdata = new Uint8Array(1);
+      var powerdata = new Uint8Array(1);
       powerdata[0] = radiopower;
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SETSIGNALPOWER,
@@ -5735,7 +5735,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendvalue",
     value: function radiosendvalue(num, text, util) {
       var textLength = Math.min(8, text.length);
-      textData = new Uint8Array(textLength + 1);
+      var textData = new Uint8Array(textLength + 1);
 
       for (var i = 0; i < textLength; i++) {
         textData[i] = text.charCodeAt(i);

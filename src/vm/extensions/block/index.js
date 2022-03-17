@@ -1522,7 +1522,7 @@ class MbitMore {
     radiosetgroup(group,util){
 
         const GROUPNUMBER = Math.min(256, group);
-        groupdata = new Uint8Array(1);
+        let groupdata = new Uint8Array(1);
         groupdata[0] = GROUPNUMBER
          if (!this.isConnected()) {
             return Promise.resolve();
@@ -1547,7 +1547,7 @@ class MbitMore {
 
     radiosendstring(text,util){
         const textLength = Math.min(17, text.length);
-        textData = new Uint8Array(textLength + 1);
+       let  textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
             textData[i] = text.charCodeAt(i);
         }
@@ -1612,7 +1612,7 @@ class MbitMore {
 
     const radiopower =  Math.min(7, RADIOPOWER); 
 
-   powerdata = new Uint8Array(1);
+   let powerdata = new Uint8Array(1);
    powerdata[0] = radiopower
     return this.sendCommandSet(
         [{
@@ -1637,7 +1637,7 @@ class MbitMore {
     
     radiosendvalue(num,text,util){
         const textLength = Math.min(8, text.length);
-        textData = new Uint8Array(textLength + 1);
+       let  textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
             textData[i] = text.charCodeAt(i);
         }
