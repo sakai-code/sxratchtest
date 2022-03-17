@@ -5597,13 +5597,6 @@ var MbitMore = /*#__PURE__*/function () {
       return this.buttonState[buttonName] === 1;
     }
     /**
-    * sendradiobuffer
-    */
-
-  }, {
-    key: "sendradiobuf",
-    value: function sendradiobuf() {}
-    /**
      * float to array(uint8)
      * @param {number} NUM(int or double) 
      * @return {Buffer}

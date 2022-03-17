@@ -1474,12 +1474,7 @@ class MbitMore {
         }
         return this.buttonState[buttonName] === 1;
     }
-    /**
-    * sendradiobuffer
-    */
-     sendradiobuf(){
-
-    }
+  
     /**
      * float to array(uint8)
      * @param {number} NUM(int or double) 
