@@ -1522,7 +1522,7 @@ class MbitMore {
     radiosetgroup(group,util){
 
         const GROUPNUMBER = Math.min(256, group);
-        const groupdata = new Uint8Array(1);
+        groupdata = new Uint8Array(1);
         groupdata[0] = GROUPNUMBER
          if (!this.isConnected()) {
             return Promise.resolve();
@@ -1547,7 +1547,7 @@ class MbitMore {
 
     radiosendstring(text,util){
         const textLength = Math.min(17, text.length);
-        const textData = new Uint8Array(textLength + 1);
+        textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
             textData[i] = text.charCodeAt(i);
         }
@@ -1570,7 +1570,6 @@ class MbitMore {
     radiosendnumber(NUM,util){
         const sendnumber = NUM;
         const doubleBuf = this.getFloattoArray(sendnumber);
-        console.log(doubleBuf);
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDNUMBER,
@@ -1613,7 +1612,7 @@ class MbitMore {
 
     const radiopower =  Math.min(7, RADIOPOWER); 
 
-    const powerdata = new Uint8Array(1);
+   powerdata = new Uint8Array(1);
    powerdata[0] = radiopower
     return this.sendCommandSet(
         [{
@@ -1638,7 +1637,7 @@ class MbitMore {
     
     radiosendvalue(num,text,util){
         const textLength = Math.min(8, text.length);
-        const textData = new Uint8Array(textLength + 1);
+        textData = new Uint8Array(textLength + 1);
         for (let i = 0; i < textLength; i++) {
             textData[i] = text.charCodeAt(i);
         }
