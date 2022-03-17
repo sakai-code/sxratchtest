@@ -1531,7 +1531,7 @@ class MbitMore {
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETGROUP,
-                message: new Uint8Array([groupdata[0]])
+                message: new Uint8Array([...groupdata])
             }],
             util
         );
@@ -1618,7 +1618,7 @@ class MbitMore {
         [{
             id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETSIGNALPOWER,
             message: new Uint8Array([
-                powerdata
+                ...powerdata
             ])
         }],
         util
@@ -1649,7 +1649,7 @@ class MbitMore {
                 message: new Uint8Array([
                     ...doubleBuf,
                     textLength,
-                    textData
+                    ...textData
                 ])
             }],
             util
