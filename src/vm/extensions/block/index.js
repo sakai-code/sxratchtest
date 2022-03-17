@@ -1482,9 +1482,9 @@ class MbitMore {
      */
     getFloattoArray(NUM){
         
-        const doubleBuf = Buffer.from(new Float64Array([NUM]).buffer)
+        const doubleBuf = Buffer.from(new Float64Array([NUM]).buffer);
         
-        return doubleBuf
+        return doubleBuf;
 
     }
 
@@ -1495,10 +1495,10 @@ class MbitMore {
      */
     getArraytoFloat(Buf){
    
-        const doubleBuf = Buffer.from(Buf)
+        const doubleBuf = Buffer.from(Buf);
       
-        const double = doubleBuf.readDoubleLE(0)
-        return double
+        const double = doubleBuf.readDoubleLE(0);
+        return double;
 
 
 
@@ -1518,7 +1518,7 @@ class MbitMore {
 
         const GROUPNUMBER = Math.min(256, group);
         let groupdata = new Uint8Array(1);
-        groupdata[0] = GROUPNUMBER
+        groupdata[0] = GROUPNUMBER;
          if (!this.isConnected()) {
             return Promise.resolve();
         }
@@ -1583,7 +1583,7 @@ class MbitMore {
      */
     radioreceivedstring(){
         console.log("receivedstring");
-        let a = "hello"
+        let a = "hello";
         return  a;
 
     }
@@ -1593,7 +1593,7 @@ class MbitMore {
      */
 
     radioreceivednumber(){
-        console.log("receivednumber")
+        console.log("receivednumber");
         let b = 0;
         return b;
 
@@ -1608,7 +1608,7 @@ class MbitMore {
     const radiopower =  Math.min(7, RADIOPOWER); 
 
    let powerdata = new Uint8Array(1);
-   powerdata[0] = radiopower
+   powerdata[0] = radiopower;
     return this.sendCommandSet(
         [{
             id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETSIGNALPOWER,
@@ -3780,7 +3780,7 @@ class MbitMoreBlocks {
     */
     radiosetgroup(args,util){
         const groupnumber = args.GROUP;
-        const NUM = parseInt(groupnumber)
+        const NUM = parseInt(groupnumber);
 
         return this._peripheral.radiosetgroup(NUM, util);
 
@@ -3811,7 +3811,7 @@ class MbitMoreBlocks {
      */
     radiosendnumber(args,util){
      const sendnumber = args.NV;
-     return this._peripheral.radiosendnumber(sendnumber,util)
+     return this._peripheral.radiosendnumber(sendnumber,util);
 
     }
     /**
