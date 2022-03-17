@@ -1523,7 +1523,7 @@ class MbitMore {
 
         const GROUPNUMBER = Math.min(256, group);
         const groupdata = new Uint8Array(1);
-        groupdata[0] = GROUPNUMBER.charCodeAt()
+        groupdata[0] = GROUPNUMBER
          if (!this.isConnected()) {
             return Promise.resolve();
         }
@@ -1614,7 +1614,7 @@ class MbitMore {
     const radiopower =  Math.min(7, RADIOPOWER); 
 
     const powerdata = new Uint8Array(1);
-   powerdata[0] = radiopower.charCodeAt()
+   powerdata[0] = radiopower
     return this.sendCommandSet(
         [{
             id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SETSIGNALPOWER,
@@ -1649,7 +1649,7 @@ class MbitMore {
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDVALUE,
                 message: new Uint8Array([
                     ...doubleBuf,
-                    textLength.charCodeAt(),
+                    textLength,
                     textData
                 ])
             }],
