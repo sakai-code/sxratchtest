@@ -3847,7 +3847,7 @@ class MbitMoreBlocks {
             String.fromCharCode(zenkaku.charCodeAt(0) - 0xFEE0)) // zenkaku to hankaku
         .replace(/[^ -~]/g, '?');
 
-        return this._peripheral.radiosendvalue(number,text,util);
+        return this._peripheral.radiosendvalue(number,text,util); //error
 
 
 
