@@ -1565,7 +1565,7 @@ class MbitMore {
     radiosendnumber(NUM,util){
         const sendnumber = NUM;
         const doubleBuf = this.getFloattoArray(sendnumber);
-        console.log(doubleBuf);
+   
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDNUMBER,
@@ -1639,7 +1639,6 @@ class MbitMore {
         }
         const sendnumber = num;
         const doubleBuf = this.getFloattoArray(sendnumber); //test
-        console.log(doubleBuf);
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDVALUE,
