@@ -5715,7 +5715,7 @@ var MbitMore = /*#__PURE__*/function () {
       console.log(sendnumber);
       var doubleBuf = this.getNumbertoArray(sendnumber);
 
-      if (sendnumber === (sendnumber | 0)) {
+      if (sendnumber == (sendnumber | 0)) {
         console.log("int");
         return this.sendCommandSet([{
           id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDINTNUMBER,
