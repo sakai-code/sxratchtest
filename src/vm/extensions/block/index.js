@@ -72,9 +72,9 @@ const RadioCommand = {
     SETGROUP : 0x00,
     SETSIGNALPOWER : 0x01,
     SENDSTRING : 0x02,
-    SENDNUMBER : 0x03,
+    SENDINTNUMBER : 0x03,
     SENDVALUE : 0x04,
-    GETLASTPACKET : 0x05,
+    SENDDOUBLENUMBER : 0x05,
     GETLASTPACKETSIGNAL : 0x06
 
 
@@ -1480,11 +1480,43 @@ class MbitMore {
      * @param {number} NUM(int or double) 
      * @return {Buffer}
      */
-    getFloattoArray(NUM){
+    getFloatArray(NUM){
         
         const doubleBuf = Buffer.from(new Float64Array([NUM]).buffer);
         
         return doubleBuf;
+
+    }
+
+    /**
+     * float to array(uint8)
+     * @param {number} NUM(int or double) 
+     * @return {Buffer}
+     */
+     getIntArray(NUM){
+        
+        const IntBuf = Buffer.from(new Uint8Array([NUM]).buffer);
+        
+        return IntBuf;
+
+    }
+    /**
+     * float to array(uint8)
+     * @param {number} NUM(int or double) 
+     * @return {Buffer}
+     */
+     getNumbertoArray(NUM){
+         const value = NUM;
+         if (value === (value | 0)) {
+            Buf = this.getIntArray(value);
+        }
+        else {
+            Buf = this.getFloatArray(value);
+        }
+        
+        
+        
+        return Buf;
 
     }
 
@@ -1564,17 +1596,34 @@ class MbitMore {
 
     radiosendnumber(NUM,util){
         const sendnumber = NUM;
-        const doubleBuf = this.getFloattoArray(sendnumber);
+
+        const doubleBuf = this.getNumbertoArray(sendnumber);
+        if (sendnumber === (sendnumber| 0)) {
+            return this.sendCommandSet(
+                [{
+                    id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDINTNUMBER,
+                    message: new Uint8Array([
+                        ...doubleBuf
+                    ])
+                }],
+                util
+            );
+        }
+        else {
+            return this.sendCommandSet(
+                [{
+                    id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDDOUBLENUMBER,
+                    message: new Uint8Array([
+                        ...doubleBuf
+                    ])
+                }],
+                util
+            );
+            
+        }
+        
    
-        return this.sendCommandSet(
-            [{
-                id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDNUMBER,
-                message: new Uint8Array([
-                    ...doubleBuf
-                ])
-            }],
-            util
-        );
+    
        
     }
 
