@@ -1599,9 +1599,10 @@ class MbitMore {
 
     radiosendnumber(NUM,util){
         const sendnumber = NUM;
+        console.log(sendnumber);
 
         const doubleBuf = this.getNumbertoArray(sendnumber);
-        if (sendnumber === (sendnumber| 0)) {
+        if (sendnumber === (sendnumber | 0)) {
             console.log("int")
             return this.sendCommandSet(
                 [{
@@ -1684,7 +1685,13 @@ class MbitMore {
     }
 
     
-    
+    /**
+     * 
+     * @param {number} num 
+     * @param {string} text 
+     * @param {object} util 
+     * @returns 
+     */
     radiosendvalue(num,text,util){
         const textLength = Math.min(8, text.length);
        let  textData = new Uint8Array(textLength + 1);

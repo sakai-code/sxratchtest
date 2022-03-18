@@ -5712,6 +5712,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendnumber",
     value: function radiosendnumber(NUM, util) {
       var sendnumber = NUM;
+      console.log(sendnumber);
       var doubleBuf = this.getNumbertoArray(sendnumber);
 
       if (sendnumber === (sendnumber | 0)) {
@@ -5768,6 +5769,14 @@ var MbitMore = /*#__PURE__*/function () {
         message: new Uint8Array(_toConsumableArray(powerdata))
       }], util);
     }
+    /**
+     * 
+     * @param {number} num 
+     * @param {string} text 
+     * @param {object} util 
+     * @returns 
+     */
+
   }, {
     key: "radiosendvalue",
     value: function radiosendvalue(num, text, util) {
