@@ -5637,6 +5637,7 @@ var MbitMore = /*#__PURE__*/function () {
         var Buf = this.getFloatArray(value);
       }
 
+      console.log(Buf);
       return Buf;
     }
     /**
