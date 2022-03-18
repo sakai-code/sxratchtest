@@ -1515,7 +1515,7 @@ class MbitMore {
         }
         
         
-        
+        console.log(Buf);
         return Buf;
 
     }
