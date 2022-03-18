@@ -1507,7 +1507,7 @@ class MbitMore {
      */
      getNumbertoArray(NUM){
          const value = NUM;
-         if (value === (value | 0)) {
+         if (value == (value | 0)) {
              var Buf = this.getIntArray(value);
         }
         else {

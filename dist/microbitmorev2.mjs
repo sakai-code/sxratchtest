@@ -5631,7 +5631,7 @@ var MbitMore = /*#__PURE__*/function () {
     value: function getNumbertoArray(NUM) {
       var value = NUM;
 
-      if (value === (value | 0)) {
+      if (value == (value | 0)) {
         var Buf = this.getIntArray(value);
       } else {
         var Buf = this.getFloatArray(value);
