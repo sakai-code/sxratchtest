@@ -5679,6 +5679,7 @@ var MbitMore = /*#__PURE__*/function () {
     value: function radiosendnumber(NUM, util) {
       var sendnumber = NUM;
       var doubleBuf = this.getFloattoArray(sendnumber);
+      console.log(doubleBuf);
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDNUMBER,
         message: new Uint8Array(_toConsumableArray(doubleBuf))
@@ -5737,6 +5738,7 @@ var MbitMore = /*#__PURE__*/function () {
       var sendnumber = num;
       var doubleBuf = this.getFloattoArray(sendnumber); //test
 
+      console.log(doubleBuf);
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDVALUE,
         message: new Uint8Array([].concat(_toConsumableArray(doubleBuf), [textLength], _toConsumableArray(textData)))
