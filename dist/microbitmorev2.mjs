@@ -5617,7 +5617,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "getIntArray",
     value: function getIntArray(NUM) {
-      var IntBuf = Buffer.from(new int32Array([NUM]).buffer);
+      var IntBuf = Buffer.from(new Int32Array([NUM]).buffer);
       return IntBuf;
     }
     /**
@@ -5629,6 +5629,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "getNumbertoArray",
     value: function getNumbertoArray(NUM) {
+      console.log("int32ver");
       var value = NUM;
 
       if (value == (value | 0)) {

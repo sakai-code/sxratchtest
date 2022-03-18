@@ -1495,7 +1495,7 @@ class MbitMore {
      */
      getIntArray(NUM){
         
-        const IntBuf = Buffer.from(new int32Array([NUM]).buffer);
+        const IntBuf = Buffer.from(new Int32Array([NUM]).buffer);
         
         return IntBuf;
 
