@@ -1508,10 +1508,10 @@ class MbitMore {
      getNumbertoArray(NUM){
          const value = NUM;
          if (value === (value | 0)) {
-            Buf = this.getIntArray(value);
+             let Buf = this.getIntArray(value);
         }
         else {
-            Buf = this.getFloatArray(value);
+            let Buf = this.getFloatArray(value);
         }
         
         
