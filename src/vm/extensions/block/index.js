@@ -1506,6 +1506,7 @@ class MbitMore {
      * @return {Buffer}
      */
      getNumbertoArray(NUM){
+        console.log("int32ver");
          const value = NUM;
          if (value == (value | 0)) {
              var Buf = this.getIntArray(value);
