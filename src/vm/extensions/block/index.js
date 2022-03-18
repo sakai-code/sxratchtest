@@ -1623,7 +1623,9 @@ class MbitMore {
                 [{
                     id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDDOUBLENUMBER,
                     message: new Uint8Array([
-                        ...doubleBuf
+                        ...doubleBuf,
+                        0,
+                        0
                     ])
                 }],
                 util

@@ -5730,7 +5730,7 @@ var MbitMore = /*#__PURE__*/function () {
 
         return this.sendCommandSet([{
           id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDDOUBLENUMBER,
-          message: new Uint8Array(_toConsumableArray(_doubleBuf))
+          message: new Uint8Array([].concat(_toConsumableArray(_doubleBuf), [0, 0]))
         }], util);
       }
     }
