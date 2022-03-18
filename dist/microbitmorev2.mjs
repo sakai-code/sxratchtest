@@ -5702,8 +5702,11 @@ var MbitMore = /*#__PURE__*/function () {
       }], util);
     }
     /**
-     * radio send number
-     */
+    * 
+    * @param {number} NUM
+    * @param {object} util 
+    * @returns {promise | undefined}
+    */
 
   }, {
     key: "radiosendnumber",
@@ -5712,11 +5715,13 @@ var MbitMore = /*#__PURE__*/function () {
       var doubleBuf = this.getNumbertoArray(sendnumber);
 
       if (sendnumber === (sendnumber | 0)) {
+        console.log("int");
         return this.sendCommandSet([{
           id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDINTNUMBER,
           message: new Uint8Array(_toConsumableArray(doubleBuf))
         }], util);
       } else {
+        console.log("double");
         return this.sendCommandSet([{
           id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDDOUBLENUMBER,
           message: new Uint8Array(_toConsumableArray(doubleBuf))
