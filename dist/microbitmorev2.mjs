@@ -5632,9 +5632,9 @@ var MbitMore = /*#__PURE__*/function () {
       var value = NUM;
 
       if (value === (value | 0)) {
-        this.getIntArray(value);
+        var Buf = this.getIntArray(value);
       } else {
-        this.getFloatArray(value);
+        var Buf = this.getFloatArray(value);
       }
 
       return Buf;
