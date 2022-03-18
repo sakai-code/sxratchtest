@@ -5617,7 +5617,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "getIntArray",
     value: function getIntArray(NUM) {
-      var IntBuf = Buffer.from(new Uint8Array([NUM]).buffer);
+      var IntBuf = Buffer.from(new int32Array([NUM]).buffer);
       return IntBuf;
     }
     /**
