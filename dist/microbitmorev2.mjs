@@ -5779,7 +5779,7 @@ var MbitMore = /*#__PURE__*/function () {
       }
 
       var sendnumber = num;
-      var doubleBuf = this.getFloattoArray(sendnumber); //test
+      var doubleBuf = this.getNumbertoArray(sendnumber); //test
 
       return this.sendCommandSet([{
         id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDVALUE,

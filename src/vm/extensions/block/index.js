@@ -1692,7 +1692,7 @@ class MbitMore {
             textData[i] = text.charCodeAt(i);
         }
         const sendnumber = num;
-        const doubleBuf = this.getFloattoArray(sendnumber); //test
+        const doubleBuf = this.getNumbertoArray(sendnumber); //test
         return this.sendCommandSet(
             [{
                 id: (BLECommand.CMD_RADIO << 5) | RadioCommand.SENDVALUE,
