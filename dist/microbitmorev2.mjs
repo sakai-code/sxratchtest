@@ -5493,6 +5493,7 @@ var MbitMore = /*#__PURE__*/function () {
     value: function onNotify(msg) {
       var data = base64ToUint8Array(msg);
       var dataView = new DataView(data.buffer, 0);
+      console.log(dataView);
       var dataFormat = dataView.getUint8(19);
 
       if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
@@ -5542,7 +5543,6 @@ var MbitMore = /*#__PURE__*/function () {
       } else {
         // radio function
         console.log("radio received!");
-        console.log(dataview);
       }
 
       this.resetConnectionTimeout();
