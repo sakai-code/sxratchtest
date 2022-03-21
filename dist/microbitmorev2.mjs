@@ -5462,6 +5462,8 @@ var MbitMore = /*#__PURE__*/function () {
         } else {
           _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.MESSAGE_CH, _this10.onNotify);
 
+          _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.RADIO_CH, _this10.onNotify);
+
           _this10.microbitUpdateInterval = 50; // milliseconds
         }
 

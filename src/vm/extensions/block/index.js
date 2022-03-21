@@ -1371,6 +1371,11 @@ class MbitMore {
                         MM_SERVICE.ID,
                         MM_SERVICE.MESSAGE_CH,
                         this.onNotify);
+
+                        this._ble.startNotifications(
+                            MM_SERVICE.ID,
+                            MM_SERVICE.RADIO_CH,
+                            this.onNotify);
                     this.microbitUpdateInterval = 50; // milliseconds
                 }
                 if (this.route === CommunicationRoute.SERIAL) {
