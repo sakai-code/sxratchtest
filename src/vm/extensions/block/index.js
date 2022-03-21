@@ -1431,7 +1431,8 @@ class MbitMore {
                 timestamp: Date.now()
             };
         } else {     // radio function
-            console.log("radio received!")
+            console.log("radio received!");
+            console.log(dataview);
 
         }
         this.resetConnectionTimeout();

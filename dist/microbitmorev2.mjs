@@ -5542,6 +5542,7 @@ var MbitMore = /*#__PURE__*/function () {
       } else {
         // radio function
         console.log("radio received!");
+        console.log(dataview);
       }
 
       this.resetConnectionTimeout();
