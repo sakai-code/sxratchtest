@@ -1372,7 +1372,7 @@ class MbitMore {
                         MM_SERVICE.MESSAGE_CH,
                         this.onNotify);
 
-                        this._ble.startNotifications(
+                        this._ble.startNotifications( // add radio function
                             MM_SERVICE.ID,
                             MM_SERVICE.RADIO_CH,
                             this.onNotify);
