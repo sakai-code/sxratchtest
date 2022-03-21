@@ -3401,7 +3401,8 @@ var SERIAL_CH_ID = {
   '0b500120-607f-4151-9091-7d008d6ffc5c': 0x0120,
   '0b500121-607f-4151-9091-7d008d6ffc5c': 0x0121,
   '0b500122-607f-4151-9091-7d008d6ffc5c': 0x0122,
-  '0b500130-607f-4151-9091-7d008d6ffc5c': 0x0130
+  '0b500130-607f-4151-9091-7d008d6ffc5c': 0x0130,
+  '0b500140-607f-4151-9091-7d008d6ffc5c': 0x0140
 };
 /**
  * Start Frame Delimiter
@@ -4441,7 +4442,9 @@ var MM_SERVICE = {
   PIN_EVENT_CH: '0b500110-607f-4151-9091-7d008d6ffc5c',
   ACTION_EVENT_CH: '0b500111-607f-4151-9091-7d008d6ffc5c',
   ANALOG_IN_CH: ['0b500120-607f-4151-9091-7d008d6ffc5c', '0b500121-607f-4151-9091-7d008d6ffc5c', '0b500122-607f-4151-9091-7d008d6ffc5c'],
-  MESSAGE_CH: '0b500130-607f-4151-9091-7d008d6ffc5c'
+  MESSAGE_CH: '0b500130-607f-4151-9091-7d008d6ffc5c',
+  RADIO_CH: '0b500140-607f-4151-9091-7d008d6ffc5c' //add radio function 
+
 };
 /**
  * Enum for axis menu options.
@@ -5536,6 +5539,9 @@ var MbitMore = /*#__PURE__*/function () {
           })),
           timestamp: Date.now()
         };
+      } else {
+        // radio function
+        console.log("radio received!");
       }
 
       this.resetConnectionTimeout();

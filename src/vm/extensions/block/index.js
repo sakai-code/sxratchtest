@@ -369,7 +369,8 @@ const MM_SERVICE = {
         '0b500121-607f-4151-9091-7d008d6ffc5c',
         '0b500122-607f-4151-9091-7d008d6ffc5c'
     ],
-    MESSAGE_CH: '0b500130-607f-4151-9091-7d008d6ffc5c'
+    MESSAGE_CH: '0b500130-607f-4151-9091-7d008d6ffc5c',
+    RADIO_CH: '0b500140-607f-4151-9091-7d008d6ffc5c'//add radio function 
 };
 
 /**
@@ -1429,6 +1430,9 @@ class MbitMore {
                 content: new TextDecoder().decode(data.slice(8, 20).filter(char => (char !== 0))),
                 timestamp: Date.now()
             };
+        } else {     // radio function
+            console.log("radio received!")
+
         }
         this.resetConnectionTimeout();
     }
