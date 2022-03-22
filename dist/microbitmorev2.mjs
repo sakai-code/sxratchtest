@@ -5587,19 +5587,19 @@ var MbitMore = /*#__PURE__*/function () {
         if (packetstate == MbitMoreRadioPacketState.NUM || MbitMoreRadioPacketState.DOUBLE) {
           if (packetstate == MbitMoreRadioPacketState.NUM) {
             var packet = data.slice(9, 12);
-            packet.readInt8(0);
+            var Intnumber = packet.readInt8(0);
             this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
-              content: packet,
+              content: Intnumber,
               timestamp: Date.now()
             };
             console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
           } else {
             var _packet = data.slice(9, 16);
 
-            _packet.readFloatLE(0);
+            var Doublenumber = _packet.readFloatLE(0);
 
             this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
-              content: _packet,
+              content: Doublenumber,
               timestamp: Date.now()
             };
             console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
