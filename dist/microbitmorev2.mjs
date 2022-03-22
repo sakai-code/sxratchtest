@@ -5593,10 +5593,15 @@ var MbitMore = /*#__PURE__*/function () {
           };
           console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
         } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
+          console.log("done");
+
           var _packet = data.slice(9, 16);
+
+          console.log(_packet);
 
           var Doublenumber = _packet.readDoubleLE(0);
 
+          console.log(Doublenumber);
           this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
             content: Doublenumber,
             timestamp: Date.now()

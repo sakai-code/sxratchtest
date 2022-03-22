@@ -1475,8 +1475,12 @@ class MbitMore {
 
 
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
+
+                    console.log("done")
                     const packet = data.slice(9,16);
+                    console.log(packet);
                     const Doublenumber = packet.readDoubleLE(0);
+                    console.log(Doublenumber);
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.DOUBLE ] = {
                         content : Doublenumber, timestamp : Date.now() 
