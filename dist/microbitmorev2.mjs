@@ -5583,7 +5583,7 @@ var MbitMore = /*#__PURE__*/function () {
         // radio function
         var packetstate = dataView.getUint8(0);
 
-        if (packetstate == MbitMoreRadioPacketState.NUM || MbitMoreRadioPacketState.DOUBLE) {
+        if (packetstate == MbitMoreRadioPacketState.NUM || packetstate == MbitMoreRadioPacketState.DOUBLE) {
           if (packetstate == MbitMoreRadioPacketState.NUM) {
             var packet = data.slice(9, 12);
             var Intnumber = packet.readInt8(0);

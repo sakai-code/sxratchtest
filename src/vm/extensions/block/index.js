@@ -1458,7 +1458,7 @@ class MbitMore {
          
 
             const packetstate = dataView.getUint8(0)
-            if( packetstate == MbitMoreRadioPacketState.NUM || MbitMoreRadioPacketState.DOUBLE){
+            if( packetstate == MbitMoreRadioPacketState.NUM || packetstate == MbitMoreRadioPacketState.DOUBLE){
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
                     const packet = data.slice(9,12);
