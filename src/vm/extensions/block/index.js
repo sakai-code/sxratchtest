@@ -1457,7 +1457,8 @@ class MbitMore {
         } else {     // radio function
          
 
-            const packetstate = dataView.getUint8(0)
+            const packetstate = dataView.getUint8(0);
+            console.log(packetstate);
             if( packetstate == MbitMoreRadioPacketState.NUM || packetstate == MbitMoreRadioPacketState.DOUBLE){
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
