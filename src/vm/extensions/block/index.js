@@ -1459,7 +1459,7 @@ class MbitMore {
 
             const packetstate = dataView.getUint8(0);
             console.log(packetstate);
-            if( packetstate == MbitMoreRadioPacketState.NUM || packetstate == MbitMoreRadioPacketState.DOUBLE){
+            
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
                     const packet = data.slice(9,12);
@@ -1474,7 +1474,7 @@ class MbitMore {
                     console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
 
 
-                }else{
+                }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
                     const packet = data.slice(9,16);
                     const Doublenumber = packet.readDoubleLE(0);
 
@@ -1489,7 +1489,7 @@ class MbitMore {
                  
 
 
-            }
+            
 
             const label = new TextDecoder().decode(data.slice(0, 8).filter(char => (char !== 0)));
             this.receivedData[label] =

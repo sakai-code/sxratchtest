@@ -5584,26 +5584,24 @@ var MbitMore = /*#__PURE__*/function () {
         var packetstate = dataView.getUint8(0);
         console.log(packetstate);
 
-        if (packetstate == MbitMoreRadioPacketState.NUM || packetstate == MbitMoreRadioPacketState.DOUBLE) {
-          if (packetstate == MbitMoreRadioPacketState.NUM) {
-            var packet = data.slice(9, 12);
-            var Intnumber = packet.readInt8(0);
-            this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
-              content: Intnumber,
-              timestamp: Date.now()
-            };
-            console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
-          } else {
-            var _packet = data.slice(9, 16);
+        if (packetstate == MbitMoreRadioPacketState.NUM) {
+          var packet = data.slice(9, 12);
+          var Intnumber = packet.readInt8(0);
+          this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
+            content: Intnumber,
+            timestamp: Date.now()
+          };
+          console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
+        } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
+          var _packet = data.slice(9, 16);
 
-            var Doublenumber = _packet.readDoubleLE(0);
+          var Doublenumber = _packet.readDoubleLE(0);
 
-            this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
-              content: Doublenumber,
-              timestamp: Date.now()
-            };
-            console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
-          }
+          this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
+            content: Doublenumber,
+            timestamp: Date.now()
+          };
+          console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
         }
 
         var _label2 = new TextDecoder().decode(data.slice(0, 8).filter(function (char) {
