@@ -5585,7 +5585,7 @@ var MbitMore = /*#__PURE__*/function () {
         console.log(packetstate);
 
         if (packetstate == MbitMoreRadioPacketState.NUM) {
-          var packet = data.slice(9, 12);
+          var packet = data.slice(9, 13);
           var Intnumber = packet.readInt8(0);
           this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
             content: Intnumber,
@@ -5595,7 +5595,7 @@ var MbitMore = /*#__PURE__*/function () {
         } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
           console.log("done");
 
-          var _packet = data.slice(9, 16);
+          var _packet = data.slice(9, 17);
 
           console.log(_packet);
 

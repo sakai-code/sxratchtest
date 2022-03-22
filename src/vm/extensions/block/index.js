@@ -1462,7 +1462,7 @@ class MbitMore {
             
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
-                    const packet = data.slice(9,12);
+                    const packet = data.slice(9,13);
                     const Intnumber = packet.readInt8(0);
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.NUM ] = {
@@ -1477,7 +1477,7 @@ class MbitMore {
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
 
                     console.log("done")
-                    const packet = data.slice(9,16);
+                    const packet = data.slice(9,17);
                     console.log(packet);
                     const Doublenumber = packet.readDoubleLE(0);
                     console.log(Doublenumber);
