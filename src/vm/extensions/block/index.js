@@ -6,6 +6,7 @@ const BLE = require('./ble');
 const {Buffer} = require('buffer');
 
 const WebSerial = require('./serial-web');
+const { time } = require('console');
 
 const uint8ArrayToBase64 = array => Buffer.from(array).toString('base64');
 const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
@@ -344,6 +345,18 @@ const MbitMoreAudioCommand =
     PLAY_TONE: 0x01
 };
 
+const MbitMoreRadioPacketState =
+{
+    NUM :0x00,
+    STRING_AND_NUMBER : 0x01,
+    STRING  : 0x02,
+    info : 0x03 , //not use
+    DOUBLE : 0x04,
+    value : 0x05
+   
+
+}; 
+
 /**
  * A time interval to wait (in milliseconds) before reporting to the BLE socket
  * that data has stopped coming from the peripheral.
@@ -474,6 +487,11 @@ class MbitMore {
          * @private
          */
         this.receivedData = {};
+
+
+        this.receivedRadionumber = {}; // last received radio number Int or Float64
+        this.receivedRadiostring = {}; // last received radio string
+        this.receivedRadioValue = {}; // last received radio value 
 
         this.analogIn = [0, 1, 2];
         this.analogValue = [];
@@ -1438,6 +1456,50 @@ class MbitMore {
             };
         } else {     // radio function
             console.log("radio received!");
+
+            const packetstate = dataView.getUint8(0)
+            if( packetstate == MbitMoreRadioPacketState.NUM || MbitMoreRadioPacketState.DOUBLE){
+
+                if(packetstate == MbitMoreRadioPacketState.NUM){
+                    const packet = data.slice(9,12);
+                    const Intnumber = packet.readInt8(0);
+
+                    this.receivedRadionumber[ MbitMoreRadioPacketState.NUM ] = {
+                        content : packet, timestamp : Date.now() 
+
+                    }
+
+
+                    console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
+
+
+                }else{
+                    const packet = data.slice(9,16);
+                    const Intnumber = packet.readFloatLE(0);
+
+                    this.receivedRadionumber[ MbitMoreRadioPacketState.DOUBLE ] = {
+                        content : packet, timestamp : Date.now() 
+
+                    }
+
+                    console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
+
+                }
+                 
+
+
+            }
+
+            const label = new TextDecoder().decode(data.slice(0, 8).filter(char => (char !== 0)));
+            this.receivedData[label] =
+            {
+                content: new TextDecoder().decode(data.slice(8, 20).filter(char => (char !== 0))),
+                timestamp: Date.now()
+            };
+
+            
+
+
            
 
         }

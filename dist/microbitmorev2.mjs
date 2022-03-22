@@ -4083,12 +4083,34 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
 var serialWeb = WebSerial$1;
 
+function noop(){}
+
+var _polyfillNode_console = global$1.console ? global$1.console : {
+  log: noop,
+  info: noop,
+  warn: noop,
+  error: noop,
+  dir: noop,
+  assert: noop,
+  time: noop,
+  timeEnd: noop,
+  trace: noop
+};
+
+var _polyfillNode_console$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  'default': _polyfillNode_console
+});
+
+var require$$7 = /*@__PURE__*/getAugmentedNamespace(_polyfillNode_console$1);
+
 var ArgumentType = argumentType;
 var BlockType = blockType;
 var log = log$2;
 var cast = cast$1;
 var Buffer = require$$5.Buffer;
 var WebSerial = serialWeb;
+require$$7.time;
 
 var uint8ArrayToBase64 = function uint8ArrayToBase64(array) {
   return Buffer.from(array).toString('base64');
@@ -4422,6 +4444,15 @@ var MbitMoreAudioCommand = {
   STOP_TONE: 0x00,
   PLAY_TONE: 0x01
 };
+var MbitMoreRadioPacketState = {
+  NUM: 0x00,
+  STRING_AND_NUMBER: 0x01,
+  STRING: 0x02,
+  info: 0x03,
+  //not use
+  DOUBLE: 0x04,
+  value: 0x05
+};
 /**
  * A time interval to wait (in milliseconds) before reporting to the BLE socket
  * that data has stopped coming from the peripheral.
@@ -4547,6 +4578,12 @@ var MbitMore = /*#__PURE__*/function () {
      */
 
     this.receivedData = {};
+    this.receivedRadionumber = {}; // last received radio number Int or Float64
+
+    this.receivedRadiostring = {}; // last received radio string
+
+    this.receivedRadioValue = {}; // last received radio value 
+
     this.analogIn = [0, 1, 2];
     this.analogValue = [];
     this.analogIn.forEach(function (pinIndex) {
@@ -5496,7 +5533,6 @@ var MbitMore = /*#__PURE__*/function () {
     value: function onNotify(msg) {
       var data = base64ToUint8Array(msg);
       var dataView = new DataView(data.buffer, 0);
-      console.log(dataView);
       var dataFormat = dataView.getUint8(19);
 
       if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
@@ -5546,6 +5582,40 @@ var MbitMore = /*#__PURE__*/function () {
       } else {
         // radio function
         console.log("radio received!");
+        var packetstate = dataView.getUint8(0);
+
+        if (packetstate == MbitMoreRadioPacketState.NUM || MbitMoreRadioPacketState.DOUBLE) {
+          if (packetstate == MbitMoreRadioPacketState.NUM) {
+            var packet = data.slice(9, 12);
+            packet.readInt8(0);
+            this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
+              content: packet,
+              timestamp: Date.now()
+            };
+            console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
+          } else {
+            var _packet = data.slice(9, 16);
+
+            _packet.readFloatLE(0);
+
+            this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
+              content: _packet,
+              timestamp: Date.now()
+            };
+            console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
+          }
+        }
+
+        var _label2 = new TextDecoder().decode(data.slice(0, 8).filter(function (char) {
+          return char !== 0;
+        }));
+
+        this.receivedData[_label2] = {
+          content: new TextDecoder().decode(data.slice(8, 20).filter(function (char) {
+            return char !== 0;
+          })),
+          timestamp: Date.now()
+        };
       }
 
       this.resetConnectionTimeout();
