@@ -1399,7 +1399,7 @@ class MbitMore {
     onNotify (msg) {
         const data = base64ToUint8Array(msg);
         const dataView = new DataView(data.buffer, 0);
-        console.log(dataView);
+      
         const dataFormat = dataView.getUint8(19);
         if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
             const actionEventType = dataView.getUint8(0);
