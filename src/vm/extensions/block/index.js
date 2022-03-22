@@ -1475,7 +1475,7 @@ class MbitMore {
 
                 }else{
                     const packet = data.slice(9,16);
-                    const Doublenumber = packet.readFloatLE(0);
+                    const Doublenumber = packet.readDoubleLE(0);
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.DOUBLE ] = {
                         content : Doublenumber, timestamp : Date.now() 

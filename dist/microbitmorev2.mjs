@@ -5596,7 +5596,7 @@ var MbitMore = /*#__PURE__*/function () {
           } else {
             var _packet = data.slice(9, 16);
 
-            var Doublenumber = _packet.readFloatLE(0);
+            var Doublenumber = _packet.readDoubleLE(0);
 
             this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
               content: Doublenumber,
