@@ -1486,7 +1486,7 @@ class MbitMore {
                 }else if(packetstate == MbitMoreRadioPacketState.STRING){
                     const packetlength = dataView.getUint8(9);
 
-                    const packet =new TextDecoder().decode(data.slice(10, 10+packetlength-1).filter(char => (char !== 0)));
+                    const packet =new TextDecoder().decode(data.slice(10, 10+packetlength).filter(char => (char !== 0)));
 
                     this.receivedRadiostring[MbitMoreRadioPacketState.STRING] = {
                         content : packet,timestamp : Date.now()
@@ -1499,7 +1499,7 @@ class MbitMore {
                     const numpacket = dataView.slice(9,13);
                     const Intnumberpacket = numpacket.readInt8(0);
                     const stringpacketlength = dataView.getUint8(13);
-                    const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength-1).filter(char => (char !== 0)));
+                    const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength).filter(char => (char !== 0)));
 
 
 
@@ -1523,8 +1523,8 @@ class MbitMore {
                     const packet = dataView.slice(9,17);
                 
                     const Doublenumber = packet.readDoubleLE(0);
-                    const stringpacketlength = dataView.getUint8(13);
-                    const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength-1).filter(char => (char !== 0)));
+                    const stringpacketlength = dataView.getUint8(17);
+                    const stringpacket =new TextDecoder().decode(data.slice(18, 18+stringpacketlength).filter(char => (char !== 0)));
                     this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ] = {
                         content : stringpacket, timestamp : Date.now() 
 
