@@ -5613,27 +5613,34 @@ var MbitMore = /*#__PURE__*/function () {
           console.log("string");
           log(this.receivedRadiostring[MbitMoreRadioPacketState.STRING]);
         } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
+          console.log("string int value");
           var numpacket = dataView.slice(9, 13);
           var Intnumberpacket = numpacket.readInt8(0);
+          console.log(Intnumberpacket);
           var stringpacketlength = dataView.getUint8(13);
           var stringpacket = new TextDecoder().decode(data.slice(14, 14 + stringpacketlength).filter(function (char) {
             return char !== 0;
           }));
+          console.log(stringpacket);
           this.receivedRadioValue[MbitMoreRadioPacketState.NUM] = {
             content: Intnumberpacket,
             timestamp: Date.now()
           };
+          console.log("write1");
           this.receivedRadioValue[MbitMoreRadioPacketState.STRING] = {
             content: stringpacket,
             timestamp: Date.now()
           };
-          console.log("string int value");
           log(this.receivedRadioValue[MbitMoreRadioPacketState.NUM]);
           console.log(this.receivedRadioValue[MbitMoreRadioPacketState.STRING]);
         } else if (packetstate == MbitMoreRadioPacketState.value) {
+          console.log("string double value");
+
           var _packet3 = dataView.slice(9, 17);
 
           var _Doublenumber = _packet3.readDoubleLE(0);
+
+          console.log(_Doublenumber);
 
           var _stringpacketlength = dataView.getUint8(17);
 
@@ -5641,15 +5648,16 @@ var MbitMore = /*#__PURE__*/function () {
             return char !== 0;
           }));
 
+          console.log(_stringpacket);
           this.receivedRadioValue[MbitMoreRadioPacketState.STRING] = {
             content: _stringpacket,
             timestamp: Date.now()
           };
+          console.log("write1");
           this.receivedRadioValue[MbitMoreRadioPacketState.NUM] = {
             content: _Doublenumber,
             timestamp: Date.now()
           };
-          console.log("string double value");
           log(this.receivedRadioValue[MbitMoreRadioPacketState.NUM]);
           console.log(this.receivedRadioValue[MbitMoreRadioPacketState.STRING]);
         }
