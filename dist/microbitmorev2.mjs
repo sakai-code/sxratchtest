@@ -5602,7 +5602,7 @@ var MbitMore = /*#__PURE__*/function () {
         } else if (packetstate == MbitMoreRadioPacketState.STRING) {
           var packetlength = data.getUint8(9);
 
-          var _packet2 = new TextDecoder().decode(dataView.slice(10, 10 + packetlength).filter(function (char) {
+          var _packet2 = new TextDecoder().decode(data.slice(10, 10 + packetlength).filter(function (char) {
             return char !== 0;
           }));
 
@@ -5618,7 +5618,7 @@ var MbitMore = /*#__PURE__*/function () {
           var Intnumberpacket = numpacket.readInt32LE(0);
           console.log(Intnumberpacket);
           var stringpacketlength = data.getUint8(13);
-          var stringpacket = new TextDecoder().decode(dataView.slice(14, 14 + stringpacketlength).filter(function (char) {
+          var stringpacket = new TextDecoder().decode(data.slice(14, 14 + stringpacketlength).filter(function (char) {
             return char !== 0;
           }));
           console.log(stringpacket);
@@ -5644,7 +5644,7 @@ var MbitMore = /*#__PURE__*/function () {
 
           var _stringpacketlength = data.getUint8(17);
 
-          var _stringpacket = new TextDecoder().decode(dataView.slice(18, 18 + _stringpacketlength).filter(function (char) {
+          var _stringpacket = new TextDecoder().decode(data.slice(18, 18 + _stringpacketlength).filter(function (char) {
             return char !== 0;
           }));
 
