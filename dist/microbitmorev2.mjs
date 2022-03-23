@@ -5595,12 +5595,12 @@ var MbitMore = /*#__PURE__*/function () {
 
           var Doublenumber = _packet.readDoubleLE(0);
 
-          this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
+          this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
             content: Doublenumber,
             timestamp: Date.now()
           };
         } else if (packetstate == MbitMoreRadioPacketState.STRING) {
-          var packetlength = data.getUint8(9);
+          var packetlength = dataView.getUint8(9);
 
           var _packet2 = new TextDecoder().decode(data.slice(10, 10 + packetlength).filter(function (char) {
             return char !== 0;
@@ -5617,7 +5617,7 @@ var MbitMore = /*#__PURE__*/function () {
           var numpacket = data.slice(9, 13);
           var Intnumberpacket = numpacket.readInt32LE(0);
           console.log(Intnumberpacket);
-          var stringpacketlength = data.getUint8(13);
+          var stringpacketlength = dataView.getUint8(13);
           var stringpacket = new TextDecoder().decode(data.slice(14, 14 + stringpacketlength).filter(function (char) {
             return char !== 0;
           }));
@@ -5642,7 +5642,7 @@ var MbitMore = /*#__PURE__*/function () {
 
           console.log(_Doublenumber);
 
-          var _stringpacketlength = data.getUint8(17);
+          var _stringpacketlength = dataView.getUint8(17);
 
           var _stringpacket = new TextDecoder().decode(data.slice(18, 18 + _stringpacketlength).filter(function (char) {
             return char !== 0;

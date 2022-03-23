@@ -1478,13 +1478,13 @@ class MbitMore {
                     const Doublenumber = packet.readDoubleLE(0);
                   
 
-                    this.receivedRadionumber[ MbitMoreRadioPacketState.DOUBLE ] = {
+                    this.receivedRadionumber[ MbitMoreRadioPacketState.NUM ] = {
                         content : Doublenumber, timestamp : Date.now() 
 
                     }
 
                 }else if(packetstate == MbitMoreRadioPacketState.STRING){
-                    const packetlength = data.getUint8(9);
+                    const packetlength = dataView.getUint8(9);
 
                     const packet =new TextDecoder().decode(data.slice(10, 10+packetlength).filter(char => (char !== 0)));
 
@@ -1502,7 +1502,7 @@ class MbitMore {
                     const Intnumberpacket = numpacket.readInt32LE(0);
 
                     console.log(Intnumberpacket);
-                    const stringpacketlength = data.getUint8(13);
+                    const stringpacketlength = dataView.getUint8(13);
                     const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength).filter(char => (char !== 0)));
                     console.log(stringpacket);
 
@@ -1529,7 +1529,7 @@ class MbitMore {
                 
                     const Doublenumber = packet.readDoubleLE(0);
                     console.log(Doublenumber)
-                    const stringpacketlength = data.getUint8(17);
+                    const stringpacketlength = dataView.getUint8(17);
                     const stringpacket =new TextDecoder().decode(data.slice(18, 18+stringpacketlength).filter(char => (char !== 0)));
                     console.log(stringpacket)
                     
