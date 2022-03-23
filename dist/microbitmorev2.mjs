@@ -5582,43 +5582,77 @@ var MbitMore = /*#__PURE__*/function () {
       } else {
         // radio function
         var packetstate = dataView.getUint8(0);
-        console.log(packetstate);
 
         if (packetstate == MbitMoreRadioPacketState.NUM) {
-          var packet = data.slice(9, 13);
+          var packet = dataView.slice(9, 13);
           var Intnumber = packet.readInt8(0);
           this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
             content: Intnumber,
             timestamp: Date.now()
           };
-          console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
         } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
-          console.log("done");
-
-          var _packet = data.slice(9, 17);
-
-          console.log(_packet);
+          var _packet = dataView.slice(9, 17);
 
           var Doublenumber = _packet.readDoubleLE(0);
 
-          console.log(Doublenumber);
           this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE] = {
             content: Doublenumber,
             timestamp: Date.now()
           };
-          console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
-        }
+        } else if (packetstate == MbitMoreRadioPacketState.STRING) {
+          var packetlength = dataView.getUint8(9);
 
-        var _label2 = new TextDecoder().decode(data.slice(0, 8).filter(function (char) {
-          return char !== 0;
-        }));
-
-        this.receivedData[_label2] = {
-          content: new TextDecoder().decode(data.slice(8, 20).filter(function (char) {
+          var _packet2 = new TextDecoder().decode(data.slice(10, 10 + packetlength - 1).filter(function (char) {
             return char !== 0;
-          })),
-          timestamp: Date.now()
-        };
+          }));
+
+          this.receivedRadiostring[MbitMoreRadioPacketState.STRING] = {
+            content: _packet2,
+            timestamp: Date.now()
+          };
+          console.log("string");
+          log(this.receivedRadiostring[MbitMoreRadioPacketState.STRING]);
+        } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
+          var numpacket = dataView.slice(9, 13);
+          var Intnumberpacket = numpacket.readInt8(0);
+          var stringpacketlength = dataView.getUint8(13);
+          var stringpacket = new TextDecoder().decode(data.slice(14, 14 + stringpacketlength - 1).filter(function (char) {
+            return char !== 0;
+          }));
+          this.receivedRadioValue[MbitMoreRadioPacketState.NUM] = {
+            content: Intnumberpacket,
+            timestamp: Date.now()
+          };
+          this.receivedRadioValue[MbitMoreRadioPacketState.STRING] = {
+            content: stringpacket,
+            timestamp: Date.now()
+          };
+          console.log("string int value");
+          log(this.receivedRadioValue[MbitMoreRadioPacketState.NUM]);
+          console.log(this.receivedRadioValue[MbitMoreRadioPacketState.STRING]);
+        } else if (packetstate == MbitMoreRadioPacketState.value) {
+          var _packet3 = dataView.slice(9, 17);
+
+          var _Doublenumber = _packet3.readDoubleLE(0);
+
+          var _stringpacketlength = dataView.getUint8(13);
+
+          var _stringpacket = new TextDecoder().decode(data.slice(14, 14 + _stringpacketlength - 1).filter(function (char) {
+            return char !== 0;
+          }));
+
+          this.receivedRadioValue[MbitMoreRadioPacketState.STRING] = {
+            content: _stringpacket,
+            timestamp: Date.now()
+          };
+          this.receivedRadioValue[MbitMoreRadioPacketState.NUM] = {
+            content: _Doublenumber,
+            timestamp: Date.now()
+          };
+          console.log("string double value");
+          log(this.receivedRadioValue[MbitMoreRadioPacketState.NUM]);
+          console.log(this.receivedRadioValue[MbitMoreRadioPacketState.STRING]);
+        }
       }
 
       this.resetConnectionTimeout();

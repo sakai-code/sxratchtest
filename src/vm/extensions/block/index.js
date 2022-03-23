@@ -1458,11 +1458,10 @@ class MbitMore {
          
 
             const packetstate = dataView.getUint8(0);
-            console.log(packetstate);
-            
+      
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
-                    const packet = data.slice(9,13);
+                    const packet = dataView.slice(9,13);
                     const Intnumber = packet.readInt8(0);
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.NUM ] = {
@@ -1471,23 +1470,78 @@ class MbitMore {
                     }
 
 
-                    console.log(this.receivedRadionumber[MbitMoreRadioPacketState.NUM]);
-
-
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
 
-                    console.log("done")
-                    const packet = data.slice(9,17);
-                    console.log(packet);
+                  
+                    const packet = dataView.slice(9,17);
+                
                     const Doublenumber = packet.readDoubleLE(0);
-                    console.log(Doublenumber);
+                  
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.DOUBLE ] = {
                         content : Doublenumber, timestamp : Date.now() 
 
                     }
 
-                    console.log(this.receivedRadionumber[MbitMoreRadioPacketState.DOUBLE]);
+                }else if(packetstate == MbitMoreRadioPacketState.STRING){
+                    const packetlength = dataView.getUint8(9);
+
+                    const packet =new TextDecoder().decode(data.slice(10, 10+packetlength-1).filter(char => (char !== 0)));
+
+                    this.receivedRadiostring[MbitMoreRadioPacketState.STRING] = {
+                        content : packet,timestamp : Date.now()
+                    }
+
+                    console.log("string");
+                    console,log(this.receivedRadiostring[MbitMoreRadioPacketState.STRING])
+                }else if(packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER){
+
+                    const numpacket = dataView.slice(9,13);
+                    const Intnumberpacket = numpacket.readInt8(0);
+                    const stringpacketlength = dataView.getUint8(13);
+                    const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength-1).filter(char => (char !== 0)));
+
+
+
+                    this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ] = {
+                        content : Intnumberpacket, timestamp : Date.now() 
+
+                    }
+                    this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ] = {
+                        content : stringpacket, timestamp : Date.now() 
+
+                    }
+                    console.log("string int value");
+                    console,log(this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ]);
+                    console.log(this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ]);
+
+                
+                }else if (packetstate == MbitMoreRadioPacketState.value){
+
+
+
+                    const packet = dataView.slice(9,17);
+                
+                    const Doublenumber = packet.readDoubleLE(0);
+                    const stringpacketlength = dataView.getUint8(13);
+                    const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength-1).filter(char => (char !== 0)));
+                    this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ] = {
+                        content : stringpacket, timestamp : Date.now() 
+
+                    }
+
+                  
+
+                    this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ] = {
+                        content : Doublenumber, timestamp : Date.now() 
+
+                    }
+
+                    console.log("string double value");
+                    console,log(this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ]);
+                    console.log(this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ]);
+
+
 
                 }
                  
@@ -1495,12 +1549,7 @@ class MbitMore {
 
             
 
-            const label = new TextDecoder().decode(data.slice(0, 8).filter(char => (char !== 0)));
-            this.receivedData[label] =
-            {
-                content: new TextDecoder().decode(data.slice(8, 20).filter(char => (char !== 0))),
-                timestamp: Date.now()
-            };
+            
 
             
 
