@@ -1461,7 +1461,7 @@ class MbitMore {
       
 
                 if(packetstate == MbitMoreRadioPacketState.NUM){
-                    const packet = dataView.slice(9,13);
+                    const packet = data.slice(9,13);
                     const Intnumber = packet.readInt8(0);
 
                     this.receivedRadionumber[ MbitMoreRadioPacketState.NUM ] = {
@@ -1473,7 +1473,7 @@ class MbitMore {
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
 
                   
-                    const packet = dataView.slice(9,17);
+                    const packet = data.slice(9,17);
                 
                     const Doublenumber = packet.readDoubleLE(0);
                   
@@ -1484,7 +1484,7 @@ class MbitMore {
                     }
 
                 }else if(packetstate == MbitMoreRadioPacketState.STRING){
-                    const packetlength = dataView.getUint8(9);
+                    const packetlength = data.getUint8(9);
 
                     const packet =new TextDecoder().decode(data.slice(10, 10+packetlength).filter(char => (char !== 0)));
 
@@ -1498,11 +1498,11 @@ class MbitMore {
                     console.log("string int value");
 
 
-                    const numpacket = dataView.slice(9,13);
+                    const numpacket = data.slice(9,13);
                     const Intnumberpacket = numpacket.readInt8(0);
 
                     console.log(Intnumberpacket);
-                    const stringpacketlength = dataView.getUint8(13);
+                    const stringpacketlength = data.getUint8(13);
                     const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength).filter(char => (char !== 0)));
                     console.log(stringpacket);
 
@@ -1525,11 +1525,11 @@ class MbitMore {
 
 
                     console.log("string double value");
-                    const packet = dataView.slice(9,17);
+                    const packet = data.slice(9,17);
                 
                     const Doublenumber = packet.readDoubleLE(0);
                     console.log(Doublenumber)
-                    const stringpacketlength = dataView.getUint8(17);
+                    const stringpacketlength = data.getUint8(17);
                     const stringpacket =new TextDecoder().decode(data.slice(18, 18+stringpacketlength).filter(char => (char !== 0)));
                     console.log(stringpacket)
                     

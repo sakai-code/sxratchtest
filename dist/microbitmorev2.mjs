@@ -5584,14 +5584,14 @@ var MbitMore = /*#__PURE__*/function () {
         var packetstate = dataView.getUint8(0);
 
         if (packetstate == MbitMoreRadioPacketState.NUM) {
-          var packet = dataView.slice(9, 13);
+          var packet = data.slice(9, 13);
           var Intnumber = packet.readInt8(0);
           this.receivedRadionumber[MbitMoreRadioPacketState.NUM] = {
             content: Intnumber,
             timestamp: Date.now()
           };
         } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
-          var _packet = dataView.slice(9, 17);
+          var _packet = data.slice(9, 17);
 
           var Doublenumber = _packet.readDoubleLE(0);
 
@@ -5600,7 +5600,7 @@ var MbitMore = /*#__PURE__*/function () {
             timestamp: Date.now()
           };
         } else if (packetstate == MbitMoreRadioPacketState.STRING) {
-          var packetlength = dataView.getUint8(9);
+          var packetlength = data.getUint8(9);
 
           var _packet2 = new TextDecoder().decode(data.slice(10, 10 + packetlength).filter(function (char) {
             return char !== 0;
@@ -5614,10 +5614,10 @@ var MbitMore = /*#__PURE__*/function () {
           log(this.receivedRadiostring[MbitMoreRadioPacketState.STRING]);
         } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
           console.log("string int value");
-          var numpacket = dataView.slice(9, 13);
+          var numpacket = data.slice(9, 13);
           var Intnumberpacket = numpacket.readInt8(0);
           console.log(Intnumberpacket);
-          var stringpacketlength = dataView.getUint8(13);
+          var stringpacketlength = data.getUint8(13);
           var stringpacket = new TextDecoder().decode(data.slice(14, 14 + stringpacketlength).filter(function (char) {
             return char !== 0;
           }));
@@ -5636,13 +5636,13 @@ var MbitMore = /*#__PURE__*/function () {
         } else if (packetstate == MbitMoreRadioPacketState.value) {
           console.log("string double value");
 
-          var _packet3 = dataView.slice(9, 17);
+          var _packet3 = data.slice(9, 17);
 
           var _Doublenumber = _packet3.readDoubleLE(0);
 
           console.log(_Doublenumber);
 
-          var _stringpacketlength = dataView.getUint8(17);
+          var _stringpacketlength = data.getUint8(17);
 
           var _stringpacket = new TextDecoder().decode(data.slice(18, 18 + _stringpacketlength).filter(function (char) {
             return char !== 0;
