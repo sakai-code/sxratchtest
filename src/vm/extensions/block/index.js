@@ -1492,52 +1492,49 @@ class MbitMore {
                         content : packet,timestamp : Date.now()
                     }
 
-                    console.log("string");
-                    console,log(this.receivedRadiostring[MbitMoreRadioPacketState.STRING])
+                
                 }else if(packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER){
-                    console.log("string int value");
+                  
 
 
                     const numpacket = data.slice(9,13);
                     const Intnumberpacket = numpacket.readInt32LE(0);
 
-                    console.log(Intnumberpacket);
+       
                     const stringpacketlength = dataView.getUint8(13);
                     const stringpacket =new TextDecoder().decode(data.slice(14, 14+stringpacketlength).filter(char => (char !== 0)));
-                    console.log(stringpacket);
+                 
 
                     
                     this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ] = {
                         content : Intnumberpacket, timestamp : Date.now() 
 
                     }
-                    console.log("write1")
+         
                     this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ] = {
                         content : stringpacket, timestamp : Date.now() 
 
                     }
                   
-                    console,log(this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ]);
-                    console.log(this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ]);
+        
 
                 
                 }else if (packetstate == MbitMoreRadioPacketState.value){
 
 
-                    console.log("string double value");
                     const packet = data.slice(9,17);
                 
                     const Doublenumber = packet.readDoubleLE(0);
-                    console.log(Doublenumber)
+                 
                     const stringpacketlength = dataView.getUint8(17);
                     const stringpacket =new TextDecoder().decode(data.slice(18, 18+stringpacketlength).filter(char => (char !== 0)));
-                    console.log(stringpacket)
+            
                     
                     this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ] = {
                         content : stringpacket, timestamp : Date.now() 
 
                     }
-                    console.log("write1")
+            
 
                   
 
@@ -1547,8 +1544,7 @@ class MbitMore {
                     }
 
                    
-                    console,log(this.receivedRadioValue[ MbitMoreRadioPacketState.NUM ]);
-                    console.log(this.receivedRadioValue[ MbitMoreRadioPacketState.STRING ]);
+        
 
 
 
