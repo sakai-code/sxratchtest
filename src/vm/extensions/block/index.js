@@ -492,6 +492,7 @@ class MbitMore {
         this.receivedRadionumber = {}; // last received radio number Int or Float64
         this.receivedRadiostring = {}; // last received radio string
         this.receivedRadioValue = {}; // last received radio value 
+        this.lastreceivedrssi  = 0;
 
         this.analogIn = [0, 1, 2];
         this.analogValue = [];
@@ -1455,6 +1456,8 @@ class MbitMore {
                 timestamp: Date.now()
             };
         } else {     // radio function
+            this.lastreceivedrssi = data.slice(33).readInt32LE;
+            console.log(this.lastreceivedrssi);
          
 
             const packetstate = dataView.getUint8(0);
@@ -1668,12 +1671,7 @@ class MbitMore {
 
 
     }
-    /**
-     * when radio received
-     */
-    whenradiopacketreceived(){
-
-    }
+    
     /**
      * radio set group 
      */
@@ -1770,27 +1768,7 @@ class MbitMore {
        
     }
 
-    /**
-     * 
-     * @returns 
-     */
-    radioreceivedstring(){
-        console.log("receivedstring");
-        let a = "hello";
-        return  a;
 
-    }
-    /**
-     * 
-     *latest radio received number
-     */
-
-    radioreceivednumber(){
-        console.log("receivednumber");
-        let b = 0;
-        return b;
-
-    }
     /**
      * set radio send power
      *
@@ -1851,11 +1829,79 @@ class MbitMore {
 
     }
 
+    whenradiostringreceived(util){
+
+        return false;
+    }
+    
+    /**
+     * 
+     * @param {object} util 
+     * @returns {string}
+     */
+
+    radiostringpacketreceived(util){
+        return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
+
+    }
+    /**
+     * 
+     * @param {object} uitl 
+     * @returns {boolean}
+     */
+
+    whenradionumberreceived(uitl){
+        return false;
+
+    }
+    /**
+     * 
+     * @param {object} uitl 
+     * @returns {number}
+     */
+
+    radionumberereceived(uitl){
+        return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
+
+    }
+    /**
+     * 
+     * @param {object} util 
+     * @returns {boolean}
+     */
+
+    whenradiovaluereceived(util){
+        return false;
+    }
+
+    /**
+     * 
+     * @param {object} util 
+     * @returns number
+     */
+
+
+    radiovaluereceivednumber(util){
+        return this.receivedRadioValue[MbitMoreRadioPacketState.NUM].content;
+    }
+    /**
+     * 
+     * @param {object} util 
+     * @returns string
+     */
+    
+
+    radiovaluereceivedstring(util){
+        return this.receivedRadioValue[MbitMoreRadioPacketState.STRING].content
+
+    }
+
     /**
      * last received packet RSSI
      */
 
     radioreceivedRSSI(){
+        return this.lastreceivedrssi;
 
     } 
 
@@ -3172,17 +3218,6 @@ class MbitMoreBlocks {
                 },
                 '---',
                 {
-                    opcode: 'whenradiopacketreceived',
-                    text: formatMessage({
-                        id: 'mbitMore.whenradiopacketreceived',
-                        default: 'when radio received',
-                        description: 'when radio packet received  '
-                    }),
-                    blockType: BlockType.HAT
-                    
-                    
-                },
-                {
                     opcode: 'radiosetgroup',
                     text: formatMessage({
                         id: 'mbitMore.radiosetgroup',
@@ -3229,51 +3264,7 @@ class MbitMoreBlocks {
                         },
                     }
                     
-                },
-                {
-                
-                    opcode: 'radiosendpowerset',
-                    text: formatMessage({
-                        id: 'mbitMore.radiosendpowerset',
-                        default: 'radio send power : [POWER]',
-                        description: 'radio send power '
-                    }),
-                    blockType: BlockType.COMMAND,
-                    arguments: {
-                        POWER: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 6
-                        },
-                        
-                    }
-                    
-                },
-                {
-                
-                    opcode: 'radioreceivedstring',
-                    text: formatMessage({
-                        id: 'mbitMore.radioreceivedstring',
-                        default: 'radiosreceivedstring',
-                        description: 'radio receivedstring '
-                    }),
-                    blockType: BlockType.REPORTER
-                    
-                    
-                    
-                },
-                {
-                
-                    opcode: 'radioreceivednumber',
-                    text: formatMessage({
-                        id: 'mbitMore.radioreceivednumber',
-                        default: 'radioreceivednumber',
-                        description: 'radio receivednumber '
-                    }),
-                    blockType: BlockType.REPORTER,
-                  
-                    
-                    
-                },     
+                },    
                 {
                 
                     opcode: 'radiosendvalue',
@@ -3294,6 +3285,111 @@ class MbitMoreBlocks {
 
                         }
                     }
+                    
+                },
+                {
+                
+                    opcode: 'radiosendpowerset',
+                    text: formatMessage({
+                        id: 'mbitMore.radiosendpowerset',
+                        default: 'radio send power : [POWER]',
+                        description: 'radio send power '
+                    }),
+                    blockType: BlockType.COMMAND,
+                    arguments: {
+                        POWER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 6
+                        },
+                        
+                    }
+                    
+                },
+                {
+                    opcode: 'whenradiopstringtreceived',
+                    text: formatMessage({
+                        id: 'mbitMore.whenradiostringreceived',
+                        default: 'when radio string received',
+                        description: 'when radio string packet received  '
+                    }),
+                    blockType: BlockType.HAT
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radiostringreceived',
+                    text: formatMessage({
+                        id: 'mbitMore.radiostringreceived',
+                        default: 'radio  received string',
+                        description: 'radio received string '
+                    }),
+                    blockType: BlockType.REPORTER
+                    
+                    
+                    
+                },
+                {
+                    opcode: 'whenradionumberreceived',
+                    text: formatMessage({
+                        id: 'mbitMore.whenradionumberreceived',
+                        default: 'when radio number received',
+                        description: 'when radio number packet received  '
+                    }),
+                    blockType: BlockType.HAT
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radionumbereceived',
+                    text: formatMessage({
+                        id: 'mbitMore.radioreceivednumber',
+                        default: 'radioreceivednumber',
+                        description: 'radio receivednumber '
+                    }),
+                    blockType: BlockType.REPORTER,
+                  
+                    
+                    
+                },
+                {
+                
+                    opcode: 'whenradiovaluereceived',
+                    text: formatMessage({
+                        id: 'mbitMore.whenradiorvaluereceived',
+                        default: 'when radio value received',
+                        description: 'radio received value '
+                    }),
+                    blockType: BlockType,HAT,
+                  
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radiovaluereceivednumber',
+                    text: formatMessage({
+                        id: 'mbitMore.radiorvaluereceivednumber',
+                        default: 'when radio value received number',
+                        description: 'radio received value number'
+                    }),
+                    blockType: BlockType,REPORTER,
+                  
+                    
+                    
+                },
+                {
+                
+                    opcode: 'radiovaluereceivedstring',
+                    text: formatMessage({
+                        id: 'mbitMore.radiorvaluereceived',
+                        default: 'when radio value received string',
+                        description: 'radio received value string'
+                    }),
+                    blockType: BlockType,REPORTER,
+                  
+                    
                     
                 }
 
@@ -4054,6 +4150,114 @@ class MbitMoreBlocks {
 
 
     }
+  /**
+   * 
+   * @param {object} args 
+   * @param {object} util 
+   * @returns {boolean} 
+   */
+    whenradiostringreceived(args,util){
+        return this._peripheral.whenradiostringreceived(util);
+
+
+
+    }
+
+    
+    /**
+     * 
+     * @param {object} args 
+     * @param {object} util 
+     * @returns {string}
+     */
+
+
+   radiostringreceived(args,util){
+        
+
+        return this._peripheral.radiostringpacketreceived(util)
+   
+
+
+
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {object} util 
+     * @returns {boolean}
+     */
+
+    whenradionumberreceived(args,util){
+        return this._peripheral.whenradionumberreceived(util);
+
+        
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {object} util 
+     * @returns {number}
+     */
+    radionumberreceived(args,util){
+        return this._peripheral.radionumberereceived(uitl);
+
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {bject} util 
+     * @returns {boolean}
+     */
+
+
+    whenradiovaluereceived(args,util){
+        return this._peripheral.whenradiovaluereceived(util);
+        
+
+    }
+
+    /**
+     * 
+     * @param {object} args 
+     * @param {object} util 
+     * @returns {number}
+     */
+
+    radiovaluereceivednumber(args,util){
+
+        return this._peripheral.radiovaluereceivednumber(util);
+
+
+    }
+    /**
+     * 
+     * @param {object} args 
+     * @param {object} util 
+     * @returns {string}
+     */
+
+    radiovaluereceivedstring(args,util){
+        return this._peripheral.radiovaluereceivedstring(util);
+
+    }
+/**
+ * 
+ * @param {object} args 
+ * @param {object} util 
+ * @returns {number}
+ */
+
+    radiolastpacketrssi(args,util){
+
+        return this._peripheral.radioreceivedRSSI();
+    }
+
+
+
+
+
+
 
     
 
