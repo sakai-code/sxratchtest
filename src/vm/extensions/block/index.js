@@ -3361,7 +3361,7 @@ class MbitMoreBlocks {
                         default: 'when radio value received',
                         description: 'radio received value '
                     }),
-                    blockType: BlockType,HAT,
+                    blockType: BlockType.HAT,
                   
                     
                     
@@ -3374,7 +3374,7 @@ class MbitMoreBlocks {
                         default: 'when radio value received number',
                         description: 'radio received value number'
                     }),
-                    blockType: BlockType,REPORTER,
+                    blockType: BlockType.REPORTER,
                   
                     
                     
@@ -3387,7 +3387,7 @@ class MbitMoreBlocks {
                         default: 'when radio value received string',
                         description: 'radio received value string'
                     }),
-                    blockType: BlockType,REPORTER,
+                    blockType: BlockType.REPORTER,
                   
                     
                     

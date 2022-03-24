@@ -7293,8 +7293,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             default: 'when radio value received',
             description: 'radio received value '
           }),
-          blockType: BlockType,
-          HAT: HAT
+          blockType: BlockType.HAT
         }, {
           opcode: 'radiovaluereceivednumber',
           text: formatMessage({
@@ -7302,8 +7301,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             default: 'when radio value received number',
             description: 'radio received value number'
           }),
-          blockType: BlockType,
-          REPORTER: REPORTER
+          blockType: BlockType.REPORTER
         }, {
           opcode: 'radiovaluereceivedstring',
           text: formatMessage({
@@ -7311,8 +7309,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             default: 'when radio value received string',
             description: 'radio received value string'
           }),
-          blockType: BlockType,
-          REPORTER: REPORTER
+          blockType: BlockType.REPORTER
         }],
         menus: {
           buttonIDMenu: {
