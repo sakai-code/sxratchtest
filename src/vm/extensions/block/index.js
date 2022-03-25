@@ -1456,7 +1456,7 @@ class MbitMore {
                 timestamp: Date.now()
             };
         } else {     // radio function
-            this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) /100000000) / 10;
+            this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) /1000000) / 10;
             console.log(data);
         
          
