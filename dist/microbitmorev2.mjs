@@ -5914,7 +5914,7 @@ var MbitMore = /*#__PURE__*/function () {
     }
     /**
      * 
-     * @param {object} uitl 
+     * @param {object} util 
      * @returns {number}
      */
 

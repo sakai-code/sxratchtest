@@ -1860,7 +1860,7 @@ class MbitMore {
     }
     /**
      * 
-     * @param {object} uitl 
+     * @param {object} util 
      * @returns {number}
      */
 
