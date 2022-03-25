@@ -5881,6 +5881,12 @@ var MbitMore = /*#__PURE__*/function () {
         message: new Uint8Array([].concat(_toConsumableArray(doubleBuf), [textLength], _toConsumableArray(textData)))
       }], util);
     }
+    /**
+     * 
+     * @param {object} util 
+     * @returns {boolean} 
+     */
+
   }, {
     key: "whenradiostringreceived",
     value: function whenradiostringreceived(util) {
@@ -7272,7 +7278,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             }
           }
         }, {
-          opcode: 'whenradiopstringtreceived',
+          opcode: 'whenradiostringreceived',
           text: formatMessage({
             id: 'mbitMore.whenradiostringreceived',
             default: 'when radio string received',

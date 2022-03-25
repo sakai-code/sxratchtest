@@ -1829,6 +1829,12 @@ class MbitMore {
 
     }
 
+    /**
+     * 
+     * @param {object} util 
+     * @returns {boolean} 
+     */
+
     whenradiostringreceived(util){
 
         return false;
@@ -3324,7 +3330,7 @@ class MbitMoreBlocks {
                     
                 },
                 {
-                    opcode: 'whenradiopstringtreceived',
+                    opcode: 'whenradiostringreceived',
                     text: formatMessage({
                         id: 'mbitMore.whenradiostringreceived',
                         default: 'when radio string received',
