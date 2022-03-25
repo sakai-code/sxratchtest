@@ -3415,6 +3415,19 @@ class MbitMoreBlocks {
                   
                     
                     
+                },
+                {
+                
+                    opcode: 'radiolastpacketrssi',
+                    text: formatMessage({
+                        id: 'mbitMore.radiolastpacketrssi',
+                        default: 'last radio packet received rssi',
+                        description: 'radio packet received rssi '
+                    }),
+                    blockType: BlockType.REPORTER,
+                  
+                    
+                    
                 }
 
 

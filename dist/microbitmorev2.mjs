@@ -7329,6 +7329,14 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
             description: 'radio received value string'
           }),
           blockType: BlockType.REPORTER
+        }, {
+          opcode: 'radiolastpacketrssi',
+          text: formatMessage({
+            id: 'mbitMore.radiolastpacketrssi',
+            default: 'last radio packet received rssi',
+            description: 'radio packet received rssi '
+          }),
+          blockType: BlockType.REPORTER
         }],
         menus: {
           buttonIDMenu: {
