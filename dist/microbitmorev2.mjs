@@ -5819,18 +5819,14 @@ var MbitMore = /*#__PURE__*/function () {
     key: "radiosendnumber",
     value: function radiosendnumber(NUM, util) {
       var sendnumber = NUM;
-      console.log(sendnumber);
 
       if (sendnumber == (sendnumber | 0)) {
         var doubleBuf = this.getIntArray(sendnumber);
-        console.log("int");
         return this.sendCommandSet([{
           id: BLECommand.CMD_RADIO << 5 | RadioCommand.SENDINTNUMBER,
           message: new Uint8Array(_toConsumableArray(doubleBuf))
         }], util);
       } else {
-        console.log("double");
-
         var _doubleBuf = this.getFloatArray(sendnumber);
 
         return this.sendCommandSet([{
