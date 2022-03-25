@@ -1864,7 +1864,7 @@ class MbitMore {
      * @returns {number}
      */
 
-    radionumberereceived(util){
+    radionumberreceived(util){
 
         if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
             return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
@@ -3360,9 +3360,9 @@ class MbitMoreBlocks {
                 },
                 {
                 
-                    opcode: 'radionumbereceived',
+                    opcode: 'radionumberreceived',
                     text: formatMessage({
-                        id: 'mbitMore.radioreceivednumber',
+                        id: 'mbitMore.radionumberreceived',
                         default: 'radioreceivednumber',
                         description: 'radio receivednumber '
                     }),
@@ -4218,7 +4218,7 @@ class MbitMoreBlocks {
      * @returns {number}
      */
     radionumberreceived(args,util){
-        return this._peripheral.radionumberereceived(util);
+        return this._peripheral.radionumberreceived(util);
 
     }
     /**

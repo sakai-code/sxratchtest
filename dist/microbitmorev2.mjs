@@ -5919,8 +5919,8 @@ var MbitMore = /*#__PURE__*/function () {
      */
 
   }, {
-    key: "radionumberereceived",
-    value: function radionumberereceived(util) {
+    key: "radionumberreceived",
+    value: function radionumberreceived(util) {
       if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
         return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
       }
@@ -7296,9 +7296,9 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
           }),
           blockType: BlockType.HAT
         }, {
-          opcode: 'radionumbereceived',
+          opcode: 'radionumberreceived',
           text: formatMessage({
-            id: 'mbitMore.radioreceivednumber',
+            id: 'mbitMore.radionumberreceived',
             default: 'radioreceivednumber',
             description: 'radio receivednumber '
           }),
@@ -8294,7 +8294,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radionumberreceived",
     value: function radionumberreceived(args, util) {
-      return this._peripheral.radionumberereceived(util);
+      return this._peripheral.radionumberreceived(util);
     }
     /**
      * 
