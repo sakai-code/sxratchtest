@@ -5895,7 +5895,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiostringpacketreceived",
     value: function radiostringpacketreceived(util) {
-      return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
+      if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
+        return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
+      }
+
+      return null;
     }
     /**
      * 
@@ -5917,7 +5921,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radionumberereceived",
     value: function radionumberereceived(uitl) {
-      return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
+      if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
+        return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
+      }
+
+      return null;
     }
     /**
      * 
@@ -5939,7 +5947,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiovaluereceivednumber",
     value: function radiovaluereceivednumber(util) {
-      return this.receivedRadioValue[MbitMoreRadioPacketState.NUM].content;
+      if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
+        return this.receivedRadioValue[MbitMoreRadioPacketState.NUM].content;
+      }
+
+      return null;
     }
     /**
      * 
@@ -5950,7 +5962,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiovaluereceivedstring",
     value: function radiovaluereceivedstring(util) {
-      return this.receivedRadioValue[MbitMoreRadioPacketState.STRING].content;
+      if (this.receivedRadioValue[MbitMoreRadioPacketState.STRING]) {
+        return this.receivedRadioValue[MbitMoreRadioPacketState.STRING].content;
+      }
+
+      return null;
     }
     /**
      * last received packet RSSI

@@ -1841,8 +1841,12 @@ class MbitMore {
      */
 
     radiostringpacketreceived(util){
-        return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
 
+        if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
+            return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
+        }
+        return null;
+        
     }
     /**
      * 
@@ -1861,7 +1865,12 @@ class MbitMore {
      */
 
     radionumberereceived(uitl){
-        return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
+
+        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
+            return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
+        }
+        return null;
+       
 
     }
     /**
@@ -1882,7 +1891,11 @@ class MbitMore {
 
 
     radiovaluereceivednumber(util){
-        return this.receivedRadioValue[MbitMoreRadioPacketState.NUM].content;
+        if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
+            return this.receivedRadioValue[MbitMoreRadioPacketState.NUM].content;
+        }
+        return null;
+      
     }
     /**
      * 
@@ -1892,7 +1905,11 @@ class MbitMore {
     
 
     radiovaluereceivedstring(util){
-        return this.receivedRadioValue[MbitMoreRadioPacketState.STRING].content
+        if (this.receivedRadioValue[MbitMoreRadioPacketState.STRING]) {
+            return this.receivedRadioValue[MbitMoreRadioPacketState.STRING].content
+        }
+        return null;
+     
 
     }
 
