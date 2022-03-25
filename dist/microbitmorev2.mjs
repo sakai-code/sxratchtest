@@ -5582,7 +5582,7 @@ var MbitMore = /*#__PURE__*/function () {
         };
       } else {
         // radio function
-        this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) / 100000000000) / 10;
+        this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) / 100000000) / 10;
         console.log(data);
         var packetstate = dataView.getUint8(0);
 
