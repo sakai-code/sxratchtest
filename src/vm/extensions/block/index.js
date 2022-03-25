@@ -1886,7 +1886,7 @@ class MbitMore {
     /**
      * 
      * @param {object} util 
-     * @returns number
+     * @returns {number}
      */
 
 
@@ -1900,7 +1900,7 @@ class MbitMore {
     /**
      * 
      * @param {object} util 
-     * @returns string
+     * @returns {string}
      */
     
 
@@ -1915,7 +1915,8 @@ class MbitMore {
 
     /**
      * last received packet RSSI
-     */
+     * @returns {number}
+     */    
 
     radioreceivedRSSI(){
         return this.lastreceivedrssi;

@@ -5941,7 +5941,7 @@ var MbitMore = /*#__PURE__*/function () {
     /**
      * 
      * @param {object} util 
-     * @returns number
+     * @returns {number}
      */
 
   }, {
@@ -5956,7 +5956,7 @@ var MbitMore = /*#__PURE__*/function () {
     /**
      * 
      * @param {object} util 
-     * @returns string
+     * @returns {string}
      */
 
   }, {
@@ -5970,6 +5970,7 @@ var MbitMore = /*#__PURE__*/function () {
     }
     /**
      * last received packet RSSI
+     * @returns {number}
      */
 
   }, {
