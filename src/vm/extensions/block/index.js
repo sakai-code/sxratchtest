@@ -1864,7 +1864,7 @@ class MbitMore {
      * @returns {number}
      */
 
-    radionumberereceived(uitl){
+    radionumberereceived(util){
 
         if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
             return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
@@ -4217,7 +4217,7 @@ class MbitMoreBlocks {
      * @returns {number}
      */
     radionumberreceived(args,util){
-        return this._peripheral.radionumberereceived(uitl);
+        return this._peripheral.radionumberereceived(util);
 
     }
     /**

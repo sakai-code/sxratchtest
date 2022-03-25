@@ -5920,7 +5920,7 @@ var MbitMore = /*#__PURE__*/function () {
 
   }, {
     key: "radionumberereceived",
-    value: function radionumberereceived(uitl) {
+    value: function radionumberereceived(util) {
       if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
         return this.receivedRadionumber[MbitMoreRadioPacketState.NUM].content;
       }
@@ -8293,7 +8293,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "radionumberreceived",
     value: function radionumberreceived(args, util) {
-      return this._peripheral.radionumberereceived(uitl);
+      return this._peripheral.radionumberereceived(util);
     }
     /**
      * 
