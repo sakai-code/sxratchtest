@@ -5650,6 +5650,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: _Doublenumber,
             timestamp: Date.now()
           };
+          this.whenradiovaluereceived();
         }
       }
 
@@ -5889,7 +5890,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradiostringreceived",
     value: function whenradiostringreceived(util) {
-      if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
+      if (!this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
         return false;
       }
 
@@ -5919,7 +5920,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradionumberreceived",
     value: function whenradionumberreceived(uitl) {
-      if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
+      if (!this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
         return false;
       }
 
@@ -5949,7 +5950,7 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradiovaluereceived",
     value: function whenradiovaluereceived(util) {
-      if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
+      if (!this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
         return false;
       }
 

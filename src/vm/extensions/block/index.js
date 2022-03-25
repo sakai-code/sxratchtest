@@ -1553,6 +1553,8 @@ class MbitMore {
 
                     }
 
+                    this.whenradiovaluereceived();
+
                    
         
 
@@ -1844,7 +1846,7 @@ class MbitMore {
 
     whenradiostringreceived(util){
 
-        if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]){
+        if (!this.receivedRadiostring[MbitMoreRadioPacketState.STRING]){
             return false;
         }
 
@@ -1875,7 +1877,7 @@ class MbitMore {
      */
 
     whenradionumberreceived(uitl){
-        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
+        if (!this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
             return false
         }
         return true;
@@ -1903,7 +1905,7 @@ class MbitMore {
      */
 
     whenradiovaluereceived(util){
-        if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
+        if (!this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
             return false
         }
         return true;
