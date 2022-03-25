@@ -5593,6 +5593,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: Intnumber,
             timestamp: Date.now()
           };
+          this.whenradionumberreceived();
         } else if (packetstate == MbitMoreRadioPacketState.DOUBLE) {
           var _packet = data.slice(9, 17);
 
@@ -5613,6 +5614,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: _packet2,
             timestamp: Date.now()
           };
+          this.whenradiostringreceived();
         } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
           var numpacket = data.slice(9, 13);
           var Intnumberpacket = numpacket.readInt32LE(0);
@@ -5628,6 +5630,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: stringpacket,
             timestamp: Date.now()
           };
+          this.whenradiovaluereceived();
         } else if (packetstate == MbitMoreRadioPacketState.value) {
           var _packet3 = data.slice(9, 17);
 
@@ -5886,7 +5889,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradiostringreceived",
     value: function whenradiostringreceived(util) {
-      return false;
+      if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
+        return false;
+      }
+
+      return true;
     }
     /**
      * 
@@ -5912,7 +5919,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradionumberreceived",
     value: function whenradionumberreceived(uitl) {
-      return false;
+      if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
+        return false;
+      }
+
+      return true;
     }
     /**
      * 
@@ -5938,7 +5949,11 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "whenradiovaluereceived",
     value: function whenradiovaluereceived(util) {
-      return false;
+      if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM]) {
+        return false;
+      }
+
+      return true;
     }
     /**
      * 
