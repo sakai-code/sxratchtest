@@ -1456,14 +1456,12 @@ class MbitMore {
                 timestamp: Date.now()
             };
         } else {    
-            this.whenradionumberreceived(0);
-            this.whenradiostringreceived(0);
-            this.whenradiovaluereceived(0);
+     
     
             // radio function
             
             this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) /1000000) / 10;
-            console.log(data);
+         
         
          
 
@@ -1479,7 +1477,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradionumberreceived(1);
+                    
 
 
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
@@ -1495,7 +1493,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradionumberreceived(1);
+                   
 
                 }else if(packetstate == MbitMoreRadioPacketState.STRING){
                     const packetlength = dataView.getUint8(9);
@@ -1506,7 +1504,7 @@ class MbitMore {
                         content : packet,timestamp : Date.now()
                     }
 
-                    this.whenradiostringreceived(1);
+                    
 
                
 
@@ -1534,7 +1532,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived(1);
+                
 
                    
                   
@@ -1565,8 +1563,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived(1);
-
+                  
                     
 
                    
@@ -1859,11 +1856,9 @@ class MbitMore {
      */
 
     
-    whenradiostringreceived(num,util){
+    whenradiostringreceived(util){
 
-        if (num == 0){
-            return false;
-        }
+     
 
         
         
@@ -1894,11 +1889,7 @@ class MbitMore {
      */
 
     whenradionumberreceived(num,uitl){
-        if (num == 0) {
-            return false
-        }
-        return true;
-
+       
     }
     /**
      * 
@@ -1922,10 +1913,7 @@ class MbitMore {
      */
 
     whenradiovaluereceived(num,util){
-        if (num == 0) {
-            return false
-        }
-        return true;
+       
     }
 
     /**
@@ -4235,7 +4223,7 @@ class MbitMoreBlocks {
    * @returns {boolean} 
    */
     whenradiostringreceived(args,util){
-        return this._peripheral.whenradiostringreceived(1,util);
+        return this._peripheral.whenradiostringreceived(util);
 
 
 
@@ -4267,7 +4255,7 @@ class MbitMoreBlocks {
      */
 
     whenradionumberreceived(args,util){
-        return this._peripheral.whenradionumberreceived(1,util);
+        return this._peripheral.whenradionumberreceived(util);
 
         
     }
@@ -4290,7 +4278,8 @@ class MbitMoreBlocks {
 
 
     whenradiovaluereceived(args,util){
-        return this._peripheral.whenradiovaluereceived(1,util);
+        console.log("on");
+        return this._peripheral.whenradiovaluereceived(util);
         
 
     }
