@@ -1458,7 +1458,7 @@ class MbitMore {
         } else {    
             this.whenradionumberreceived(0);
             this.whenradiostringreceived(0);
-            thius.whenradiovaluereceived(0);
+            this.whenradiovaluereceived(0);
     
             // radio function
             
@@ -4235,7 +4235,7 @@ class MbitMoreBlocks {
    * @returns {boolean} 
    */
     whenradiostringreceived(args,util){
-        return this._peripheral.whenradiostringreceived(1,util);
+        return this._peripheral.whenradiostringreceived(0,util);
 
 
 
@@ -4267,7 +4267,7 @@ class MbitMoreBlocks {
      */
 
     whenradionumberreceived(args,util){
-        return this._peripheral.whenradionumberreceived(1,util);
+        return this._peripheral.whenradionumberreceived(0,util);
 
         
     }
@@ -4290,7 +4290,7 @@ class MbitMoreBlocks {
 
 
     whenradiovaluereceived(args,util){
-        return this._peripheral.whenradiovaluereceived(1,util);
+        return this._peripheral.whenradiovaluereceived(0,util);
         
 
     }

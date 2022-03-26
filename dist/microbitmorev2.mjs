@@ -5583,7 +5583,7 @@ var MbitMore = /*#__PURE__*/function () {
       } else {
         this.whenradionumberreceived(0);
         this.whenradiostringreceived(0);
-        thius.whenradiovaluereceived(0); // radio function
+        this.whenradiovaluereceived(0); // radio function
 
         this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) / 1000000) / 10;
         console.log(data);
@@ -8289,7 +8289,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "whenradiostringreceived",
     value: function whenradiostringreceived(args, util) {
-      return this._peripheral.whenradiostringreceived(1, util);
+      return this._peripheral.whenradiostringreceived(0, util);
     }
     /**
      * 
@@ -8313,7 +8313,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "whenradionumberreceived",
     value: function whenradionumberreceived(args, util) {
-      return this._peripheral.whenradionumberreceived(1, util);
+      return this._peripheral.whenradionumberreceived(0, util);
     }
     /**
      * 
@@ -8337,7 +8337,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
   }, {
     key: "whenradiovaluereceived",
     value: function whenradiovaluereceived(args, util) {
-      return this._peripheral.whenradiovaluereceived(1, util);
+      return this._peripheral.whenradiovaluereceived(0, util);
     }
     /**
      * 
