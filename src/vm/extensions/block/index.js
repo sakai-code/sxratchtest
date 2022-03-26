@@ -494,6 +494,12 @@ class MbitMore {
         this.receivedRadioValue = {}; // last received radio value 
         this.lastreceivedrssi  = 0;
 
+        this.lastreceivednumbertimestamp = 0;
+
+        this.lastreceivedstringtimestamp = 0;
+
+        this.lastreceivedvaluetimestamp = 0;
+
         this.analogIn = [0, 1, 2];
         this.analogValue = [];
         this.analogIn.forEach(pinIndex => {
@@ -1857,12 +1863,13 @@ class MbitMore {
 
     
     whenradiostringreceived(util){
+        if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING].timestamp === this.lastreceivedstringtimestamp){
+            return false
+        } 
 
-     
-
+        this.lastreceivedstringtimestamp = this.receivedRadiostring[MbitMoreRadioPacketState.STRING].timestamp;
+          
         
-        
-
         return true;
     }
     
@@ -1888,7 +1895,13 @@ class MbitMore {
      * @returns {boolean}
      */
 
-    whenradionumberreceived(num,uitl){
+    whenradionumberreceived(uitl){
+        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp == this.lastreceivednumbertimestamp ){
+            return false;
+        }
+        this.lastreceivednumbertimestamp =this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp;
+
+        return true;
        
     }
     /**
@@ -1912,8 +1925,20 @@ class MbitMore {
      * @returns {boolean}
      */
 
-    whenradiovaluereceived(num,util){
+    whenradiovaluereceived(util){
+        if (this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp === this.lastreceivedvaluetimestamp) {
+            return false;
+        }
+
+        this.lastreceivedstringtimestamp = this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp;
+
+        return true;
+
+
+
+
        
+        
     }
 
     /**
@@ -4278,7 +4303,7 @@ class MbitMoreBlocks {
 
 
     whenradiovaluereceived(args,util){
-        console.log("on");
+      
         return this._peripheral.whenradiovaluereceived(util);
         
 
