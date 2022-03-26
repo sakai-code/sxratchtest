@@ -1506,7 +1506,7 @@ class MbitMore {
                         content : packet,timestamp : Date.now()
                     }
 
-                    this.whenradiostringreceived(0);
+                    this.whenradiostringreceived(1);
 
                
 
@@ -1534,7 +1534,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived(0);
+                    this.whenradiovaluereceived(1);
 
                    
                   
@@ -1565,7 +1565,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived(0);
+                    this.whenradiovaluereceived(1);
 
                     
 

@@ -5618,7 +5618,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: _packet2,
             timestamp: Date.now()
           };
-          this.whenradiostringreceived(0);
+          this.whenradiostringreceived(1);
         } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
           var numpacket = data.slice(9, 13);
           var Intnumberpacket = numpacket.readInt32LE(0);
@@ -5634,7 +5634,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: stringpacket,
             timestamp: Date.now()
           };
-          this.whenradiovaluereceived(0);
+          this.whenradiovaluereceived(1);
         } else if (packetstate == MbitMoreRadioPacketState.value) {
           var _packet3 = data.slice(9, 17);
 
@@ -5654,7 +5654,7 @@ var MbitMore = /*#__PURE__*/function () {
             content: _Doublenumber,
             timestamp: Date.now()
           };
-          this.whenradiovaluereceived(0);
+          this.whenradiovaluereceived(1);
         }
       }
 
