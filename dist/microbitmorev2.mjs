@@ -5924,7 +5924,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "whenradionumberreceived",
     value: function whenradionumberreceived(uitl) {
       if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
-        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp == this.lastreceivednumbertimestamp) {
+        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp === this.lastreceivednumbertimestamp) {
           return false;
         }
 
@@ -5963,7 +5963,7 @@ var MbitMore = /*#__PURE__*/function () {
           return false;
         }
 
-        this.lastreceivedstringtimestamp = this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp;
+        this.lastreceivedvaluetimestamp = this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp;
         return true;
       }
 

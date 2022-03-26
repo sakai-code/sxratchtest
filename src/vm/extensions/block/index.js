@@ -1905,7 +1905,7 @@ class MbitMore {
 
     whenradionumberreceived(uitl){
         if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM]) {
-        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp == this.lastreceivednumbertimestamp ){
+        if (this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp === this.lastreceivednumbertimestamp ){
             return false;
         }
         this.lastreceivednumbertimestamp =this.receivedRadionumber[MbitMoreRadioPacketState.NUM].timestamp;
@@ -1943,7 +1943,7 @@ class MbitMore {
             return false;
         }
 
-        this.lastreceivedstringtimestamp = this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp;
+        this.lastreceivedvaluetimestamp = this.receivedRadioValue[MbitMoreRadioPacketState.NUM].timestamp;
 
         return true;
 
