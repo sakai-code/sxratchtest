@@ -5614,7 +5614,6 @@ var MbitMore = /*#__PURE__*/function () {
             content: _packet2,
             timestamp: Date.now()
           };
-          this.whenradiostringreceived();
         } else if (packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER) {
           var numpacket = data.slice(9, 13);
           var Intnumberpacket = numpacket.readInt32LE(0);
@@ -5630,7 +5629,6 @@ var MbitMore = /*#__PURE__*/function () {
             content: stringpacket,
             timestamp: Date.now()
           };
-          this.whenradiovaluereceived();
         } else if (packetstate == MbitMoreRadioPacketState.value) {
           var _packet3 = data.slice(9, 17);
 
@@ -5650,7 +5648,6 @@ var MbitMore = /*#__PURE__*/function () {
             content: _Doublenumber,
             timestamp: Date.now()
           };
-          this.whenradiovaluereceived();
         }
       }
 
@@ -5905,6 +5902,8 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "radiostringpacketreceived",
     value: function radiostringpacketreceived(util) {
+      if (!setradiostringtimer) ;
+
       if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
         return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
       }
@@ -8078,6 +8077,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
 
       var lastTimestamp = this._peripheral.getPinEventTimestamp(pinIndex, eventID);
 
+      console.log(prevtimestamp);
       if (lastTimestamp === null) return false;
       var prevTimestamp = this.getPrevPinEventTimestamp(pinIndex, eventID);
       if (prevTimestamp === null) return true;

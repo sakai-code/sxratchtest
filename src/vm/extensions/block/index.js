@@ -1455,7 +1455,10 @@ class MbitMore {
                 content: new TextDecoder().decode(data.slice(8, 20).filter(char => (char !== 0))),
                 timestamp: Date.now()
             };
-        } else {     // radio function
+        } else {    
+    
+            // radio function
+            
             this.lastreceivedrssi = Math.round(data.slice(32).readInt32LE(0) /1000000) / 10;
             console.log(data);
         
@@ -1498,7 +1501,7 @@ class MbitMore {
                         content : packet,timestamp : Date.now()
                     }
 
-                    this.whenradiostringreceived();
+               
 
                 
                 }else if(packetstate == MbitMoreRadioPacketState.STRING_AND_NUMBER){
@@ -1524,7 +1527,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived();
+                   
                   
         
 
@@ -1553,7 +1556,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradiovaluereceived();
+                    
 
                    
         
@@ -1844,6 +1847,7 @@ class MbitMore {
      * @returns {boolean} 
      */
 
+    
     whenradiostringreceived(util){
 
         if (!this.receivedRadiostring[MbitMoreRadioPacketState.STRING]){
@@ -1863,6 +1867,11 @@ class MbitMore {
      */
 
     radiostringpacketreceived(util){
+
+        if (!setradiostringtimer ){
+
+            
+        }
 
         if (this.receivedRadiostring[MbitMoreRadioPacketState.STRING]) {
             return this.receivedRadiostring[MbitMoreRadioPacketState.STRING].content;
@@ -4035,6 +4044,8 @@ class MbitMoreBlocks {
         const eventID = MbitMorePinEvent[args.EVENT];
         const lastTimestamp =
             this._peripheral.getPinEventTimestamp(pinIndex, eventID);
+
+            console.log (prevtimestamp);
         if (lastTimestamp === null) return false;
         const prevTimestamp = this.getPrevPinEventTimestamp(pinIndex, eventID);
         if (prevTimestamp === null) return true;
