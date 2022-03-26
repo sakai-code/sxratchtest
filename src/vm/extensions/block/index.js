@@ -1479,7 +1479,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradionumberreceived(0);
+                    this.whenradionumberreceived(1);
 
 
                 }else if (packetstate == MbitMoreRadioPacketState.DOUBLE){
@@ -1495,7 +1495,7 @@ class MbitMore {
 
                     }
 
-                    this.whenradionumberreceived(0);
+                    this.whenradionumberreceived(1);
 
                 }else if(packetstate == MbitMoreRadioPacketState.STRING){
                     const packetlength = dataView.getUint8(9);
@@ -4235,7 +4235,7 @@ class MbitMoreBlocks {
    * @returns {boolean} 
    */
     whenradiostringreceived(args,util){
-        return this._peripheral.whenradiostringreceived(0,util);
+        return this._peripheral.whenradiostringreceived(1,util);
 
 
 
@@ -4267,7 +4267,7 @@ class MbitMoreBlocks {
      */
 
     whenradionumberreceived(args,util){
-        return this._peripheral.whenradionumberreceived(0,util);
+        return this._peripheral.whenradionumberreceived(1,util);
 
         
     }
@@ -4290,7 +4290,7 @@ class MbitMoreBlocks {
 
 
     whenradiovaluereceived(args,util){
-        return this._peripheral.whenradiovaluereceived(0,util);
+        return this._peripheral.whenradiovaluereceived(1,util);
         
 
     }
