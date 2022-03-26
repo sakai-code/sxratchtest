@@ -7346,7 +7346,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
           opcode: 'radiovaluereceivednumber',
           text: formatMessage({
             id: 'mbitMore.radiorvaluereceivednumber',
-            default: 'when radio value received number',
+            default: ' radio value received number',
             description: 'radio received value number'
           }),
           blockType: BlockType.REPORTER
@@ -7354,7 +7354,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
           opcode: 'radiovaluereceivedstring',
           text: formatMessage({
             id: 'mbitMore.radiorvaluereceived',
-            default: 'when radio value received string',
+            default: 'radio value received string',
             description: 'radio received value string'
           }),
           blockType: BlockType.REPORTER
@@ -8523,7 +8523,7 @@ var extensionTranslations = {
     'mbitMore.radionumberreceived': '無線で受信した数値',
     'mbitMore.whenradiovaluereceived': '無線で数値と文字列のセットを受信したとき',
     'mbitMore.radiovaluereceivednumber': '無線で受信したセットの数値',
-    'mbitMore.radiovaluereceivedstring': "無線で受信したセットの文字列",
+    'mbitMore.radiovaluereceivedstring': '無線で受信したセットの文字列',
     'mbitMore.radiolastpacketrssi': '最後に無線で受信した電波の強さ'
   },
   'ja-Hira': {
@@ -8623,7 +8623,7 @@ var extensionTranslations = {
     'mbitMore.radionumberreceived': 'むせんでじゅしんしたすうち',
     'mbitMore.whenradiovaluereceived': 'むせんですうちともじれつのせっとをじゅしんしたとき',
     'mbitMore.radiovaluereceivednumber': 'むせんでじゅしんしたセットのすうち',
-    'mbitMore.radiovaluereceivedstring': "むせんでじゅしんしたセットのもじれつ",
+    'mbitMore.radiovaluereceivedstring': 'むせんでじゅしんしたセットのもじれつ',
     'mbitMore.radiolastpacketrssi': 'さいごにむせんでじゅしんしたでんぱのつよさ'
   },
   'pt-br': {
