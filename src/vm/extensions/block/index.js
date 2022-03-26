@@ -4474,7 +4474,7 @@ const extensionTranslations = {
         'mbitMore.radiostringreceived':'無線で受信した文字列',
         'mbitMore.whenradionumberreceived':'無線で数値を受信したとき',
         'mbitMore.radionumberreceived':'無線で受信した数値',
-        'mbitMore.whenradiovaluereceived':'無線で数値と文字列のセットを受信したとき',
+        'mbitMore.whenradiorvaluereceived':'無線で数値と文字列のセットを受信したとき',
         'mbitMore.radiovaluereceivednumber':'無線で受信したセットの数値',
         'mbitMore.radiovaluereceivedstring':'無線で受信したセットの文字列',
         'mbitMore.radiolastpacketrssi':'最後に無線で受信した電波の強さ'
@@ -4574,7 +4574,7 @@ const extensionTranslations = {
         'mbitMore.radiostringreceived':'むせんでじゅしんしたもじれつ',
         'mbitMore.whenradionumberreceived':'むせんですうちをじゅしんしたとき',
         'mbitMore.radionumberreceived':'むせんでじゅしんしたすうち',
-        'mbitMore.whenradiovaluereceived':'むせんですうちともじれつのせっとをじゅしんしたとき',
+        'mbitMore.whenradiorvaluereceived':'むせんですうちともじれつのせっとをじゅしんしたとき',
         'mbitMore.radiovaluereceivednumber':'むせんでじゅしんしたセットのすうち',
         'mbitMore.radiovaluereceivedstring':'むせんでじゅしんしたセットのもじれつ',
         'mbitMore.radiolastpacketrssi':'さいごにむせんでじゅしんしたでんぱのつよさ'
