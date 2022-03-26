@@ -8512,7 +8512,19 @@ var extensionTranslations = {
     'mbitMore.selectCommunicationRoute.usb': 'USB',
     'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
     'mbitMore.selectCommunicationRoute.cancel': 'やめる',
-    'mbitMore.radioinit': 'ラジオ機能有効'
+    'mbitMore.radiosetgroup': '無線通信のグループ番号を[GROUP]番にする',
+    'mbitmore.radiosendstring': '無線で文字列[TEXT]（最大17文字）を送信',
+    'mbitmore.radiosendnumber': '無線で数値[NV]を送信',
+    'mbitmore.radiosendpowerset': '無線の送信する電波の強さを[POWER](0~8)に設定する',
+    'mbitmore.radiosendvalue': '無線で数値[number]と文字列[text](最大8文字)セットで送信',
+    'mbitmore.whenradiostringreceived': '無線で文字列を受信したとき',
+    'mbitmore.radiostringreceived': '無線で受信した文字列',
+    'mbitmore.whenradionumberreceived': '無線で数値を受信したとき',
+    'mbitmore.radionumberreceived': '無線で受信した数値',
+    'mbitmore.whenradiovaluereceived': '無線で数値と文字列のセットを受信したとき',
+    'mbitmore.radiovaluereceivednumber': '無線で受信したセットの数値',
+    'mbitmore.radiovaluereceivedstring': "無線で受信したセットの文字列",
+    'mbitmore.radiolastpacketrssi': '最後に無線で受信した電波の強さ'
   },
   'ja-Hira': {
     'mbitMore.whenButtonEvent': '[NAME] ボタンが [EVENT] とき',
@@ -8600,7 +8612,19 @@ var extensionTranslations = {
     'mbitMore.selectCommunicationRoute.usb': 'ゆうせん',
     'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
     'mbitMore.selectCommunicationRoute.cancel': 'やめる',
-    'mbitMore.radioinit': 'らじおきのうゆうこう'
+    'mbitMore.radiosetgroup': 'むせんつうしんのぐるーぷばんごうを[GROUP]ばんにする',
+    'mbitmore.radiosendstring': 'むせんでもじれつ[TEXT]（さいだい17もじ）をそうしん',
+    'mbitmore.radiosendnumber': 'むせんですうち[NV]をそうしん',
+    'mbitmore.radiosendpowerset': 'むせんのそうしんするでんぱのつよさを[POWER](0~8)にせっていする',
+    'mbitmore.radiosendvalue': 'むせんですうち[number]ともじれつ[text](さいだい8もじ)せっとでそうしん',
+    'mbitmore.whenradiostringreceived': 'むせんでもじれつをじゅしんしたとき',
+    'mbitmore.radiostringreceived': 'むせんでじゅしんしたもじれつ',
+    'mbitmore.whenradionumberreceived': 'むせんですうちをじゅしんしたとき',
+    'mbitmore.radionumberreceived': 'むせんでじゅしんしたすうち',
+    'mbitmore.whenradiovaluereceived': 'むせんですうちともじれつのせっとをじゅしんしたとき',
+    'mbitmore.radiovaluereceivednumber': 'むせんでじゅしんしたセットのすうち',
+    'mbitmore.radiovaluereceivedstring': "むせんでじゅしんしたセットのもじれつ",
+    'mbitmore.radiolastpacketrssi': 'さいごにむせんでじゅしんしたでんぱのつよさ'
   },
   'pt-br': {
     'mbitMore.lightLevel': 'Intensidade da Luz',
