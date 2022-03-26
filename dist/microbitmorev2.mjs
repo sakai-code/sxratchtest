@@ -8612,7 +8612,7 @@ var extensionTranslations = {
     'mbitMore.selectCommunicationRoute.usb': 'ゆうせん',
     'mbitMore.selectCommunicationRoute.connect': 'つなぐ',
     'mbitMore.selectCommunicationRoute.cancel': 'やめる',
-    'mbitMore.radiosetgroup': 'むせんつうしんのぐるーぷばんごうを[GROUP]ばんにする',
+    'mbitMore.radiosetgroup': 'むせんつうしんのグループばんごうを[GROUP]ばんにする',
     'mbitMore.radiosendstring': 'むせんでもじれつ[TEXT]（さいだい17もじ）をそうしん',
     'mbitMore.radiosendnumber': 'むせんですうち[NV]をそうしん',
     'mbitMore.radiosendpowerset': 'むせんのそうしんするでんぱのつよさを[POWER](0~8)にせっていする',
@@ -8621,7 +8621,7 @@ var extensionTranslations = {
     'mbitMore.radiostringreceived': 'むせんでじゅしんしたもじれつ',
     'mbitMore.whenradionumberreceived': 'むせんですうちをじゅしんしたとき',
     'mbitMore.radionumberreceived': 'むせんでじゅしんしたすうち',
-    'mbitMore.whenradiorvaluereceived': 'むせんですうちともじれつのせっとをじゅしんしたとき',
+    'mbitMore.whenradiorvaluereceived': 'むせんですうちともじれつのセットをじゅしんしたとき',
     'mbitMore.radiorvaluereceivednumber': 'むせんでじゅしんしたセットのすうち',
     'mbitMore.radiorvaluereceivedstring': 'むせんでじゅしんしたセットのもじれつ',
     'mbitMore.radiolastpacketrssi': 'さいごにむせんでじゅしんしたでんぱのつよさ'
