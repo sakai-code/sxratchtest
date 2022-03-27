@@ -1,5 +1,5 @@
 {
-  "name": "microbitMore_with_radio",
+  "name": "microbitMorev2_with_radio",
   "version": "0.0.1",
   "scripts": {
     "register": "npx xcratch-register --id=microbitMorev2_with_radio --gui=../scratch-gui --block=./src/vm/extensions/block --entry=./src/gui/lib/libraries/extensions/entry --core --link --use=extension-support util",

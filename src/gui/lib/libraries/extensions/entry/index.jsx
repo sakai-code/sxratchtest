@@ -21,7 +21,7 @@ const translationMap = {
 
 const entry = {
     name: 'Microbit More with Radio',
-    extensionId: 'microbitMore_with_radio',
+    extensionId: 'microbitMorev2_with_radio',
     extensionURL: 'https://microbit-more.github.io/dist/microbitMore.mjs',
     collaborator: 'Yengawa Lab +@ sakai',
     iconURL: microbitMoreIconURL,
