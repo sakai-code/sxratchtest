@@ -3659,9 +3659,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
         _this3.state = 'close';
         _this3.reader = null;
         _this3.writer = null;
-        _this3.port = null;
-
-        _this3._runtime.emit(_this3._runtime.constructor.PERIPHERAL_DISCONNECTED);
+        _this3.port = null; //this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
       });
     }
     /**
