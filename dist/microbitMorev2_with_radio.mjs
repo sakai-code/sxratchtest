@@ -12,7 +12,7 @@ var formatMessage$1 = function formatMessage(messageData) {
 var version = 'v2-0.2.4';
 var translationMap = {
   'en': {
-    'gui.extension.microbitMore.description': "Play with all functions of micro:bit. (".concat(version, ")")
+    'gui.extension.microbitMore.description': "Play with all functions of micro:bit with radio. (".concat(version, ")")
   },
   'ja': {
     'gui.extension.microbitMore.description': "micro:bit\u306E\u3059\u3079\u3066\u306E\u6A5F\u80FD\u3067\u904A\u3076\u3002 (".concat(version, ")")
@@ -22,10 +22,10 @@ var translationMap = {
   }
 };
 var entry = {
-  name: 'Microbit More',
-  extensionId: 'microbitMore',
+  name: 'Microbit More with Radio',
+  extensionId: 'microbitMore_with_radio',
   extensionURL: 'https://microbit-more.github.io/dist/microbitMore.mjs',
-  collaborator: 'Yengawa Lab',
+  collaborator: 'Yengawa Lab +@ sakai',
   iconURL: img$3,
   insetIconURL: img$2,
 

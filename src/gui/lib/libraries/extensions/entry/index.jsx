@@ -9,7 +9,7 @@ const version = 'v2-0.2.4';
 
 const translationMap = {
     'en': {
-        'gui.extension.microbitMore.description': `Play with all functions of micro:bit. (${version})`
+        'gui.extension.microbitMore.description': `Play with all functions of micro:bit with radio. (${version})`
     },
     'ja': {
         'gui.extension.microbitMore.description': `micro:bitのすべての機能で遊ぶ。 (${version})`
@@ -20,10 +20,10 @@ const translationMap = {
 };
 
 const entry = {
-    name: 'Microbit More',
-    extensionId: 'microbitMore',
+    name: 'Microbit More with Radio',
+    extensionId: 'microbitMore_with_radio',
     extensionURL: 'https://microbit-more.github.io/dist/microbitMore.mjs',
-    collaborator: 'Yengawa Lab',
+    collaborator: 'Yengawa Lab +@ sakai',
     iconURL: microbitMoreIconURL,
     insetIconURL: microbitMoreInsetIconURL,
     get description () {
