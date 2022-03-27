@@ -230,7 +230,7 @@ class WebSerial {
                 this.reader = null;
                 this.writer = null;
                 this.port = null;
-                //this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
+                this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
             });
     }
 
