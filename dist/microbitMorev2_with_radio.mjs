@@ -23,7 +23,7 @@ var translationMap = {
 };
 var entry = {
   name: 'Microbit More with Radio',
-  extensionId: 'microbitMorev2_with_radio',
+  extensionId: 'microbitMorev2withradio',
   extensionURL: 'https://microbit-more.github.io/dist/microbitMore.mjs',
   collaborator: 'Yengawa Lab +@ sakai',
   iconURL: img$3,
@@ -4124,7 +4124,7 @@ var formatMessage = function formatMessage(messageData) {
   return messageData.defaultMessage;
 };
 
-var EXTENSION_ID = 'microbitMorev2_with_radio';
+var EXTENSION_ID = 'microbitMorev2withradio';
 /**
  * URL to get this extension as a module.
  * When it was loaded as a module, 'extensionURL' will be replaced a URL which is retrieved from.

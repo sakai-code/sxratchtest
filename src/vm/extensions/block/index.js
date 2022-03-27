@@ -14,7 +14,7 @@ const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
 
 let formatMessage = messageData => messageData.defaultMessage;
 
-const EXTENSION_ID = 'microbitMorev2_with_radio';
+const EXTENSION_ID = 'microbitMorev2withradio';
 
 /**
  * URL to get this extension as a module.
