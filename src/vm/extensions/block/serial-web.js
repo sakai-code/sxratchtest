@@ -230,7 +230,7 @@ class WebSerial {
                 this.reader = null;
                 this.writer = null;
                 this.port = null;
-                this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
+                //this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
             });
     }
 
@@ -549,10 +549,11 @@ class WebSerial {
                     this._resetCallback();
                 }
 
-                this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
+                /**this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
                     message: `Scratch lost connection to`,
                     extensionId: this._extensionId
                 });
+                */
             });
     }
 
