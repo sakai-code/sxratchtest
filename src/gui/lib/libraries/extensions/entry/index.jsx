@@ -5,7 +5,7 @@ import microbitMoreInsetIconURL from './inset-icon.svg';
 import microbitMoreConnectionIconURL from './connection-icon.svg';
 import microbitMoreConnectionSmallIconURL from './connection-small-icon.svg';
 
-const version = 'v2-0.2.4';
+const version = 'v2-0.2.4+α radio';
 
 const translationMap = {
     'en': {
@@ -35,7 +35,7 @@ const entry = {
     },
     featured: true,
     disabled: false,
-    bluetoothRequired: true,
+    bluetoothRequired: false,
     internetConnectionRequired: false,
     launchPeripheralConnectionFlow: true,
     useAutoScan: false,

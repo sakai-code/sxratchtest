@@ -9,7 +9,7 @@ var img = "data:image/svg+xml,%3c%3fxml version='1.0' encoding='UTF-8' standalon
 var formatMessage$1 = function formatMessage(messageData) {
   return messageData.defaultMessage;
 };
-var version = 'v2-0.2.4';
+var version = 'v2-0.2.4+α radio';
 var translationMap = {
   'en': {
     'gui.extension.microbitMore.description': "Play with all functions of micro:bit with radio. (".concat(version, ")")
@@ -39,7 +39,7 @@ var entry = {
 
   featured: true,
   disabled: false,
-  bluetoothRequired: true,
+  bluetoothRequired: false,
   internetConnectionRequired: false,
   launchPeripheralConnectionFlow: true,
   useAutoScan: false,
