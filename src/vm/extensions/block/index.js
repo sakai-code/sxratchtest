@@ -1206,6 +1206,7 @@ class MbitMore {
                 message: `Scan was canceled by user`,
                 extensionId: this._extensionId
             });
+            
         };
         confirmButton.onclick = selectProcess;
         selectDialog.addEventListener('keydown', e => {
