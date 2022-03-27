@@ -2210,7 +2210,7 @@ class MbitMoreBlocks {
      * @return {string} - the name of this extension.
      */
     static get EXTENSION_NAME () {
-        return 'Microbit More';
+        return 'Microbit More with Radio ';
     }
 
     /**

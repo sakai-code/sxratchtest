@@ -8391,7 +8391,7 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
      * @return {string} - the name of this extension.
      */
     function get() {
-      return 'Microbit More';
+      return 'Microbit More with Radio ';
     }
     /**
      * @return {string} - the ID of this extension.
