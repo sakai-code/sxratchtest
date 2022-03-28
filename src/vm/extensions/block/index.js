@@ -1384,10 +1384,7 @@ class MbitMore {
                 this.hardware = dataView.getUint8(0);
                 this.protocol = dataView.getUint8(1);
                 this.route = dataView.getUint8(2);
-                this._ble.startNotifications(
-                    MM_SERVICE.ID,
-                    MM_SERVICE.RESTART,
-                    this.onNotify);
+             
                 this._ble.startNotifications(
                     MM_SERVICE.ID,
                     MM_SERVICE.ACTION_EVENT_CH,
@@ -1434,10 +1431,7 @@ class MbitMore {
         const dataView = new DataView(data.buffer, 0);
       
         const dataFormat = dataView.getUint8(19);
-        if(dataFormat === MbitMoreDataFormat.RESTART){
-            this._ble.handleDisconnectError();
-
-        }else if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
+       if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
             const actionEventType = dataView.getUint8(0);
             if (actionEventType === MbitMoreActionEvent.BUTTON) {
                 const buttonName = MbitMoreButtonID[dataView.getUint16(1, true)];

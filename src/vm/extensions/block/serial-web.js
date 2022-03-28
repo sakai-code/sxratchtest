@@ -16,7 +16,6 @@ const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
  * Characteristic ID on serial-port.
  */
 const SERIAL_CH_ID = {
-    '0b500001-607f-4151-9091-7d008d6ffc5c': 0x0001,//launch restart 
     '0b500100-607f-4151-9091-7d008d6ffc5c': 0x0100,
     '0b500101-607f-4151-9091-7d008d6ffc5c': 0x0101,
     '0b500102-607f-4151-9091-7d008d6ffc5c': 0x0102,
@@ -296,9 +295,9 @@ class WebSerial {
 
                    
                      
-                    this.startReceiving(); //add  no stopping when error packet
+                    //this.startReceiving(); //add  no stopping when error packet
                     
-                    //this.handleDisconnectError(); //add
+                    this.handleDisconnectError(); //add
                 });
         }, this.receivingInterval);
     }

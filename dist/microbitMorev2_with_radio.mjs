@@ -3393,8 +3393,6 @@ var base64ToUint8Array$1 = function base64ToUint8Array(base64) {
 
 
 var SERIAL_CH_ID = {
-  '0b500001-607f-4151-9091-7d008d6ffc5c': 0x0001,
-  //launch restart 
   '0b500100-607f-4151-9091-7d008d6ffc5c': 0x0100,
   '0b500101-607f-4151-9091-7d008d6ffc5c': 0x0101,
   '0b500102-607f-4151-9091-7d008d6ffc5c': 0x0102,
@@ -3728,8 +3726,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
           // start again
           _this5.startReceiving();
         }).catch(function () {
-          _this5.startReceiving(); //add  no stopping when error packet
-          //this.handleDisconnectError(); //add
+          //this.startReceiving(); //add  no stopping when error packet
+          _this5.handleDisconnectError(); //add
 
         });
       }, this.receivingInterval);
@@ -5499,8 +5497,6 @@ var MbitMore = /*#__PURE__*/function () {
         _this10.protocol = dataView.getUint8(1);
         _this10.route = dataView.getUint8(2);
 
-        _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.RESTART, _this10.onNotify);
-
         _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.ACTION_EVENT_CH, _this10.onNotify);
 
         _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.PIN_EVENT_CH, _this10.onNotify);
@@ -5547,9 +5543,7 @@ var MbitMore = /*#__PURE__*/function () {
       var dataView = new DataView(data.buffer, 0);
       var dataFormat = dataView.getUint8(19);
 
-      if (dataFormat === MbitMoreDataFormat.RESTART) {
-        this._ble.handleDisconnectError();
-      } else if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
+      if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
         var actionEventType = dataView.getUint8(0);
 
         if (actionEventType === MbitMoreActionEvent.BUTTON) {
