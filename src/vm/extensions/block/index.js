@@ -142,7 +142,8 @@ const MbitMoreDataFormat = {
     PIN_EVENT: 0x11,
     ACTION_EVENT: 0x12,
     DATA_NUMBER: 0x13,
-    DATA_TEXT: 0x14
+    DATA_TEXT: 0x14,
+    RESTART:0x01, //restart launch
 };
 
 /**
@@ -371,6 +372,7 @@ const BLETimeout = 4500;
 const BLEDataStoppedError = 'micro:bit extension stopped receiving data';
 
 const MM_SERVICE = {
+    RESTART:'0b500001-607f-4151-9091-7d008d6ffc5c',
     ID: '0b50f3e4-607f-4151-9091-7d008d6ffc5c',
     COMMAND_CH: '0b500100-607f-4151-9091-7d008d6ffc5c',
     STATE_CH: '0b500101-607f-4151-9091-7d008d6ffc5c',
@@ -1384,6 +1386,10 @@ class MbitMore {
                 this.route = dataView.getUint8(2);
                 this._ble.startNotifications(
                     MM_SERVICE.ID,
+                    MM_SERVICE.RESTART,
+                    this.onNotify);
+                this._ble.startNotifications(
+                    MM_SERVICE.ID,
                     MM_SERVICE.ACTION_EVENT_CH,
                     this.onNotify);
                 this._ble.startNotifications(
@@ -1427,7 +1433,10 @@ class MbitMore {
         const dataView = new DataView(data.buffer, 0);
       
         const dataFormat = dataView.getUint8(19);
-        if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
+        if(dataFormat === MbitMoreDataFormat.RESTART){
+            this._ble.handleDisconnectError();
+
+        }else if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
             const actionEventType = dataView.getUint8(0);
             if (actionEventType === MbitMoreActionEvent.BUTTON) {
                 const buttonName = MbitMoreButtonID[dataView.getUint16(1, true)];

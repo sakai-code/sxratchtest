@@ -3393,6 +3393,8 @@ var base64ToUint8Array$1 = function base64ToUint8Array(base64) {
 
 
 var SERIAL_CH_ID = {
+  '0b500001-607f-4151-9091-7d008d6ffc5c': 0x0001,
+  //launch restart 
   '0b500100-607f-4151-9091-7d008d6ffc5c': 0x0100,
   '0b500101-607f-4151-9091-7d008d6ffc5c': 0x0101,
   '0b500102-607f-4151-9091-7d008d6ffc5c': 0x0102,
@@ -3659,7 +3661,9 @@ var WebSerial$1 = /*#__PURE__*/function () {
         _this3.state = 'close';
         _this3.reader = null;
         _this3.writer = null;
-        _this3.port = null; //this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
+        _this3.port = null;
+
+        _this3._runtime.emit(_this3._runtime.constructor.PERIPHERAL_DISCONNECTED);
       });
     }
     /**
@@ -4045,12 +4049,11 @@ var WebSerial$1 = /*#__PURE__*/function () {
         if (_this11._resetCallback) {
           _this11._resetCallback();
         }
-        /**this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
-            message: `Scratch lost connection to`,
-            extensionId: this._extensionId
-        });
-        */
 
+        _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
+          message: "Scratch lost connection to",
+          extensionId: _this11._extensionId
+        });
       });
     }
   }, {
@@ -4245,7 +4248,9 @@ var MbitMoreDataFormat = {
   PIN_EVENT: 0x11,
   ACTION_EVENT: 0x12,
   DATA_NUMBER: 0x13,
-  DATA_TEXT: 0x14
+  DATA_TEXT: 0x14,
+  RESTART: 0x01 //restart launch
+
 };
 /**
  * Enum for action event type.
@@ -4465,6 +4470,7 @@ var BLETimeout = 4500;
 
 var BLEDataStoppedError = 'micro:bit extension stopped receiving data';
 var MM_SERVICE = {
+  RESTART: '0b500001-607f-4151-9091-7d008d6ffc5c',
   ID: '0b50f3e4-607f-4151-9091-7d008d6ffc5c',
   COMMAND_CH: '0b500100-607f-4151-9091-7d008d6ffc5c',
   STATE_CH: '0b500101-607f-4151-9091-7d008d6ffc5c',
@@ -5493,6 +5499,8 @@ var MbitMore = /*#__PURE__*/function () {
         _this10.protocol = dataView.getUint8(1);
         _this10.route = dataView.getUint8(2);
 
+        _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.RESTART, _this10.onNotify);
+
         _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.ACTION_EVENT_CH, _this10.onNotify);
 
         _this10._ble.startNotifications(MM_SERVICE.ID, MM_SERVICE.PIN_EVENT_CH, _this10.onNotify);
@@ -5538,7 +5546,9 @@ var MbitMore = /*#__PURE__*/function () {
       var dataView = new DataView(data.buffer, 0);
       var dataFormat = dataView.getUint8(19);
 
-      if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
+      if (dataFormat === MbitMoreDataFormat.RESTART) {
+        this._ble.handleDisconnectError();
+      } else if (dataFormat === MbitMoreDataFormat.ACTION_EVENT) {
         var actionEventType = dataView.getUint8(0);
 
         if (actionEventType === MbitMoreActionEvent.BUTTON) {
