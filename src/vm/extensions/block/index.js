@@ -1430,6 +1430,7 @@ class MbitMore {
      */
     onNotify (msg) {
         const data = base64ToUint8Array(msg);
+        console.log(data);
         const dataView = new DataView(data.buffer, 0);
       
         const dataFormat = dataView.getUint8(19);

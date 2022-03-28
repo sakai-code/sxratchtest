@@ -5543,6 +5543,7 @@ var MbitMore = /*#__PURE__*/function () {
     key: "onNotify",
     value: function onNotify(msg) {
       var data = base64ToUint8Array(msg);
+      console.log(data);
       var dataView = new DataView(data.buffer, 0);
       var dataFormat = dataView.getUint8(19);
 
