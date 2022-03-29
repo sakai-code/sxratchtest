@@ -4052,14 +4052,10 @@ var WebSerial$1 = /*#__PURE__*/function () {
           message: "Scratch lost connection to",
           extensionId: _this11._extensionId
         });
-      }).catch(function (e) {
-        /**
-        this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
-          message: `Scratch lost connection to`,
-          extensionId: this._extensionId
-        });
-        */
-        Promise.reject(new Error("no response"));
+      }).catch(function (err) {
+        resolve(null);
+        log$1.debug(err);
+        return;
       });
     }
   }, {
