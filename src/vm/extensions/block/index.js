@@ -1427,7 +1427,7 @@ class MbitMore {
      */
     onNotify (msg) {
         const data = base64ToUint8Array(msg);
-        console.log(data);
+    
         const dataView = new DataView(data.buffer, 0);
       
         const dataFormat = dataView.getUint8(19);
@@ -1672,7 +1672,7 @@ class MbitMore {
      * @return {Buffer}
      */
      getNumbertoArray(NUM){
-        console.log("int32ver");
+      
          const value = NUM;
          if (value == (value | 0)) {
              var Buf = this.getIntArray(value);
@@ -1682,7 +1682,7 @@ class MbitMore {
         }
         
         
-        console.log(Buf);
+     
         return Buf;
 
     }
@@ -4088,7 +4088,7 @@ class MbitMoreBlocks {
         const lastTimestamp =
             this._peripheral.getPinEventTimestamp(pinIndex, eventID);
 
-            console.log (prevtimestamp);
+         
         if (lastTimestamp === null) return false;
         const prevTimestamp = this.getPrevPinEventTimestamp(pinIndex, eventID);
         if (prevTimestamp === null) return true;

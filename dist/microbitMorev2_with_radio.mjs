@@ -3726,8 +3726,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
           // start again
           _this5.startReceiving();
         }).catch(function () {
-          //this.startReceiving(); //add  no stopping when error packet
-          _this5.handleDisconnectError(); //add
+          _this5.startReceiving(); //add  no stopping when error packet
+          //this.handleDisconnectError(); //add
 
         });
       }, this.receivingInterval);
@@ -5539,7 +5539,6 @@ var MbitMore = /*#__PURE__*/function () {
     key: "onNotify",
     value: function onNotify(msg) {
       var data = base64ToUint8Array(msg);
-      console.log(data);
       var dataView = new DataView(data.buffer, 0);
       var dataFormat = dataView.getUint8(19);
 
@@ -5747,7 +5746,6 @@ var MbitMore = /*#__PURE__*/function () {
   }, {
     key: "getNumbertoArray",
     value: function getNumbertoArray(NUM) {
-      console.log("int32ver");
       var value = NUM;
 
       if (value == (value | 0)) {
@@ -5756,7 +5754,6 @@ var MbitMore = /*#__PURE__*/function () {
         var Buf = this.getFloatArray(value);
       }
 
-      console.log(Buf);
       return Buf;
     }
     /**
@@ -8095,7 +8092,6 @@ var MbitMoreBlocks = /*#__PURE__*/function () {
 
       var lastTimestamp = this._peripheral.getPinEventTimestamp(pinIndex, eventID);
 
-      console.log(prevtimestamp);
       if (lastTimestamp === null) return false;
       var prevTimestamp = this.getPrevPinEventTimestamp(pinIndex, eventID);
       if (prevTimestamp === null) return true;
