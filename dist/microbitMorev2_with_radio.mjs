@@ -4052,7 +4052,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
           message: "Scratch lost connection to",
           extensionId: _this11._extensionId
         });
-      });
+      }).catch(function (e) {});
     }
   }, {
     key: "_handleRequestError",
@@ -4074,10 +4074,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function
       /* event */
     onDisconnected() {
-      //this.handleDisconnectError(new Error('device disconnected'));
-      Promise.reject(new Error("no response"));
-      log$1.debug("device disconnected");
-      return;
+      this.handleDisconnectError(new Error('device disconnected'));
     }
   }]);
 

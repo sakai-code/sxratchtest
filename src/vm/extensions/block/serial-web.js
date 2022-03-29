@@ -554,7 +554,9 @@ class WebSerial {
              extensionId: this._extensionId
          });
          
-     });
+     })
+     
+  .catch(function(e) {});
 
    
     }
@@ -572,11 +574,8 @@ class WebSerial {
      * Called when disconnected by the device.
      */
     onDisconnected (/* event */) {
-        //this.handleDisconnectError(new Error('device disconnected'));
+        this.handleDisconnectError(new Error('device disconnected'));
 
-        Promise.reject(new Error(`no response`));
-                log.debug(`device disconnected`);
-                return;
     }
 }
 
