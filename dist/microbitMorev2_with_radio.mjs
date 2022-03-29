@@ -4040,21 +4040,19 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function
       /* e */
     handleDisconnectError() {
+      var _this11 = this;
+
       if (this.state !== 'open') return;
-      setTimeout(function () {
-        var _this11 = this;
+      this.disconnect().then(function () {
+        if (_this11._resetCallback) {
+          _this11._resetCallback();
+        }
 
-        this.disconnect().then(function () {
-          if (_this11._resetCallback) {
-            _this11._resetCallback();
-          }
-
-          _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
-            message: "Scratch lost connection to",
-            extensionId: _this11._extensionId
-          });
+        _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
+          message: "Scratch lost connection to",
+          extensionId: _this11._extensionId
         });
-      }, 1000);
+      });
     }
   }, {
     key: "_handleRequestError",
@@ -4076,7 +4074,10 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function
       /* event */
     onDisconnected() {
-      this.handleDisconnectError(new Error('device disconnected'));
+      //this.handleDisconnectError(new Error('device disconnected'));
+      reject(new Error("no response"));
+      log$1.debug("device disconnected");
+      return;
     }
   }]);
 

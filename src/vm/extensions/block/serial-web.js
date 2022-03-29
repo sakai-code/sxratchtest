@@ -543,7 +543,7 @@ class WebSerial {
      */
     handleDisconnectError (/* e */) {
      if (this.state !== 'open') return;
-    setTimeout( function(){   this.disconnect()
+    this.disconnect()
      .then(() => {
          if (this._resetCallback) {
              this._resetCallback();
@@ -554,7 +554,7 @@ class WebSerial {
              extensionId: this._extensionId
          });
          
-     });}, 1000)
+     });
 
    
     }
@@ -572,7 +572,11 @@ class WebSerial {
      * Called when disconnected by the device.
      */
     onDisconnected (/* event */) {
-        this.handleDisconnectError(new Error('device disconnected'));
+        //this.handleDisconnectError(new Error('device disconnected'));
+
+        reject(new Error(`no response`));
+                log.debug(`device disconnected`);
+                return;
     }
 }
 
