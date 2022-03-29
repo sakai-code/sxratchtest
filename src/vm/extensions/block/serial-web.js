@@ -295,9 +295,9 @@ class WebSerial {
 
                    
                      
-                    //this.startReceiving(); //add  no stopping when error packet
+                this.startReceiving(); //add  no stopping when error packet
                     
-                    this.handleDisconnectError(); //add
+                    //this.handleDisconnectError(); //add
                 });
         }, this.receivingInterval);
     }
