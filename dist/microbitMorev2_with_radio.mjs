@@ -4053,9 +4053,11 @@ var WebSerial$1 = /*#__PURE__*/function () {
           extensionId: _this11._extensionId
         });
       }).catch(function (err) {
-        _this11.handleDisconnectError(err);
-
+        //this.handleDisconnectError(err);
         log$1.debug(err);
+
+        _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_DISCONNECTED);
+
         return;
       });
     }

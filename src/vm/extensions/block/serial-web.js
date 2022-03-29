@@ -557,9 +557,11 @@ class WebSerial {
      })
      
      .catch(err => {
-        this.handleDisconnectError(err);
+        //this.handleDisconnectError(err);
         log.debug(err);
+        this._runtime.emit(this._runtime.constructor.PERIPHERAL_DISCONNECTED);
         return;
+        
     });
 
 
