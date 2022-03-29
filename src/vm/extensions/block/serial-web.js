@@ -574,7 +574,7 @@ class WebSerial {
     onDisconnected (/* event */) {
         //this.handleDisconnectError(new Error('device disconnected'));
 
-        reject(new Error(`no response`));
+        Promise.reject(new Error(`no response`));
                 log.debug(`device disconnected`);
                 return;
     }
