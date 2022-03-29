@@ -4075,7 +4075,7 @@ var WebSerial$1 = /*#__PURE__*/function () {
       /* event */
     onDisconnected() {
       //this.handleDisconnectError(new Error('device disconnected'));
-      reject(new Error("no response"));
+      Promise.reject(new Error("no response"));
       log$1.debug("device disconnected");
       return;
     }
