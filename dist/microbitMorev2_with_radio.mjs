@@ -4053,7 +4053,8 @@ var WebSerial$1 = /*#__PURE__*/function () {
           extensionId: _this11._extensionId
         });
       }).catch(function (err) {
-        resolve(null);
+        _this11.handleDisconnectError(err);
+
         log$1.debug(err);
         return;
       });

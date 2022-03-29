@@ -557,7 +557,7 @@ class WebSerial {
      })
      
      .catch(err => {
-        resolve(null);
+        this.handleDisconnectError(err);
         log.debug(err);
         return;
     });
