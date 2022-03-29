@@ -4040,19 +4040,21 @@ var WebSerial$1 = /*#__PURE__*/function () {
     value: function
       /* e */
     handleDisconnectError() {
-      var _this11 = this;
-
       if (this.state !== 'open') return;
-      this.disconnect().then(function () {
-        if (_this11._resetCallback) {
-          _this11._resetCallback();
-        }
+      setTimeout(function () {
+        var _this11 = this;
 
-        _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
-          message: "Scratch lost connection to",
-          extensionId: _this11._extensionId
+        this.disconnect().then(function () {
+          if (_this11._resetCallback) {
+            _this11._resetCallback();
+          }
+
+          _this11._runtime.emit(_this11._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
+            message: "Scratch lost connection to",
+            extensionId: _this11._extensionId
+          });
         });
-      });
+      }, 1000);
     }
   }, {
     key: "_handleRequestError",
