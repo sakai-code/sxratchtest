@@ -557,10 +557,13 @@ class WebSerial {
      })
      
   .catch(function(e) {
+      /**
     this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
         message: `Scratch lost connection to`,
         extensionId: this._extensionId
-    });});
+    });
+*/
+Promise.reject(new Error(`no response`))});
 
    
     }

@@ -4053,10 +4053,13 @@ var WebSerial$1 = /*#__PURE__*/function () {
           extensionId: _this11._extensionId
         });
       }).catch(function (e) {
+        /**
         this._runtime.emit(this._runtime.constructor.PERIPHERAL_CONNECTION_LOST_ERROR, {
-          message: "Scratch lost connection to",
+          message: `Scratch lost connection to`,
           extensionId: this._extensionId
         });
+        */
+        Promise.reject(new Error("no response"));
       });
     }
   }, {
