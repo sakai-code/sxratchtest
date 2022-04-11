@@ -4090,34 +4090,12 @@ var WebSerial$1 = /*#__PURE__*/function () {
 
 var serialWeb = WebSerial$1;
 
-function noop(){}
-
-var _polyfillNode_console = global$1.console ? global$1.console : {
-  log: noop,
-  info: noop,
-  warn: noop,
-  error: noop,
-  dir: noop,
-  assert: noop,
-  time: noop,
-  timeEnd: noop,
-  trace: noop
-};
-
-var _polyfillNode_console$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  'default': _polyfillNode_console
-});
-
-var require$$7 = /*@__PURE__*/getAugmentedNamespace(_polyfillNode_console$1);
-
 var ArgumentType = argumentType;
 var BlockType = blockType;
 var log = log$2;
 var cast = cast$1;
 var Buffer = require$$5.Buffer;
 var WebSerial = serialWeb;
-require$$7.time;
 
 var uint8ArrayToBase64 = function uint8ArrayToBase64(array) {
   return Buffer.from(array).toString('base64');

@@ -6,7 +6,7 @@ const BLE = require('./ble');
 const {Buffer} = require('buffer');
 
 const WebSerial = require('./serial-web');
-const { time } = require('console');
+
 
 const uint8ArrayToBase64 = array => Buffer.from(array).toString('base64');
 const base64ToUint8Array = base64 => Buffer.from(base64, 'base64');
